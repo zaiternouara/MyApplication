@@ -32,7 +32,7 @@ public class MedicamentRepository {
     public void deleteAllMedicaments() {
         new DeleteAllMedicamentsAsyncTask( medicamentDao).execute();
     }
-    public LiveData<List<MEDICAMENTS>> getAllNotes() {
+    public LiveData<List<MEDICAMENTS>> getAllMedicaments() {
         return allMedicaments;
     }
     private static class InsertMedicamentAsyncTask extends AsyncTask<MEDICAMENTS, Void, Void> {
