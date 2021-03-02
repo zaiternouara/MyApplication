@@ -24,6 +24,30 @@ import com.example.myapplication.R;
 import static android.app.Activity.RESULT_OK;
 
 public class DashboardFragment extends Fragment {
+    public static final String EXTRA_classeThe =
+            "com.example.myapplication.ui.ajouter.EXTRA_classeThe";
+    public static final String EXTRA_nom =
+            "com.example.myapplication.ui.ajouter.EXTRA_nom";
+    public static final String EXTRA_labor =
+            "com.example.myapplication.ui.ajouter.EXTRA_labor";
+    public static final String EXTRA_denomi =
+            "com.example.myapplication.ui.ajouter.EXTRA_denomi";
+    public static final String EXTRA_formPh =
+            "com.example.myapplication.ui.ajouter.EXTRA_formPh";
+    public static final String EXTRA_dureeCon =
+            "com.example.myapplication.ui.ajouter.EXTRA_dureeCon";
+    public static final String EXTRA_dateFa =
+            "com.example.myapplication.ui.ajouter.EXTRA_dateFa";
+    public static final String EXTRA_datePe =
+            "com.example.myapplication.ui.ajouter.EXTRA_datePe";
+    public static final String EXTRA_descrC =
+            "com.example.myapplication.ui.ajouter.EXTRA_descrC";
+    public static final String EXTRA_loot =
+            "com.example.myapplication.ui.ajouter.EXTRA_loot";
+    public static final String EXTRA_pr =
+            "com.example.myapplication.ui.ajouter.EXTRA_pr";
+    public static final String EXTRA_Quantite =
+            "com.example.myapplication.ui.ajouter.EXTRA_Quantite";
     private ImageView logo;
     private TextView textView1;
     private  TextView classeTh;
