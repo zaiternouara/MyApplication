@@ -1,19 +1,20 @@
-package com.example.myapplication.Repositroy;
+package com.example.myapplication.Repository;
 
 import android.app.Application;
 import android.os.AsyncTask;
 
 import androidx.lifecycle.LiveData;
 
-import com.example.test.OperationsSQLite.MEDICAMENTSDataBase;
-import com.example.test.OperationsSQLite.MedicamentDAO;
-import com.example.test.models.MEDICAMENTS;
+import com.example.myapplication.OperationsSQLite.MEDICAMENTSDataBase;
+import com.example.myapplication.OperationsSQLite.MedicamentDAO;
+import com.example.myapplication.models.MEDICAMENTS;
 
 import java.util.List;
 
 public class MedicamentRepository {
 
     private MedicamentDAO medicamentDao;
+
     private LiveData<List<MEDICAMENTS>> allMedicaments;
     public MedicamentRepository(Application application) {
         MEDICAMENTSDataBase database = MEDICAMENTSDataBase.getInstance(application);
@@ -83,5 +84,4 @@ public class MedicamentRepository {
             return null;
         }
     }
-
 }
