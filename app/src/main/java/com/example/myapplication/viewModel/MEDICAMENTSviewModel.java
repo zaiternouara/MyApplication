@@ -1,0 +1,47 @@
+package com.example.myapplication.viewModel;
+
+import android.app.Application;
+import androidx.lifecycle.AndroidViewModel;
+import androidx.lifecycle.LiveData;
+import androidx.annotation.NonNull;
+import com.example.myapplication.Repository.MedicamentRepository;
+import com.example.myapplication.models.MEDICAMENTS;
+
+import java.util.List;
+
+public class MEDICAMENTSviewModel extends AndroidViewModel {
+
+    private MedicamentRepository repository;
+    private LiveData<List<MEDICAMENTS>> allMedicaments;
+    public MEDICAMENTSviewModel(@NonNull Application application) {
+        super(application);
+        repository = new MedicamentRepository(application);
+        allMedicaments = repository.getAllMedicaments();
+    }
+
+
+
+        public void insert(MEDICAMENTS medicaments) {
+
+        repository.insert(medicaments);
+        }
+
+        public void update(MEDICAMENTS medicaments) {
+
+        repository.update(medicaments);
+        }
+
+        public void delete(MEDICAMENTS medicaments) {
+
+        repository.delete(medicaments);
+        }
+
+        public void deleteAllMedicaments() {
+            repository.deleteAllMedicaments();
+        }
+
+        public LiveData<List<MEDICAMENTS>> getAllMedicaments() {
+            return allMedicaments;
+        }
+    }
+
