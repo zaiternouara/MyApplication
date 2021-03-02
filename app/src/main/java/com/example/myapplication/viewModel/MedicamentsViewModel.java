@@ -9,11 +9,11 @@ import com.example.myapplication.models.MEDICAMENTS;
 
 import java.util.List;
 
-public class MEDICAMENTSviewModel extends AndroidViewModel {
+public class MedicamentsViewModel extends AndroidViewModel {
 
     private MedicamentRepository repository;
     private LiveData<List<MEDICAMENTS>> allMedicaments;
-    public MEDICAMENTSviewModel(@NonNull Application application) {
+    public MedicamentsViewModel(@NonNull Application application) {
         super(application);
         repository = new MedicamentRepository(application);
         allMedicaments = repository.getAllMedicaments();

@@ -16,13 +16,13 @@ import com.example.myapplication.ui.afficher.NotificationsFragment;
 import com.example.myapplication.ui.ajouter.DashboardFragment;
 import com.example.myapplication.ui.home.HomeFragment;
 import com.example.myapplication.ui.modifier.ModifierFragment;
-import com.example.myapplication.viewModel.MEDICAMENTSviewModel;
+import com.example.myapplication.viewModel.MedicamentsViewModel;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
-    private MEDICAMENTSviewModel medicamentSviewModel;
+    private MedicamentsViewModel medicamentSviewModel;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,7 +32,7 @@ public class MainActivity extends AppCompatActivity {
         BottomNavigationView navView = findViewById(R.id.nav_view);
        navView.setOnNavigationItemSelectedListener(bottomNavMethod);
         getSupportFragmentManager().beginTransaction().replace(R.id.nav_host_fragment,new HomeFragment()).commit();
-        medicamentSviewModel = ViewModelProviders.of(this).get(MEDICAMENTSviewModel.class);
+        medicamentSviewModel = ViewModelProviders.of(this).get(MedicamentsViewModel.class);
         medicamentSviewModel.getAllMedicaments().observe(this, new Observer<List<MEDICAMENTS>>() {
             @Override
             public void onChanged(@Nullable List<MEDICAMENTS> notes) {
