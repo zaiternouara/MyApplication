@@ -32,10 +32,11 @@ public class MainActivity extends AppCompatActivity {
         BottomNavigationView navView = findViewById(R.id.nav_view);
        navView.setOnNavigationItemSelectedListener(bottomNavMethod);
         getSupportFragmentManager().beginTransaction().replace(R.id.nav_host_fragment,new HomeFragment()).commit();
+
         medicamentSviewModel = ViewModelProviders.of(this).get(MedicamentsViewModel.class);
         medicamentSviewModel.getAllMedicaments().observe(this, new Observer<List<MEDICAMENTS>>() {
             @Override
-            public void onChanged(@Nullable List<MEDICAMENTS> notes) {
+            public void onChanged(@Nullable List<MEDICAMENTS> medicaments) {
                 //update RecyclerView
                 Toast.makeText(MainActivity.this, "onChanged", Toast.LENGTH_SHORT).show();
             }
