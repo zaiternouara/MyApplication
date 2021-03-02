@@ -14,7 +14,6 @@ import java.util.List;
 public class MedicamentRepository {
 
     private MedicamentDAO medicamentDao;
-
     private LiveData<List<MEDICAMENTS>> allMedicaments;
     public MedicamentRepository(Application application) {
         MEDICAMENTSDataBase database = MEDICAMENTSDataBase.getInstance(application);
@@ -30,8 +29,8 @@ public class MedicamentRepository {
     public void delete(MEDICAMENTS medicament) {
         new DeleteMedicamentAsyncTask( medicamentDao).execute(medicament);
     }
-    public void deleteAllNotes() {
-        new DeleteAllNotesAsyncTask( medicamentDao).execute();
+    public void deleteAllMedicaments() {
+        new DeleteAllMedicamentsAsyncTask( medicamentDao).execute();
     }
     public LiveData<List<MEDICAMENTS>> getAllNotes() {
         return allMedicaments;
@@ -73,9 +72,9 @@ public class MedicamentRepository {
             return null;
         }
     }
-    private static class DeleteAllNotesAsyncTask extends AsyncTask<Void, Void, Void> {
+    private static class DeleteAllMedicamentsAsyncTask extends AsyncTask<Void, Void, Void> {
         private MedicamentDAO medicamentDao;
-        private DeleteAllNotesAsyncTask(MedicamentDAO medicamentDao) {
+        private DeleteAllMedicamentsAsyncTask(MedicamentDAO medicamentDao) {
             this.medicamentDao = medicamentDao;
         }
         @Override
@@ -84,4 +83,5 @@ public class MedicamentRepository {
             return null;
         }
     }
+
 }
