@@ -117,61 +117,7 @@ public class DashboardFragment extends Fragment {
     private int Remborsable;
 
 
-    private void saveMedicament(){
-        //93dte remborsble m3blich kifh ndirha
-        String classeThe = classeTh.getText().toString();
-        String nom = nomM.getText().toString();
-        String labor = labo.getText().toString();
-        String denomi = denom.getText().toString();
-        String formPh = form.getText().toString();
-        int dureeCon = duree.getValue();
-        String dateFa = dateF.getText().toString();
-        String datePe = dateP.getText().toString();
-        String descrC = descr.getText().toString();
-        String loot = lot.getText().toString();
-        int pr = prix.getValue();
-        int Quantite =  quant .getValue();
 
-        if (classeThe.trim().isEmpty() || nom.trim().isEmpty()|| labor.trim().isEmpty()||denomi.trim().isEmpty()||formPh.trim().isEmpty()|| descrC.trim().isEmpty()||loot.trim().isEmpty()) {
-            Toast.makeText(this, "Please insert a title and description", Toast.LENGTH_SHORT).show();
-            return;
-        }
-        Intent data = new Intent();
-        data.putExtra(EXTRA_classeThe, classeThe);
-        data.putExtra(EXTRA_nom , nom );
-        data.putExtra(EXTRA_labor, labor);
-        data.putExtra(EXTRA_denomi,denomi);
-        data.putExtra(EXTRA_formPh, formPh);
-        data.putExtra(EXTRA_dureeCon, dureeCon);
-        data.putExtra(EXTRA_dateFa, dateFa);
-        data.putExtra(EXTRA_datePe,datePe);
-        data.putExtra(EXTRA_descrC, descrC);
-        data.putExtra(EXTRA_loot, loot);
-        data.putExtra(EXTRA_pr,pr);
-        data.putExtra(EXTRA_Quantite, Quantite);
-        setResult(RESULT_OK, data);
-        finish();
 
-    }
-//hnaya m3rftch washno R hdik dylo
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        MenuInflater menuInflater = getMenuInflater();
-        menuInflater.inflate(....,
-                menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        switch(item.getItemId()){
-            case R.id.ajout :
-                saveMedicament();
-                return true;
-            default:
-                return super.onOptionsItemSelected(item);
-        }
-
-    }
 
 }
