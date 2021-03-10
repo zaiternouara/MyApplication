@@ -5,7 +5,10 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@mipmap/bg"
-    tools:context=".ui.afficher.NotificationsFragment">
+    tools:context=".ui.afficher.NotificationsFragment"
+    android:id="@+id/HOI"
+    >
+
 
     <TextView
         android:id="@+id/Nosmedoc"
@@ -48,20 +51,6 @@
         app:layout_constraintTop_toBottomOf="@+id/Nosmedoc"
         app:layout_constraintVertical_bias="0.051" />
 
-    <Button
-        android:id="@+id/button"
-        android:layout_width="34dp"
-        android:layout_height="22dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginLeft="8dp"
-        android:background="@drawable/ic_baseline_search_24"
-        app:backgroundTint="@android:color/holo_orange_dark"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toEndOf="@+id/inputRecherche"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.388" />
 
     <FrameLayout
         android:layout_width="match_parent"
@@ -71,9 +60,24 @@
         tools:layout_editor_absoluteX="108dp">
 
         <Button
+            android:id="@+id/button"
+            android:layout_width="34dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginLeft="8dp"
+            android:background="@drawable/ic_baseline_search_24"
+            app:backgroundTint="@android:color/holo_orange_dark"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toEndOf="@+id/inputRecherche"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.388" />
+
+        <Button
             android:id="@+id/button5"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="29dp"
             android:text="Afficher tout les médicaments" />
     </FrameLayout>
 

@@ -6,16 +6,24 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
+import android.content.Intent;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
+import androidx.navigation.fragment.NavHostFragment;
 
 import com.example.myapplication.R;
+import com.example.myapplication.ui.afficherTous.afficherTousMedoc;
+import com.example.myapplication.ui.home.HomeFragment;
 
-public class NotificationsFragment extends Fragment {
+public class NotificationsFragment extends Fragment implements View.OnClickListener {
     private Button bu;
     private NotificationsViewModel notificationsViewModel;
 
@@ -24,15 +32,39 @@ public class NotificationsFragment extends Fragment {
         notificationsViewModel =
                 new ViewModelProvider(this).get(NotificationsViewModel.class);
         View root = inflater.inflate(R.layout.fragment_notifications, container, false);
-       // final TextView textView = root.findViewById(R.id.text_notifications);
-         bu = root.findViewById(R.id.button);
-/*
-        notificationsViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
-            @Override
-            public void onChanged(@Nullable String s) {
-                textView.setText(s);
-            }
-        });*/
+        bu = root.findViewById(R.id.button5);
+        bu.setOnClickListener(this);
+
+
+
+
         return root;
+    }
+
+    @Override
+    public void onClick(View v) {
+        Fragment fragment = null;
+        switch (v.getId()) {
+            case R.id.button5:
+                fragment = new afficherTousMedoc();
+                replaceFragment(fragment);
+                break;
+
+        }
+
+    }
+
+    public void replaceFragment(Fragment someFragment) {
+
+        FragmentTransaction transaction = getFragmentManager().beginTransaction();
+        //transaction.setReorderingAllowed(true);
+        transaction.replace(R.id.HOI, someFragment);
+        transaction.addToBackStack(null);
+        //transaction.remove(new NotificationsFragment());
+        transaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
+
+        //
+        // transaction.addToBackStack(null);
+        transaction.commit();
     }
 }
