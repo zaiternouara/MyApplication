@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
+import android.util.Log;
 
 import com.example.myapplication.Adapter.MedicamentAdapter;
 import com.example.myapplication.R;
@@ -50,7 +51,9 @@ public class afficherTousMedica extends AppCompatActivity {
             public void onChanged(List<MEDICAMENTS> medicaments) {
                 System.out.println("1");
             adapter.setMedicament(medicaments);
-            System.out.println(medicaments);
+
+
+                System.out.println(medicaments);
             }
         });
         }
