@@ -51,7 +51,7 @@ public class afficheTousLab extends Fragment {
 
 
         medicamentSviewModel = ViewModelProviders.of(this).get(MedicamentsViewModel.class);
-        medicamentSviewModel.Affichelaboratoires().observe(getViewLifecycleOwner(),new Observer<List<MEDICAMENTS>>(){
+        medicamentSviewModel.getAllaboratoires().observe(getViewLifecycleOwner(),new Observer<List<MEDICAMENTS>>(){
 
             @Override
             public void onChanged(List<MEDICAMENTS> medicaments) {
