@@ -24,7 +24,10 @@ import com.example.myapplication.ui.afficherTous.afficherTousMedoc;
 import com.example.myapplication.ui.home.HomeFragment;
 
 public class NotificationsFragment extends Fragment implements View.OnClickListener {
-    private Button bu;
+    private Button affiT;
+    private Button affiL;
+    private Button affiR;
+
     private NotificationsViewModel notificationsViewModel;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -32,8 +35,10 @@ public class NotificationsFragment extends Fragment implements View.OnClickListe
         notificationsViewModel =
                 new ViewModelProvider(this).get(NotificationsViewModel.class);
         View root = inflater.inflate(R.layout.fragment_notifications, container, false);
-        bu = root.findViewById(R.id.button5);
-        bu.setOnClickListener(this);
+        affiT = root.findViewById(R.id.button5);
+        affiL = root.findViewById(R.id.pLabo);
+        affiR = root.findViewById(R.id.expire);
+        affiT.setOnClickListener(this);
 
 
 
@@ -46,6 +51,20 @@ public class NotificationsFragment extends Fragment implements View.OnClickListe
         Fragment fragment = null;
         switch (v.getId()) {
             case R.id.button5:
+                fragment = new afficherTousMedoc();
+                replaceFragment(fragment);
+                break;
+
+        }
+        switch (v.getId()) {
+            case R.id.pLabo:
+                fragment = new afficherTousMedoc();
+                replaceFragment(fragment);
+                break;
+
+        }
+        switch (v.getId()) {
+            case R.id.expire:
                 fragment = new afficherTousMedoc();
                 replaceFragment(fragment);
                 break;
