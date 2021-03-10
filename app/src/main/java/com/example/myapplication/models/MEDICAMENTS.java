@@ -16,8 +16,7 @@ public class MEDICAMENTS  {
     private String denominateur_De_Medicament;
     private String forme_Pharmaceutique;
     private String duree_De_Conservation;
-    private String oui;
-    private String non;
+
     private String lot;
     private String date_De_Fabrication;
     private String date_Peremption;
@@ -25,16 +24,15 @@ public class MEDICAMENTS  {
     private String prix;
     private String quantite_En_Stock;
 
-    public MEDICAMENTS(int id, String classe_Therapeutique, String nom_Commercial, String laboratoire, String denominateur_De_Medicament, String forme_Pharmaceutique, String duree_De_Conservation, String oui, String non, String lot, String date_De_Fabrication, String date_Peremption, String description_De_Composant, String prix, String quantite_En_Stock) {
-        this.id = id;
+    public MEDICAMENTS(String classe_Therapeutique, String nom_Commercial, String laboratoire, String denominateur_De_Medicament, String forme_Pharmaceutique, String duree_De_Conservation,  String lot, String date_De_Fabrication, String date_Peremption, String description_De_Composant, String prix, String quantite_En_Stock) {
+
         this.classe_Therapeutique = classe_Therapeutique;
         this.nom_Commercial = nom_Commercial;
         this.laboratoire = laboratoire;
         this.denominateur_De_Medicament = denominateur_De_Medicament;
         this.forme_Pharmaceutique = forme_Pharmaceutique;
         this.duree_De_Conservation = duree_De_Conservation;
-        this.oui = oui;
-        this.non = non;
+
         this.lot = lot;
         this.date_De_Fabrication = date_De_Fabrication;
         this.date_Peremption = date_Peremption;
@@ -99,21 +97,8 @@ public class MEDICAMENTS  {
         this.duree_De_Conservation = duree_De_Conservation;
     }
 
-    public String getOui() {
-        return oui;
-    }
 
-    public void setOui(String oui) {
-        this.oui = oui;
-    }
 
-    public String getNon() {
-        return non;
-    }
-
-    public void setNon(String non) {
-        this.non = non;
-    }
 
     public String getLot() {
         return lot;
