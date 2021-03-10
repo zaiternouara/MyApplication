@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@mipmap/bg"
+    android:id="@+id/ajouter"
     tools:context=".ui.ajouter.DashboardFragment">
 
 
@@ -159,38 +160,6 @@
                 android:ems="10"
                 android:inputType="number"
                 android:hint="Code à barre"/>
-
-            <RadioGroup
-
-                android:layout_width="match_parent"
-                android:layout_height="match_parent" >
-
-                <TextView
-
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Est-il remboursable ?" />
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:orientation="horizontal">
-
-                    <RadioButton
-                        android:id="@+id/inputOui"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="oui" />
-
-                    <RadioButton
-                        android:id="@+id/inputNon"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="non" />
-                </LinearLayout>
-            </RadioGroup>
 
             <Button
                 android:id="@+id/ajout"

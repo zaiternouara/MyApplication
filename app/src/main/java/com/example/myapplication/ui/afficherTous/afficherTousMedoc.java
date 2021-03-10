@@ -51,7 +51,7 @@ public class afficherTousMedoc extends Fragment {
 
 
         medicamentSviewModel = ViewModelProviders.of(this).get(MedicamentsViewModel.class);
-        medicamentSviewModel.insert(new MEDICAMENTS(45,"ju","paralgan","bayer","jp","comprimé","3mois","oui","non","23","21/09/2019","2019/09/06","bienn","12euros","89"));
+        medicamentSviewModel.insert(new MEDICAMENTS("ju","paralgan","bayer","jp","comprimé","3mois","23","21/09/2019","2019/09/06","bienn","12euros","89"));
         medicamentSviewModel.getAllMedicaments().observe(getViewLifecycleOwner(),new Observer<List<MEDICAMENTS>>(){
 
             @Override

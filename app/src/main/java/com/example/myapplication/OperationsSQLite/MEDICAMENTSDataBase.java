@@ -43,7 +43,7 @@ public abstract class MEDICAMENTSDataBase extends RoomDatabase {
 
         @Override
         protected Void doInBackground(Void... voids) {
-            medicamentDao.insert(new MEDICAMENTS(10, "class1", "nom1","laboratoire1","denom1","form1","duree","oui","non","lot1","date1","datep1","des1","pri","quan"));
+            medicamentDao.insert(new MEDICAMENTS("paracetamol","panadol","bayer","pg","comprime","3 mois","oui","23","2019/09/06","2022/09/06","c'est un medoc","67euros"));
             return null;
         }
     }
