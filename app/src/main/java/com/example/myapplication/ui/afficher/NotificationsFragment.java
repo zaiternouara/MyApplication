@@ -20,6 +20,7 @@ import androidx.navigation.Navigation;
 import androidx.navigation.fragment.NavHostFragment;
 
 import com.example.myapplication.R;
+import com.example.myapplication.ui.afficherTous.afficheTousLab;
 import com.example.myapplication.ui.afficherTous.afficherTousMedoc;
 import com.example.myapplication.ui.home.HomeFragment;
 
@@ -39,7 +40,8 @@ public class NotificationsFragment extends Fragment implements View.OnClickListe
         affiL = root.findViewById(R.id.pLabo);
         affiR = root.findViewById(R.id.expire);
         affiT.setOnClickListener(this);
-
+        affiL.setOnClickListener(this);
+        affiR.setOnClickListener(this);
 
 
 
@@ -58,7 +60,7 @@ public class NotificationsFragment extends Fragment implements View.OnClickListe
         }
         switch (v.getId()) {
             case R.id.pLabo:
-                fragment = new afficherTousMedoc();
+                fragment = new afficheTousLab();
                 replaceFragment(fragment);
                 break;
 
@@ -77,7 +79,7 @@ public class NotificationsFragment extends Fragment implements View.OnClickListe
 
         FragmentTransaction transaction = getFragmentManager().beginTransaction();
         //transaction.setReorderingAllowed(true);
-        transaction.replace(R.id.HOI, someFragment);
+        transaction.replace(R.id.afficher, someFragment);
         transaction.addToBackStack(null);
         //transaction.remove(new NotificationsFragment());
         transaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);

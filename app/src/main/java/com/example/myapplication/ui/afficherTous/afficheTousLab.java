@@ -19,12 +19,12 @@ import com.example.myapplication.viewModel.MedicamentsViewModel;
 
 import java.util.List;
 
-public class afficherTousLab extends Fragment {
+public class afficheTousLab extends Fragment {
 
 
     private MedicamentsViewModel medicamentSviewModel;
 
-    public afficherTousLab() {}
+    public afficheTousLab() {}
 
     // TODO: Rename and change types and number of parameters
 

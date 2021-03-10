@@ -20,7 +20,7 @@ public class MedicamentsViewModel extends AndroidViewModel {
         super(application);
         repository = new MedicamentRepository(application);
         allMedicaments = repository.getAllMedicaments();
-        allMedicamentslaboratoires= repository.getAlllaboratoires();
+        allMedicamentslaboratoires= repository.getAllaboratoires();
 
 
     }
