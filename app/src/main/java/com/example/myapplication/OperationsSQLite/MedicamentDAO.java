@@ -30,10 +30,10 @@ public interface MedicamentDAO {
     @Query("SELECT  * FROM TABLE_MEDICAMENTS ORDER BY Nom_Commercial DESC")
     LiveData<List<MEDICAMENTS>> getAllMEDICAMENTS();
 
-    @Query("SELECT DISTINCT * FROM TABLE_MEDICAMENTS GROUP BY laboratoire")
+    @Query("SELECT * FROM TABLE_MEDICAMENTS GROUP BY laboratoire ORDER BY laboratoire DESC")
     LiveData<List<MEDICAMENTS>> getAllaboratoires();
 
-    @Query("SELECT DISTINCT * FROM TABLE_MEDICAMENTS WHERE DATE()>=date_Peremption")
+    @Query("SELECT * FROM TABLE_MEDICAMENTS WHERE DATE()>=date_Peremption ORDER BY Nom_Commercial DESC")
     LiveData<List<MEDICAMENTS>> getAllPeremptioN();
 
 
