@@ -12,17 +12,22 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.example.myapplication.models.MEDICAMENTS;
 import com.example.myapplication.ui.ajouter.DashboardFragment;
 
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.example.myapplication.R;
-import com.example.myapplication.ui.afficherTousMedica;
+import com.example.myapplication.viewModel.MedicamentsViewModel;
 
-public class DashboardFragment extends Fragment {
+import static android.app.Activity.RESULT_OK;
+
+public class DashboardFragment extends Fragment implements View.OnClickListener {
     public static final String EXTRA_NomC =
             "com.example.myapplication.ui.ajouter.EXTRA_NomC";
     public static final String EXTRA_classeTH =
@@ -54,7 +59,8 @@ public class DashboardFragment extends Fragment {
     public static final String EXTRA_lot =
             "com.example.myapplication.ui.ajouter.EXTRA_lot";
     public static final int ADD_NOTE_REQUEST = 1;
-
+    private MedicamentsViewModel medicamentSviewModel;
+    // public static final int ADD_NOTE_REQUEST = 1;
     private ImageView logo;
     private TextView textView1;
     private  TextView classeTh;
@@ -102,7 +108,8 @@ public class DashboardFragment extends Fragment {
         boui = (RadioButton) root.findViewById(R.id.inputOui);
         bnon = (RadioButton) root.findViewById(R.id.inputNon);
         lot= (TextView) root.findViewById(R.id.inputLot);
-
+        ajout=(Button)root.findViewById(R.id.ajout);
+    ajout.setOnClickListener(this);
 
 
 
@@ -129,7 +136,7 @@ public class DashboardFragment extends Fragment {
         String dureee = duree.getText().toString();
         String dateFab = dateF.getText().toString();
         String datePer = dateP.getText().toString();
-        String price = prix.getText().toString();
+        String price = prix.getText();
         String quantite = quant.getText().toString();
         String codeBarre = codeB.getText().toString();
         String oui = boui.getText().toString();
@@ -138,28 +145,41 @@ public class DashboardFragment extends Fragment {
             Toast.makeText(getContext(), "Entrez tous les champs", Toast.LENGTH_SHORT).show();
             return;
         }
-        Intent data = new Intent();
-        data.putExtra(EXTRA_NomC, NomCommercial);
-        data.putExtra(EXTRA_classeTH, classTH);
-        data.putExtra(EXTRA_Labo,laboratoire);
-        data.putExtra(EXTRA_Denom,denomination);
-        data.putExtra(EXTRA_form,formePharmaceutique);
-        data.putExtra(EXTRA_duree,dureee);
-        data.putExtra(EXTRA_dateF,dateFab);
-        data.putExtra(EXTRA_dateP,datePer);
-        data.putExtra(EXTRA_quant,quantite);
-        data.putExtra(EXTRA_codeB,codeBarre);
-        data.putExtra(EXTRA_oui,oui);
-        data.putExtra(EXTRA_non,non);
-       data.putExtra(EXTRA_lot,lots);
+        /*Intent data = new Intent();
+
+        data.getStringExtra(EXTRA_NomC);
+        String classTH = data.getStringExtra(EXTRA_classeTH);
+        String labo = data.getStringExtra(EXTRA_Labo);
+        String description = data.getStringExtra(EXTRA_DESCRIPTION);
+        String denom = data.getStringExtra(EXTRA_Denom);
+        String formePH = data.getStringExtra(EXTRA_form);
+        String dure = data.getStringExtra(EXTRA_duree);
+        String dateF = data.getStringExtra(EXTRA_dateF);
+        String dateP = data.getStringExtra(EXTRA_dateP);
+        String price = data.getStringExtra(EXTRA_Price);
+        String quant = data.getStringExtra(EXTRA_quant);
+        String codeB = data.getStringExtra(EXTRA_codeB);
+        String oui = data.getStringExtra(EXTRA_oui);
+        String non = data.getStringExtra(EXTRA_non);
+        String lots = data.getStringExtra(EXTRA_lot);*/
 
 
-
-
-        getActivity().setResult(Activity.RESULT_OK, data);
-        getActivity().finish();
+        MEDICAMENTS medicaments = new MEDICAMENTS(classTH, NomCommercial, laboratoire,denomination,formePharmaceutique ,dureee,oui,non,lots,dateFab,datePer ,description,price,quantite);
+        medicamentSviewModel.insert(medicaments);
+    } /*else {
+        Toast.makeText(this, "medicament not saved", Toast.LENGTH_SHORT).show();
     }
 
+        /*getActivity().setResult(RESULT_OK, data);
+        getActivity().finish();
+        medicamentSviewModel.insert(data);
+    }*/
 
 
+    @Override
+    public void onClick(View v) {
+        if(v.getId()==R.id.ajout){
+            ajouterM();
+        }
+    }
 }

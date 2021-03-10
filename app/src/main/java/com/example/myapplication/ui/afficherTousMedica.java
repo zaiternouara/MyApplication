@@ -28,7 +28,7 @@ public class afficherTousMedica extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_afficher_tous_medica);
+        //setContentView(R.layout.activity_afficher_tous_medica);
       /*  Button buttonAddMedoc = findViewById(R.id.ajout);
         buttonAddMedoc.setOnClickListener(new View.OnClickListener() {
             @Override

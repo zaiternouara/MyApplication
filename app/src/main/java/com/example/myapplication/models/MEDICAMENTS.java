@@ -25,8 +25,8 @@ public class MEDICAMENTS  {
     private String prix;
     private String quantite_En_Stock;
 
-    public MEDICAMENTS(int id, String classe_Therapeutique, String nom_Commercial, String laboratoire, String denominateur_De_Medicament, String forme_Pharmaceutique, String duree_De_Conservation, String oui, String non, String lot, String date_De_Fabrication, String date_Peremption, String description_De_Composant, String prix, String quantite_En_Stock) {
-        this.id = id;
+    public MEDICAMENTS(String classe_Therapeutique, String nom_Commercial, String laboratoire, String denominateur_De_Medicament, String forme_Pharmaceutique, String duree_De_Conservation, String oui, String non, String lot, String date_De_Fabrication, String date_Peremption, String description_De_Composant, String prix, String quantite_En_Stock) {
+
         this.classe_Therapeutique = classe_Therapeutique;
         this.nom_Commercial = nom_Commercial;
         this.laboratoire = laboratoire;
