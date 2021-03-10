@@ -15,13 +15,13 @@ public class MedicamentRepository {
 
     private MedicamentDAO medicamentDao;
     private LiveData<List<MEDICAMENTS>> allMedicaments;
-    private LiveData<List<MEDICAMENTS>> allMedicamentslaboratoire;
+    private LiveData<List<MEDICAMENTS>> allMedicamentslaboratoires;
     public MedicamentRepository(Application application) {
         MEDICAMENTSDataBase database = MEDICAMENTSDataBase.getInstance(application);
         medicamentDao = database. medicamentDao();
 
         allMedicaments =  medicamentDao.getAllMEDICAMENTS();
-        allMedicamentslaboratoire =  medicamentDao.Affichelaboratoire();
+        allMedicamentslaboratoires =  medicamentDao.getAlllaboratoires();
     }
     public void insert(MEDICAMENTS medicament) {
         new InsertMedicamentAsyncTask( medicamentDao).execute(medicament);
@@ -38,8 +38,8 @@ public class MedicamentRepository {
     public LiveData<List<MEDICAMENTS>> getAllMedicaments() {
         return allMedicaments;
     }
-    public LiveData<List<MEDICAMENTS>> Affichelaboratoire() {
-        return allMedicamentslaboratoire;
+    public LiveData<List<MEDICAMENTS>> getAlllaboratoires() {
+        return allMedicamentslaboratoires;
     }
 
     private static class InsertMedicamentAsyncTask extends AsyncTask<MEDICAMENTS, Void, Void> {

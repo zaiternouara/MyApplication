@@ -13,14 +13,14 @@ public class MedicamentsViewModel extends AndroidViewModel {
 
     private MedicamentRepository repository;
     private LiveData<List<MEDICAMENTS>> allMedicaments;
-    private LiveData<List<MEDICAMENTS>> allMedicamentslaboratoire;
+    private LiveData<List<MEDICAMENTS>> allMedicamentslaboratoires;
 
 
     public MedicamentsViewModel(@NonNull Application application) {
         super(application);
         repository = new MedicamentRepository(application);
         allMedicaments = repository.getAllMedicaments();
-        allMedicamentslaboratoire= repository.Affichelaboratoire();
+        allMedicamentslaboratoires= repository.getAlllaboratoires();
 
 
     }
@@ -49,6 +49,6 @@ public class MedicamentsViewModel extends AndroidViewModel {
         public LiveData<List<MEDICAMENTS>> getAllMedicaments() {
             return allMedicaments;
         }
-        public LiveData<List<MEDICAMENTS>> Affichelaboratoire() { return allMedicamentslaboratoire; }
+        public LiveData<List<MEDICAMENTS>> Affichelaboratoires() { return allMedicamentslaboratoires; }
     }
 

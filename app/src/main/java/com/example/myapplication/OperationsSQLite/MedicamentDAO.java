@@ -31,7 +31,9 @@ public interface MedicamentDAO {
     LiveData<List<MEDICAMENTS>> getAllMEDICAMENTS();
 
     @Query("SELECT  * FROM TABLE_MEDICAMENTS GROUP BY laboratoire")
-    LiveData<List<MEDICAMENTS>> Affichelaboratoire();
+    LiveData<List<MEDICAMENTS>> getAlllaboratoires();
+
+
 
 
 
