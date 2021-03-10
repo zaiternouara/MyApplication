@@ -13,6 +13,7 @@ import androidx.lifecycle.ViewModelProviders;
 
 import com.example.myapplication.models.MEDICAMENTS;
 import com.example.myapplication.ui.afficher.NotificationsFragment;
+import com.example.myapplication.ui.afficherTous.afficherTousMedoc;
 import com.example.myapplication.ui.ajouter.DashboardFragment;
 import com.example.myapplication.ui.home.HomeFragment;
 import com.example.myapplication.ui.modifier.ModifierFragment;

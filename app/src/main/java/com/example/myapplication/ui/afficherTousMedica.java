@@ -1,40 +1,44 @@
 package com.example.myapplication.ui;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
+import android.view.View;
+import android.widget.Button;
+import android.widget.Toast;
 
 import com.example.myapplication.Adapter.MedicamentAdapter;
 import com.example.myapplication.R;
 import com.example.myapplication.models.MEDICAMENTS;
+import com.example.myapplication.ui.ajouter.DashboardFragment;
 import com.example.myapplication.viewModel.MedicamentsViewModel;
 
 import java.util.List;
 
 public class afficherTousMedica extends AppCompatActivity {
     private MedicamentsViewModel medicamentSviewModel;
-   // public static final int ADD_NOTE_REQUEST = 1;
+  // public static final int ADD_NOTE_REQUEST = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_afficher_tous_medica);
-       /* Button buttonAddMedoc = findViewById(R.id.ajout);
+      /*  Button buttonAddMedoc = findViewById(R.id.ajout);
         buttonAddMedoc.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(afficherTousMedica.this,DashboardFragment.class);
                 startActivityForResult(intent, ADD_NOTE_REQUEST);
             }
-        });
+        });*/
 
-*/
-        RecyclerView recyclerView=findViewById(R.id.recycle_view);
+    RecyclerView recyclerView=findViewById(R.id.recycle_view);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));//comment les infos sont afficher
         recyclerView.setHasFixedSize(true);
 
@@ -51,9 +55,7 @@ public class afficherTousMedica extends AppCompatActivity {
             public void onChanged(List<MEDICAMENTS> medicaments) {
                 System.out.println("1");
             adapter.setMedicament(medicaments);
-
-
-                System.out.println(medicaments);
+            System.out.println(medicaments);
             }
         });
         }
@@ -79,7 +81,7 @@ public class afficherTousMedica extends AppCompatActivity {
             String non = data.getStringExtra(DashboardFragment.EXTRA_non);
             String lots = data.getStringExtra(DashboardFragment.EXTRA_lot);
 
-            MEDICAMENTS medicaments = new MEDICAMENTS(id,classTH, nomC, labo,denom,formePH,dure,oui,non,lots,dateF,dateP,description,price,quant);
+            MEDICAMENTS medicaments = new MEDICAMENTS(4,classTH, nomC, labo,denom,formePH,dure,oui,non,lots,dateF,dateP,description,price,quant);
             medicamentSviewModel.insert(medicaments);
             Toast.makeText(this, "medicament saved", Toast.LENGTH_SHORT).show();
         } else {
