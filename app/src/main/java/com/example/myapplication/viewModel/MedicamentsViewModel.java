@@ -13,12 +13,13 @@ public class MedicamentsViewModel extends AndroidViewModel {
 
     private MedicamentRepository repository;
     private LiveData<List<MEDICAMENTS>> allMedicaments;
+
+
     public MedicamentsViewModel(@NonNull Application application) {
         super(application);
         repository = new MedicamentRepository(application);
         allMedicaments = repository.getAllMedicaments();
     }
-
 
 
         public void insert(MEDICAMENTS medicaments) {

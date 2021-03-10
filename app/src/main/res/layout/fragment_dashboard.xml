@@ -161,12 +161,12 @@
                 android:hint="Code à barre"/>
 
             <RadioGroup
-                android:id="@+id/inputRembou"
+
                 android:layout_width="match_parent"
                 android:layout_height="match_parent" >
 
                 <TextView
-                    android:id="@+id/question"
+
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Est-il remboursable ?" />

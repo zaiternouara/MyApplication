@@ -35,6 +35,7 @@ public class MedicamentRepository {
     public LiveData<List<MEDICAMENTS>> getAllMedicaments() {
         return allMedicaments;
     }
+
     private static class InsertMedicamentAsyncTask extends AsyncTask<MEDICAMENTS, Void, Void> {
         private MedicamentDAO  medicamentDao;
         private InsertMedicamentAsyncTask(MedicamentDAO  medicamentDao) {
