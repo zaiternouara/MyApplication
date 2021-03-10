@@ -11,7 +11,7 @@ import androidx.sqlite.db.SupportSQLiteDatabase;
 
 import com.example.myapplication.models.MEDICAMENTS;
 
-@Database( entities = {MEDICAMENTS.class}, version = 1,exportSchema = false)
+@Database( entities = {MEDICAMENTS.class}, version = 2)
 public abstract class MEDICAMENTSDataBase extends RoomDatabase {
     private static MEDICAMENTSDataBase instance;
 
@@ -47,5 +47,14 @@ public abstract class MEDICAMENTSDataBase extends RoomDatabase {
             return null;
         }
     }
+    private static RoomDatabase.Callback
+    sRoomDataBaseCallback = new RoomDatabase.Callback(){
+        @Override
+        public void onOpen(@NonNull SupportSQLiteDatabase db) {
+            super.onOpen(db);
+            new PopulateDbAsyncTask(instance).execute();
+        }
+    };
+
 
 }

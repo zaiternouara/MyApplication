@@ -21,6 +21,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.lifecycle.ViewModelProviders;
 
 import com.example.myapplication.R;
 import com.example.myapplication.viewModel.MedicamentsViewModel;
@@ -305,12 +306,14 @@ public class DashboardFragment extends Fragment implements View.OnClickListener 
         quant = (TextView) root.findViewById(R.id.inputQuant);
         codeB = (TextView) root.findViewById(R.id.inputCode);
 
-        boui = (RadioButton) root.findViewById(R.id.inputOui);
-        bnon = (RadioButton) root.findViewById(R.id.inputNon);
+        //boui = (RadioButton) root.findViewById(R.id.inputOui);
+        //bnon = (RadioButton) root.findViewById(R.id.inputNon);
         lot= (TextView) root.findViewById(R.id.inputLot);
 
 
+        ajout=(Button)root.findViewById(R.id.ajout);
 
+        ajout.setOnClickListener(this);
 
 
 
@@ -338,18 +341,21 @@ public class DashboardFragment extends Fragment implements View.OnClickListener 
         String price = prix.getText().toString();
         String quantite = quant.getText().toString();
         String codeBarre = codeB.getText().toString();
-        String oui = boui.getText().toString();
-        String non = bnon.getText().toString();
-        if (NomCommercial.trim().isEmpty() || description.trim().isEmpty()|| classTH.trim().isEmpty()|| laboratoire.trim().isEmpty()|| lots.trim().isEmpty()|| denomination.trim().isEmpty()|| formePharmaceutique.trim().isEmpty()|| dureee.trim().isEmpty()|| dateFab.trim().isEmpty()|| datePer.trim().isEmpty()|| price.trim().isEmpty()|| quantite.trim().isEmpty()|| codeBarre.trim().isEmpty()|| oui.trim().isEmpty()|| non.trim().isEmpty()) {
+        //String oui = boui.getText().toString();
+        //String non = bnon.getText().toString();
+        if (NomCommercial.trim().isEmpty() || description.trim().isEmpty()|| classTH.trim().isEmpty()|| laboratoire.trim().isEmpty()|| lots.trim().isEmpty()|| denomination.trim().isEmpty()|| formePharmaceutique.trim().isEmpty()|| dureee.trim().isEmpty()|| dateFab.trim().isEmpty()|| datePer.trim().isEmpty()|| price.trim().isEmpty()|| quantite.trim().isEmpty()|| codeBarre.trim().isEmpty()) {
 
-            Toast.makeText(this, "Entrez tous les champs", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getContext(), "Entrez tous les champs", Toast.LENGTH_SHORT).show();
+
             return;
         }
         MEDICAMENTS medicaments = new MEDICAMENTS(classTH,NomCommercial, laboratoire,denomination,formePharmaceutique ,dureee,lots,dateFab,datePer ,description,price,quantite);
+        medicamentSviewModel = ViewModelProviders.of(getActivity()).get(MedicamentsViewModel.class);
         medicamentSviewModel.insert(medicaments);
-        Toast.makeText(this, "medicament saved", Toast.LENGTH_SHORT).show();
-        getActivity().setResult(Activity.RESULT_OK, data);
-        getActivity().finish();
+        Toast.makeText(getContext(), "medicament saved", Toast.LENGTH_SHORT).show();
+
+        //getActivity().setResult(Activity.RESULT_OK, data);
+        //getActivity().finish();
     }
     @Override
     public void onClick(View v) {
