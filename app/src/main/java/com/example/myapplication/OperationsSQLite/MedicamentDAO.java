@@ -30,5 +30,9 @@ public interface MedicamentDAO {
     @Query("SELECT  * FROM TABLE_MEDICAMENTS ORDER BY Nom_Commercial DESC")
     LiveData<List<MEDICAMENTS>> getAllMEDICAMENTS();
 
+    @Query("SELECT  * FROM TABLE_MEDICAMENTS GROUP BY laboratoire")
+    LiveData<List<MEDICAMENTS>> Affichelaboratoire();
+
+
 
 }
