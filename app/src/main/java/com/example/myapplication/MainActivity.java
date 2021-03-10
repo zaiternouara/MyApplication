@@ -22,7 +22,6 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
-    private MedicamentsViewModel medicamentSviewModel;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -33,14 +32,7 @@ public class MainActivity extends AppCompatActivity {
        navView.setOnNavigationItemSelectedListener(bottomNavMethod);
         getSupportFragmentManager().beginTransaction().replace(R.id.nav_host_fragment,new HomeFragment()).commit();
 
-        medicamentSviewModel = ViewModelProviders.of(this).get(MedicamentsViewModel.class);
-        medicamentSviewModel.getAllMedicaments().observe(this, new Observer<List<MEDICAMENTS>>() {
-            @Override
-            public void onChanged(@Nullable List<MEDICAMENTS> medicaments) {
-                //update RecyclerView
-                Toast.makeText(MainActivity.this, "onChanged", Toast.LENGTH_SHORT).show();
-            }
-        });
+
 
         }
 

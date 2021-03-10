@@ -1,8 +1,9 @@
 <resources>
-    <string name="app_name">My Application</string>
+    <string name="app_name">Digital Pharm</string>
     <string name="title_home">Acceuil</string>
     <string name="title_dashboard">Ajouter</string>
     <string name="title_notifications">Afficher</string>
     <string name="title_modifier">Modifier</string>
+    <!-- TODO: Remove or change this placeholder text -->
 
 </resources>

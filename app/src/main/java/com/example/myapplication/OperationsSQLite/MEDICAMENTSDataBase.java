@@ -11,7 +11,7 @@ import androidx.sqlite.db.SupportSQLiteDatabase;
 
 import com.example.myapplication.models.MEDICAMENTS;
 
-@Database( entities = {MEDICAMENTS.class}, version = 1)
+@Database( entities = {MEDICAMENTS.class}, version = 1,exportSchema = false)
 public abstract class MEDICAMENTSDataBase extends RoomDatabase {
     private static MEDICAMENTSDataBase instance;
 
@@ -43,7 +43,7 @@ public abstract class MEDICAMENTSDataBase extends RoomDatabase {
 
         @Override
         protected Void doInBackground(Void... voids) {
-            medicamentDao.insert(new MEDICAMENTS("Title 1", "Description 1", 1));
+            medicamentDao.insert(new MEDICAMENTS(10, "class1", "nom1","laboratoire1","denom1","form1","duree","oui","non","lot1","date1","datep1","des1","pri","quan"));
             return null;
         }
     }
