@@ -51,6 +51,10 @@ public class MedicamentAdapter extends RecyclerView.Adapter<MedicamentAdapter.me
         this.medicament=medicament;
         notifyDataSetChanged();
     }
+    public MEDICAMENTS getMedicamentAt(int position) {
+        return medicament.get(position);
+    }
+
 
     class medicamentHolder extends RecyclerView.ViewHolder{//liaison entre interface graphique et code JAVA
         private TextView nomCom;
