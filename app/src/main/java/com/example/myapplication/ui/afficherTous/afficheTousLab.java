@@ -5,12 +5,14 @@ import android.os.Bundle;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
+import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.example.myapplication.Adapter.MedicamentAdapter;
 import com.example.myapplication.R;
@@ -58,6 +60,19 @@ public class afficheTousLab extends Fragment {
                 adapter.setMedicament(medicaments);
             }
         });
+        new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(0,
+                ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT) {
+            @Override
+            public boolean onMove(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder, RecyclerView.ViewHolder target) {
+                return false;
+            }
+            @Override
+            public void onSwiped(RecyclerView.ViewHolder viewHolder, int direction) {
+                medicamentSviewModel.delete(adapter.getMedicamentAt(viewHolder.getAdapterPosition()));
+                Toast.makeText(getContext(), "Medicament deleted", Toast.LENGTH_SHORT).show();
+
+            }
+        }).attachToRecyclerView(recyclerView);
         return root;
 
     }
