@@ -5,6 +5,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EdgeEffect;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.content.Intent;
 
@@ -28,6 +30,7 @@ public class NotificationsFragment extends Fragment implements View.OnClickListe
     private Button affiT;
     private Button affiL;
     private Button affiR;
+    private EditText recherche;
 
     private NotificationsViewModel notificationsViewModel;
 
@@ -39,6 +42,7 @@ public class NotificationsFragment extends Fragment implements View.OnClickListe
         affiT = root.findViewById(R.id.button5);
         affiL = root.findViewById(R.id.pLabo);
         affiR = root.findViewById(R.id.expire);
+        recherche=root.findViewById(R.id.inputRecherche);
         affiT.setOnClickListener(this);
         affiL.setOnClickListener(this);
         affiR.setOnClickListener(this);
