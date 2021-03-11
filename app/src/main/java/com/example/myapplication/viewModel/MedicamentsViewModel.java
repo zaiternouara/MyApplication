@@ -15,6 +15,8 @@ public class MedicamentsViewModel extends AndroidViewModel {
     private LiveData<List<MEDICAMENTS>> allMedicaments;
     private LiveData<List<MEDICAMENTS>> allMedicamentslaboratoires;
     private LiveData<List<MEDICAMENTS>> allMedicamentsPeremptions;
+    private LiveData<List<MEDICAMENTS>> SearchMedicaments;
+
 
 
     public MedicamentsViewModel(@NonNull Application application) {
@@ -23,6 +25,7 @@ public class MedicamentsViewModel extends AndroidViewModel {
         allMedicaments = repository.getAllMedicaments();
         allMedicamentslaboratoires= repository.getAllaboratoires();
         allMedicamentsPeremptions= repository.getAllMedicamentsPeremptions();
+        SearchMedicaments= repository.getSearchMedicamemts();
 
 
     }
@@ -53,5 +56,6 @@ public class MedicamentsViewModel extends AndroidViewModel {
         }
         public LiveData<List<MEDICAMENTS>> getAllaboratoires() { return allMedicamentslaboratoires; }
         public LiveData<List<MEDICAMENTS>> getAllPeremptions() { return allMedicamentsPeremptions; }
+        public LiveData<List<MEDICAMENTS>> getSearchMedicaments() { return SearchMedicaments; }
     }
 

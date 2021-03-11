@@ -17,7 +17,8 @@ public class MedicamentRepository {
     private LiveData<List<MEDICAMENTS>> allMedicaments;
     private LiveData<List<MEDICAMENTS>> allMedicamentslaboratoires;
     private LiveData<List<MEDICAMENTS>> AllMedicamentsPeremptions;
-
+    private LiveData<List<MEDICAMENTS>> SearchMedicaments;
+    String search;
     public MedicamentRepository(Application application) {
         MEDICAMENTSDataBase database = MEDICAMENTSDataBase.getInstance(application);
         medicamentDao = database. medicamentDao();
@@ -25,6 +26,8 @@ public class MedicamentRepository {
         allMedicaments =  medicamentDao.getAllMEDICAMENTS();
         allMedicamentslaboratoires =  medicamentDao.getAllaboratoires();
         AllMedicamentsPeremptions =  medicamentDao.getAllPeremptioN();
+        SearchMedicaments =  medicamentDao.SearchMedicamemts(search);
+
     }
     public void insert(MEDICAMENTS medicament) {
         new InsertMedicamentAsyncTask( medicamentDao).execute(medicament);
@@ -44,6 +47,10 @@ public class MedicamentRepository {
     public LiveData<List<MEDICAMENTS>> getAllaboratoires() {
         return allMedicamentslaboratoires;
     }
+    public LiveData<List<MEDICAMENTS>> getSearchMedicamemts() {
+        return SearchMedicaments;
+    }
+
 
     public LiveData<List<MEDICAMENTS>> getAllMedicamentsPeremptions() {
         return AllMedicamentsPeremptions;
