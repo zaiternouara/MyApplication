@@ -47,8 +47,8 @@ public class MedicamentRepository {
     public LiveData<List<MEDICAMENTS>> getAllaboratoires() {
         return allMedicamentslaboratoires;
     }
-    public LiveData<List<MEDICAMENTS>> getSearchMedicamemts() {
-        return SearchMedicaments;
+    public LiveData<List<MEDICAMENTS>> getSearchMedicamemts(String search) {
+        return medicamentDao.SearchMedicamemts(search);
     }
 
 

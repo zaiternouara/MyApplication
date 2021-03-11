@@ -1,5 +1,6 @@
 package com.example.myapplication.ui.afficher;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,6 +10,7 @@ import android.widget.EdgeEffect;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.content.Intent;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -22,6 +24,7 @@ import androidx.navigation.Navigation;
 import androidx.navigation.fragment.NavHostFragment;
 
 import com.example.myapplication.R;
+import com.example.myapplication.ui.afficherTous.SearchResults;
 import com.example.myapplication.ui.afficherTous.afficheTousLab;
 import com.example.myapplication.ui.afficherTous.afficherTousMedoc;
 import com.example.myapplication.ui.home.HomeFragment;
@@ -34,7 +37,11 @@ public class NotificationsFragment extends Fragment implements View.OnClickListe
     private Button rButton;
 
     private NotificationsViewModel notificationsViewModel;
+    DataPassListener mCallback;
 
+    public interface DataPassListener{
+        public void passData(String data);
+    }
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         notificationsViewModel =
@@ -77,13 +84,45 @@ public class NotificationsFragment extends Fragment implements View.OnClickListe
         switch (v.getId()) {
             case R.id.expire:
                 fragment = new afficherTousMedoc();
+                mCallback.passData("Text to pass FragmentB");
                 replaceFragment(fragment);
+                break;
+
+        }
+
+        switch (v.getId()) {
+            case R.id.button:
+                fragment = new SearchResults();
+                String rechercher = recherche.getText().toString();
+                //String oui = boui.getText().toString();
+                //String non = bnon.getText().toString();
+                if (rechercher.trim().isEmpty() ) {
+
+                    Toast.makeText(getContext(), "Entrez le champs", Toast.LENGTH_SHORT).show();
+
+                    return;
+                }
+                Bundle i = new Bundle();
+                i.putString("result", rechercher);
+
+                NotificationsFragment frag = new NotificationsFragment();
+                frag.setArguments(i);
+                FragmentManager fragmentManager = getFragmentManager();
+                fragmentManager.beginTransaction()
+                        .replace(R.id.afficher
+                                , fragment)
+                        .commit();
+
+
                 break;
 
         }
 
 
     }
+
+
+
 
     public void replaceFragment(Fragment someFragment) {
 
