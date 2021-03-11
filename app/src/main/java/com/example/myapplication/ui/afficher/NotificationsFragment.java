@@ -31,6 +31,7 @@ public class NotificationsFragment extends Fragment implements View.OnClickListe
     private Button affiL;
     private Button affiR;
     private EditText recherche;
+    private Button rButton;
 
     private NotificationsViewModel notificationsViewModel;
 
@@ -42,11 +43,15 @@ public class NotificationsFragment extends Fragment implements View.OnClickListe
         affiT = root.findViewById(R.id.button5);
         affiL = root.findViewById(R.id.pLabo);
         affiR = root.findViewById(R.id.expire);
+
         recherche=root.findViewById(R.id.inputRecherche);
+        rButton=root.findViewById(R.id.button);
+
+
         affiT.setOnClickListener(this);
         affiL.setOnClickListener(this);
         affiR.setOnClickListener(this);
-
+        rButton.setOnClickListener(this);
 
 
         return root;
@@ -76,6 +81,7 @@ public class NotificationsFragment extends Fragment implements View.OnClickListe
                 break;
 
         }
+
 
     }
 
