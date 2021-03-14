@@ -11,7 +11,7 @@ import androidx.sqlite.db.SupportSQLiteDatabase;
 
 import com.example.myapplication.models.MEDICAMENTS;
 
-@Database( entities = {MEDICAMENTS.class}, version = 2,  exportSchema = false)
+@Database( entities = {MEDICAMENTS.class}, version = 5,  exportSchema = false)
 public abstract class MEDICAMENTSDataBase extends RoomDatabase {
     private static MEDICAMENTSDataBase instance;
 
@@ -19,20 +19,21 @@ public abstract class MEDICAMENTSDataBase extends RoomDatabase {
 
     public static synchronized MEDICAMENTSDataBase getInstance(Context context) {
         if (instance == null) {
+            synchronized (MEDICAMENTSDataBase.class) {
             instance = Room.databaseBuilder(context.getApplicationContext(),
                     MEDICAMENTSDataBase.class, "MEDICAMENTS_database").fallbackToDestructiveMigration()
                     .addCallback(roomCallback).build();
-        }
+        }}
         return instance;
     }
 
-  private static RoomDatabase.Callback roomCallback = new RoomDatabase.Callback() {
+  /*private static RoomDatabase.Callback roomCallback = new RoomDatabase.Callback() {
         @Override
         public void onCreate(@NonNull SupportSQLiteDatabase db) {
             super.onCreate(db);
             new PopulateDbAsyncTask(instance).execute();
         }
-    };
+    };*/
 
     private static class PopulateDbAsyncTask extends AsyncTask<Void, Void, Void> {
         private MedicamentDAO medicamentDao;
@@ -47,14 +48,15 @@ public abstract class MEDICAMENTSDataBase extends RoomDatabase {
             return null;
         }
     }
-    private static RoomDatabase.Callback
-    sRoomDataBaseCallback = new RoomDatabase.Callback(){
-        @Override
-        public void onOpen(@NonNull SupportSQLiteDatabase db) {
-            super.onOpen(db);
-            new PopulateDbAsyncTask(instance).execute();
-        }
-    };
 
-
+    private static RoomDatabase.Callback roomCallback =
+            new RoomDatabase.Callback(){
+                @Override
+                public void onOpen (@NonNull SupportSQLiteDatabase db){
+                    super.onOpen(db);
+                    new PopulateDbAsyncTask(instance).execute();
+                }
+            };
 }
+
+
