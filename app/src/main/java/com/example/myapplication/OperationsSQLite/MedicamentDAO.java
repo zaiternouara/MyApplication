@@ -36,8 +36,8 @@ public interface MedicamentDAO {
     @Query("SELECT * FROM TABLE_MEDICAMENTS WHERE '2020/09/06'>=date_Peremption ORDER BY Nom_Commercial DESC")
     LiveData<List<MEDICAMENTS>> getAllPeremptioN();
 
-    @Query("SELECT * FROM TABLE_MEDICAMENTS WHERE Nom_Commercial = :search OR denominateur_De_Medicament = :search ORDER BY Nom_Commercial DESC")
 
+    @Query("SELECT * FROM TABLE_MEDICAMENTS WHERE Nom_Commercial LIKE '%' || :search || '%' OR denominateur_De_Medicament LIKE '%' || :search || '%' OR classe_Therapeutique LIKE '%' || :search || '%' OR laboratoire LIKE '%' || :search || '%' ORDER BY Nom_Commercial DESC")
     LiveData<List<MEDICAMENTS>> SearchMedicamemts(String search);
 
 

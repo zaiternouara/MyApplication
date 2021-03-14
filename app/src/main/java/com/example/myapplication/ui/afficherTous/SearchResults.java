@@ -47,11 +47,10 @@ public class SearchResults extends Fragment {
             // Inflate the layout for this fragment
             View root = inflater.inflate(R.layout.fragment_search_results, container, false);
             RecyclerView recyclerView = root.findViewById(R.id.recycle_view);
-            Intent intent = getActivity().getIntent();
 
-            String result = intent.getStringExtra("result");
-            System.out.println(intent);
 
+            String result = getArguments().getString("result");
+            System.out.println(result);
             recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));//comment les infos sont afficher
             recyclerView.setHasFixedSize(true);
 

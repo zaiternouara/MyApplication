@@ -93,6 +93,7 @@ public class NotificationsFragment extends Fragment implements View.OnClickListe
         switch (v.getId()) {
             case R.id.button:
                 fragment = new SearchResults();
+
                 String rechercher = recherche.getText().toString();
                 //String oui = boui.getText().toString();
                 //String non = bnon.getText().toString();
@@ -105,8 +106,9 @@ public class NotificationsFragment extends Fragment implements View.OnClickListe
                 Bundle i = new Bundle();
                 i.putString("result", rechercher);
 
-                NotificationsFragment frag = new NotificationsFragment();
-                frag.setArguments(i);
+
+                fragment.setArguments(i);
+                System.out.println(fragment);
                 FragmentManager fragmentManager = getFragmentManager();
                 fragmentManager.beginTransaction()
                         .replace(R.id.afficher
