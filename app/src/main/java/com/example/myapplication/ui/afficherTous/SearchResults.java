@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -49,6 +50,7 @@ public class SearchResults extends Fragment {
             Intent intent = getActivity().getIntent();
 
             String result = intent.getStringExtra("result");
+            System.out.println(intent);
 
             recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));//comment les infos sont afficher
             recyclerView.setHasFixedSize(true);

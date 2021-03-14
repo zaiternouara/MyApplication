@@ -4,9 +4,12 @@ package com.example.myapplication.models;
 import android.os.Parcel;
 
 import androidx.room.Entity;
+import androidx.room.Index;
 import androidx.room.PrimaryKey;
 
-@Entity(tableName = "TABLE_MEDICAMENTS")
+@Entity(tableName = "TABLE_MEDICAMENTS",indices = {
+        @Index(value = "nom_Commercial",unique = true)
+})
 public class MEDICAMENTS  {
     @PrimaryKey(autoGenerate = true)
     private int id;

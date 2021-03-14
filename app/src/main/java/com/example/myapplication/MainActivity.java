@@ -30,41 +30,39 @@ public class MainActivity extends AppCompatActivity {
 
 
         BottomNavigationView navView = findViewById(R.id.nav_view);
-       navView.setOnNavigationItemSelectedListener(bottomNavMethod);
-        getSupportFragmentManager().beginTransaction().replace(R.id.nav_host_fragment,new HomeFragment()).commit();
+        navView.setOnNavigationItemSelectedListener(bottomNavMethod);
+        getSupportFragmentManager().beginTransaction().replace(R.id.nav_host_fragment, new HomeFragment()).commit();
 
 
+    }
 
-        }
-
-    private BottomNavigationView.OnNavigationItemSelectedListener bottomNavMethod= new
+    private BottomNavigationView.OnNavigationItemSelectedListener bottomNavMethod = new
             BottomNavigationView.OnNavigationItemSelectedListener() {
                 @Override
                 public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
-                    Fragment fragment =null;
-                    switch (menuItem.getItemId())
-                    {
+                    Fragment fragment = null;
+                    switch (menuItem.getItemId()) {
                         case R.id.navigation_home:
-                            fragment=new HomeFragment();
+                            fragment = new HomeFragment();
                             break;
 
                         case R.id.navigation_dashboard:
-                            fragment=new DashboardFragment();
+                            fragment = new DashboardFragment();
                             break;
 
                         case R.id.navigation_notifications:
-                            fragment=new NotificationsFragment();
+                            fragment = new NotificationsFragment();
                             break;
                         case R.id.navigation_modifier:
-                            fragment=new ModifierFragment();
+                            fragment = new ModifierFragment();
                             break;
                     }
                     getSupportFragmentManager().beginTransaction()
-                            .replace(R.id.nav_host_fragment,fragment).commit();
+                            .replace(R.id.nav_host_fragment, fragment).commit();
 
                     return true;
                 }
             };
 
-    }
+}
 

@@ -354,6 +354,7 @@ public class DashboardFragment extends Fragment implements View.OnClickListener 
         medicamentSviewModel.insert(medicaments);
         Toast.makeText(getContext(), "medicament saved", Toast.LENGTH_SHORT).show();
 
+
         //getActivity().setResult(Activity.RESULT_OK, data);
         //getActivity().finish();
     }

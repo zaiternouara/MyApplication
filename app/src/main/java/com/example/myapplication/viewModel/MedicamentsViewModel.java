@@ -1,9 +1,11 @@
 package com.example.myapplication.viewModel;
 
 import android.app.Application;
+
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 import androidx.annotation.NonNull;
+
 import com.example.myapplication.Repository.MedicamentRepository;
 import com.example.myapplication.models.MEDICAMENTS;
 
@@ -23,39 +25,48 @@ public class MedicamentsViewModel extends AndroidViewModel {
         super(application);
         repository = new MedicamentRepository(application);
         allMedicaments = repository.getAllMedicaments();
-        allMedicamentslaboratoires= repository.getAllaboratoires();
-        allMedicamentsPeremptions= repository.getAllMedicamentsPeremptions();
-        SearchMedicaments= repository.getSearchMedicamemts(search);
+        allMedicamentslaboratoires = repository.getAllaboratoires();
+        allMedicamentsPeremptions = repository.getAllMedicamentsPeremptions();
+        SearchMedicaments = repository.getSearchMedicamemts(search);
 
 
     }
 
 
-        public void insert(MEDICAMENTS medicaments) {
+    public void insert(MEDICAMENTS medicaments) {
 
         repository.insert(medicaments);
-        }
+    }
 
 
-        public void update(MEDICAMENTS medicaments) {
+    public void update(MEDICAMENTS medicaments) {
 
         repository.update(medicaments);
-        }
+    }
 
-        public void delete(MEDICAMENTS medicaments) {
+    public void delete(MEDICAMENTS medicaments) {
 
         repository.delete(medicaments);
-        }
-
-        public void deleteAllMedicaments() {
-            repository.deleteAllMedicaments();
-        }
-
-        public LiveData<List<MEDICAMENTS>> getAllMedicaments() {
-            return allMedicaments;
-        }
-        public LiveData<List<MEDICAMENTS>> getAllaboratoires() { return allMedicamentslaboratoires; }
-        public LiveData<List<MEDICAMENTS>> getAllPeremptions() { return allMedicamentsPeremptions; }
-        public LiveData<List<MEDICAMENTS>> getSearchMedicaments(String search) { return repository.getSearchMedicamemts(search); }
     }
+
+    public void deleteAllMedicaments() {
+        repository.deleteAllMedicaments();
+    }
+
+    public LiveData<List<MEDICAMENTS>> getAllMedicaments() {
+        return allMedicaments;
+    }
+
+    public LiveData<List<MEDICAMENTS>> getAllaboratoires() {
+        return allMedicamentslaboratoires;
+    }
+
+    public LiveData<List<MEDICAMENTS>> getAllPeremptions() {
+        return allMedicamentsPeremptions;
+    }
+
+    public LiveData<List<MEDICAMENTS>> getSearchMedicaments(String search) {
+        return repository.getSearchMedicamemts(search);
+    }
+}
 

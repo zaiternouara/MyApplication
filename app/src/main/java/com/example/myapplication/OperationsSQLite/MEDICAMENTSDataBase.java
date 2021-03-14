@@ -21,7 +21,7 @@ public abstract class MEDICAMENTSDataBase extends RoomDatabase {
         if (instance == null) {
             synchronized (MEDICAMENTSDataBase.class) {
             instance = Room.databaseBuilder(context.getApplicationContext(),
-                    MEDICAMENTSDataBase.class, "MEDICAMENTS_database").fallbackToDestructiveMigration()
+                    MEDICAMENTSDataBase.class, "MEDICAMENTS_database.db").fallbackToDestructiveMigration()
                     .addCallback(roomCallback).build();
         }}
         return instance;
