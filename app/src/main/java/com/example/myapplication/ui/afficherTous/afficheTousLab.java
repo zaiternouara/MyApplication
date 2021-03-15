@@ -60,6 +60,13 @@ public class afficheTousLab extends Fragment {
                 adapter.setMedicament(medicaments);
             }
         });
+        medicamentSviewModel.getAllaboratoiresWS().observe(getViewLifecycleOwner(),new Observer<List<MEDICAMENTS>>(){
+
+            @Override
+            public void onChanged(List<MEDICAMENTS> medicaments) {
+                adapter.setMedicament(medicaments);
+            }
+        });
         new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(0,
                 ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT) {
             @Override

@@ -23,6 +23,8 @@ public class MedicamentsViewModel extends AndroidViewModel {
 //WEBSERVICE
     private WebServiceRepository rep;
     private LiveData<List<MEDICAMENTS>> allMedicamentsWS;
+    private LiveData<List<MEDICAMENTS>> allMedicamentslaboratoiresWS;
+    private LiveData<List<MEDICAMENTS>> SearchMedicamentsWS;
 
 
 
@@ -41,15 +43,17 @@ public class MedicamentsViewModel extends AndroidViewModel {
         //WEBSERVICE
         rep  = new WebServiceRepository(application);
         allMedicamentsWS = rep.getMyList();
+        allMedicamentslaboratoiresWS = rep.getMyListLaboratoire();
+        SearchMedicamentsWS = rep.getMyListSearch(search);
     }
 
-
+//SQLITE
     public void insert(MEDICAMENTS medicaments) {
 
         repository.insert(medicaments);
+        rep.AddMedicament(medicaments);
 
     }
-
 
     public void update(MEDICAMENTS medicaments) {
 
@@ -61,8 +65,16 @@ public class MedicamentsViewModel extends AndroidViewModel {
         repository.delete(medicaments);
     }
 
+//WEBSERVICE
+public void insertWS(MEDICAMENTS medicaments) {
 
-    //SQLITE
+    repository.insert(medicaments);
+
+}
+
+
+
+//SQLITE
     public void deleteAllMedicaments() {
         repository.deleteAllMedicaments();
     }
@@ -79,9 +91,15 @@ public class MedicamentsViewModel extends AndroidViewModel {
         return repository.getSearchMedicamemts(search);
     }
 
-    //WEBSEVICE
+//WEBSEVICE
     public LiveData<List<MEDICAMENTS>> getAllMedicamentsWS() {
         return allMedicamentsWS;
+    }
+    public LiveData<List<MEDICAMENTS>> getAllaboratoiresWS() {
+        return allMedicamentslaboratoiresWS;
+    }
+    public LiveData<List<MEDICAMENTS>> getSearchMedicamentsWS(String search) {
+        return rep.getMyListSearch(search);
     }
 }
 
