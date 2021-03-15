@@ -18,6 +18,7 @@ import java.util.List;
 public class MedicamentAdapter extends RecyclerView.Adapter<MedicamentAdapter.medicamentHolder> {
    private List<MEDICAMENTS> medicament=new ArrayList<>();
    Context context;
+   private OnItemClickListener listener;
 
     public MedicamentAdapter(Context context) {
         this.context = context;
@@ -56,23 +57,47 @@ public class MedicamentAdapter extends RecyclerView.Adapter<MedicamentAdapter.me
     }
 
 
-    public static class medicamentHolder extends RecyclerView.ViewHolder  {//liaison entre interface graphique et code JAVA
+    public class medicamentHolder extends RecyclerView.ViewHolder {//liaison entre interface graphique et code JAVA
         private TextView nomCom;
         private TextView classTH;
         private TextView price;
+       /* private TextView lot;
+        private TextView denom;
+        private TextView duree;
+        private TextView desc;
+        private TextView dateF;
+        private TextView dateP;
+        private TextView form;
+        private TextView codeB;
+        private TextView quant;*/
 
         public medicamentHolder(@NonNull View itemView) {
             super(itemView);
             nomCom = itemView.findViewById(R.id.text_view_NomC);
             classTH = itemView.findViewById(R.id.text_view_Class);
             price = itemView.findViewById(R.id.text_view_Prix);
+           // lot =itemView.findViewById(R.id.
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    int position=getAdapterPosition();
+                    if(listener!=null && position!= RecyclerView.NO_POSITION){
+                        listener.OnItemClick(medicament.get(position));
 
+                    }
+                }
+            });
 
 
         }
 
 
-
+    }
+    public interface OnItemClickListener{
+        void OnItemClick(MEDICAMENTS medicaments);
+    }
+    public void setOnItemClickListener(OnItemClickListener listener){
+        this.listener=listener;
     }
 
 
