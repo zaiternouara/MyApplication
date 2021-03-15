@@ -7,35 +7,47 @@ import androidx.lifecycle.LiveData;
 import androidx.annotation.NonNull;
 
 import com.example.myapplication.Repository.MedicamentRepository;
+import com.example.myapplication.Repository.WebServiceRepository;
 import com.example.myapplication.models.MEDICAMENTS;
 
 import java.util.List;
 
 public class MedicamentsViewModel extends AndroidViewModel {
-
+//SQLITE
     private MedicamentRepository repository;
     private LiveData<List<MEDICAMENTS>> allMedicaments;
     private LiveData<List<MEDICAMENTS>> allMedicamentslaboratoires;
     private LiveData<List<MEDICAMENTS>> allMedicamentsPeremptions;
     private LiveData<List<MEDICAMENTS>> SearchMedicaments;
     public String search;
+//WEBSERVICE
+    private WebServiceRepository rep;
+    private LiveData<List<MEDICAMENTS>> allMedicamentsWS;
+
+
+
+
 
 
     public MedicamentsViewModel(@NonNull Application application) {
         super(application);
+        //SQLITE
         repository = new MedicamentRepository(application);
         allMedicaments = repository.getAllMedicaments();
         allMedicamentslaboratoires = repository.getAllaboratoires();
         allMedicamentsPeremptions = repository.getAllMedicamentsPeremptions();
         SearchMedicaments = repository.getSearchMedicamemts(search);
 
-
+        //WEBSERVICE
+        rep  = new WebServiceRepository(application);
+        allMedicamentsWS = rep.getMyList();
     }
 
 
     public void insert(MEDICAMENTS medicaments) {
 
         repository.insert(medicaments);
+
     }
 
 
@@ -49,24 +61,27 @@ public class MedicamentsViewModel extends AndroidViewModel {
         repository.delete(medicaments);
     }
 
+
+    //SQLITE
     public void deleteAllMedicaments() {
         repository.deleteAllMedicaments();
     }
-
     public LiveData<List<MEDICAMENTS>> getAllMedicaments() {
         return allMedicaments;
     }
-
     public LiveData<List<MEDICAMENTS>> getAllaboratoires() {
         return allMedicamentslaboratoires;
     }
-
     public LiveData<List<MEDICAMENTS>> getAllPeremptions() {
         return allMedicamentsPeremptions;
     }
-
     public LiveData<List<MEDICAMENTS>> getSearchMedicaments(String search) {
         return repository.getSearchMedicamemts(search);
+    }
+
+    //WEBSEVICE
+    public LiveData<List<MEDICAMENTS>> getAllMedicamentsWS() {
+        return allMedicamentsWS;
     }
 }
 
