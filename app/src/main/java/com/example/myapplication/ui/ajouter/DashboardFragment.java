@@ -362,6 +362,33 @@ public class DashboardFragment extends Fragment implements View.OnClickListener 
     public void onClick(View v) {
         if(v.getId()==R.id.ajout){
             ajouterM();
+            //nomM.setText(null);
+            //classeTh.setText(null);
+            //descr.setText(null);
+            //lot.setText(null);
+            labo.setText(null);
+            denom.setText(null);
+            form.setText(null);
+            duree.setText(null);
+            dateF.setText(null);
+            dateP.setText(null);
+            prix.setText(null);
+            quant.setText(null);
+            codeB.setText(null);
+            //nomM.getText().clear();
+            //classeTh.getText().clear();
+            //descr.getText().clear();
+            //lot.getText().clear();
+            //labo.getText().clear();
+            //denom.getText().clear();
+            //form.getText().clear();
+            //duree.getText().clear();
+            //dateF.getText().clear();
+            //dateP.getText().clear();
+            //prix.getText().clear();
+            //quant.getText().clear();
+            //codeB.getText().clear();
+
         }
     }
 }
