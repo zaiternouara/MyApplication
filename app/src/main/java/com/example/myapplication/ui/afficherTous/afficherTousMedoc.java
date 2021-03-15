@@ -1,8 +1,11 @@
 package com.example.myapplication.ui.afficherTous;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.ItemTouchHelper;
@@ -44,6 +47,8 @@ public class afficherTousMedoc extends Fragment  {
         // Inflate the layout for this fragment
         View root= inflater.inflate(R.layout.fragment_afficher_tous_medoc, container, false);
         RecyclerView recyclerView=root.findViewById(R.id.recycle_view);
+        //recherche=root.findViewById(R.id.);
+
 
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));//comment les infos sont afficher
         recyclerView.setHasFixedSize(true);
@@ -84,6 +89,33 @@ public class afficherTousMedoc extends Fragment  {
 
             }
         }).attachToRecyclerView(recyclerView);
+        adapter.setOnItemClickListener(new MedicamentAdapter.OnItemClickListener() {
+            @Override
+            public void OnItemClick(MEDICAMENTS medicaments) {
+                Fragment fragment = new afficher_details();
+
+               // String rechercher = recherche.getText().toString();
+                //String oui = boui.getText().toString();
+                //String non = bnon.getText().toString();
+                if (rechercher.trim().isEmpty() ) {
+
+                    Toast.makeText(getContext(), "Entrez le champs", Toast.LENGTH_SHORT).show();
+
+                    return;
+                }
+                Bundle i = new Bundle();
+                i.putString("result", rechercher);
+
+
+                fragment.setArguments(i);
+                System.out.println(fragment);
+                FragmentManager fragmentManager = getFragmentManager();
+                fragmentManager.beginTransaction()
+                        .replace(R.id.afficher
+                                , fragment)
+                        .commit();
+            }
+        });
         return root;
 
     }

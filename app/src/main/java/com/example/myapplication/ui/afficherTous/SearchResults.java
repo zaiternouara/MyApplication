@@ -50,7 +50,7 @@ public class SearchResults extends Fragment {
 
 
             String result = getArguments().getString("result");
-            System.out.println(result);
+
             recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));//comment les infos sont afficher
             recyclerView.setHasFixedSize(true);
 
