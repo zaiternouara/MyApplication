@@ -56,7 +56,7 @@ public class MedicamentAdapter extends RecyclerView.Adapter<MedicamentAdapter.me
     }
 
 
-    class medicamentHolder extends RecyclerView.ViewHolder{//liaison entre interface graphique et code JAVA
+    public static class medicamentHolder extends RecyclerView.ViewHolder  {//liaison entre interface graphique et code JAVA
         private TextView nomCom;
         private TextView classTH;
         private TextView price;
@@ -67,8 +67,14 @@ public class MedicamentAdapter extends RecyclerView.Adapter<MedicamentAdapter.me
             classTH = itemView.findViewById(R.id.text_view_Class);
             price = itemView.findViewById(R.id.text_view_Prix);
 
+
+
         }
+
+
+
     }
+
 
 
 }

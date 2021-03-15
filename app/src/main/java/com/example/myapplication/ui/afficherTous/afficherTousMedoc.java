@@ -19,9 +19,10 @@ import com.example.myapplication.R;
 import com.example.myapplication.models.MEDICAMENTS;
 import com.example.myapplication.viewModel.MedicamentsViewModel;
 
+import java.util.ArrayList;
 import java.util.List;
 
-public class afficherTousMedoc extends Fragment {
+public class afficherTousMedoc extends Fragment  {
 
 
     private MedicamentsViewModel medicamentSviewModel;
@@ -52,6 +53,7 @@ public class afficherTousMedoc extends Fragment {
         recyclerView.setAdapter(adapter);
 
 
+
         medicamentSviewModel = ViewModelProviders.of(this).get(MedicamentsViewModel.class);
         //medicamentSviewModel.insert(new MEDICAMENTS("ju","paralgan","bayer","jp","comprimé","3mois","23","21/09/2019","2019/09/06","bienn","12euros","89"));
         medicamentSviewModel.getAllMedicaments().observe(getViewLifecycleOwner(),new Observer<List<MEDICAMENTS>>(){
@@ -77,4 +79,5 @@ public class afficherTousMedoc extends Fragment {
         return root;
 
     }
-    }
+
+}
