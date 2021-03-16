@@ -305,9 +305,6 @@ public class DashboardFragment extends Fragment implements View.OnClickListener 
         prix = (TextView) root.findViewById(R.id.inputPrix);
         quant = (TextView) root.findViewById(R.id.inputQuant);
         codeB = (TextView) root.findViewById(R.id.inputCode);
-
-        //boui = (RadioButton) root.findViewById(R.id.inputOui);
-        //bnon = (RadioButton) root.findViewById(R.id.inputNon);
         lot= (TextView) root.findViewById(R.id.inputLot);
 
 
@@ -315,15 +312,6 @@ public class DashboardFragment extends Fragment implements View.OnClickListener 
 
         ajout.setOnClickListener(this);
 
-
-
-
-        /*dashboardViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
-            @Override
-            public void onChanged(@Nullable String s) {
-                textView.setText(s);
-            }
-        });*/
         return root;
     }
     private void ajouterM(){
@@ -341,8 +329,7 @@ public class DashboardFragment extends Fragment implements View.OnClickListener 
         String price = prix.getText().toString();
         String quantite = quant.getText().toString();
         String codeBarre = codeB.getText().toString();
-        //String oui = boui.getText().toString();
-        //String non = bnon.getText().toString();
+
         if (NomCommercial.trim().isEmpty() || description.trim().isEmpty()|| classTH.trim().isEmpty()|| laboratoire.trim().isEmpty()|| lots.trim().isEmpty()|| denomination.trim().isEmpty()|| formePharmaceutique.trim().isEmpty()|| dureee.trim().isEmpty()|| dateFab.trim().isEmpty()|| datePer.trim().isEmpty()|| price.trim().isEmpty()|| quantite.trim().isEmpty()|| codeBarre.trim().isEmpty()) {
 
             Toast.makeText(getContext(), "Entrez tous les champs", Toast.LENGTH_SHORT).show();

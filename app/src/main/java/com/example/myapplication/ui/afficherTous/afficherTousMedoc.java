@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.myapplication.Adapter.MedicamentAdapter;
@@ -47,7 +48,8 @@ public class afficherTousMedoc extends Fragment  {
         // Inflate the layout for this fragment
         View root= inflater.inflate(R.layout.fragment_afficher_tous_medoc, container, false);
         RecyclerView recyclerView=root.findViewById(R.id.recycle_view);
-        //recherche=root.findViewById(R.id.);
+
+        TextView classeTh = (TextView) root.findViewById(R.id.text_view_Class);
 
 
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));//comment les infos sont afficher
@@ -92,28 +94,52 @@ public class afficherTousMedoc extends Fragment  {
         adapter.setOnItemClickListener(new MedicamentAdapter.OnItemClickListener() {
             @Override
             public void OnItemClick(MEDICAMENTS medicaments) {
+               /* FragmentTransaction transaction = getFragmentManager().beginTransaction();
+                transaction.replace(R.id.affichertous, new afficher_details());
+                transaction.addToBackStack(null);
+                transaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
+
+                transaction.commit();*/
                 Fragment fragment = new afficher_details();
 
-               // String rechercher = recherche.getText().toString();
-                //String oui = boui.getText().toString();
-                //String non = bnon.getText().toString();
-                if (rechercher.trim().isEmpty() ) {
+                String classTH=medicaments.getClasse_Therapeutique();
+                String nomC=medicaments.getNom_Commercial();
+                String prix=medicaments.getPrix();
+                String denom=medicaments.getDenominateur_De_Medicament();
+                String lot=medicaments.getLot();
+                String forme=medicaments.getForme_Pharmaceutique();
+                String dateF=medicaments.getDate_De_Fabrication();
+                String dateP=medicaments.getDate_Peremption();
+                String duree=medicaments.getDuree_De_Conservation();
+                String quant=medicaments.getQuantite_En_Stock();
+                String desc=medicaments.getDescription_De_Composant();
+                String labo=medicaments.getLaboratoire();
 
-                    Toast.makeText(getContext(), "Entrez le champs", Toast.LENGTH_SHORT).show();
 
-                    return;
-                }
                 Bundle i = new Bundle();
-                i.putString("result", rechercher);
-
+                i.putString("classe therapeutique", classTH);
+                i.putString("Nom commercial", nomC);
+                i.putString("prix", prix);
+                i.putString("denominateur", denom);
+                i.putString("lot", lot);
+                i.putString("duree de conservation", duree);
+                i.putString("forme pharmaceutique", forme);
+                i.putString("date de fabrication", dateF);
+                i.putString("date de peremption", dateP);
+                i.putString("quantite de stock", quant);
+                i.putString("description", desc);
+                i.putString("laboratoire", desc);
 
                 fragment.setArguments(i);
                 System.out.println(fragment);
                 FragmentManager fragmentManager = getFragmentManager();
                 fragmentManager.beginTransaction()
-                        .replace(R.id.afficher
+                        .replace(R.id.affichertous
                                 , fragment)
+                        .addToBackStack(null)
                         .commit();
+
+
             }
         });
         return root;
