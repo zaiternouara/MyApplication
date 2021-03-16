@@ -37,6 +37,7 @@ public class WebServiceRepository {
         getListFromServer(application);
         getListLaboratoireFromServer(application);
 
+
     }
 
     private void getListFromServer(Application application) {
@@ -128,7 +129,7 @@ public class WebServiceRepository {
         MyfileRequeteSingleton.getInstance(application).addToRequestQueue(JsonArrayRequest);
     }
 
-    private MutableLiveData<List<MEDICAMENTS>> getListOfSearchFromServer(String search) {
+    private MutableLiveData<List<MEDICAMENTS>> getListOfSearchFromServer(Application application ,String search) {
         String url ="http://192.168.43.80/Search";
         JsonArrayRequest JsonArrayRequest = new JsonArrayRequest(Request.Method.POST, url, null, new Response.Listener<JSONArray>() {
             @Override
@@ -180,6 +181,7 @@ public class WebServiceRepository {
                 return params;
             }
         };
+        MyfileRequeteSingleton.getInstance(application).addToRequestQueue(JsonArrayRequest);
         return myListSearch;
     }
 
@@ -231,8 +233,8 @@ public class WebServiceRepository {
         return myListLaboratoire;
     }
 
-    public MutableLiveData<List<MEDICAMENTS>> getMyListSearch(String search) {
-        return getListOfSearchFromServer(search);
+    public MutableLiveData<List<MEDICAMENTS>> getMyListSearch(Application application,String search) {
+        return getListOfSearchFromServer(application,search);
     }
 
 }
