@@ -7,7 +7,7 @@ import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 
 import com.example.myapplication.Repository.MedicamentRepository;
-import com.example.myapplication.Repository.WebServiceRepository;
+//import com.example.myapplication.Repository.WebServiceRepository;
 import com.example.myapplication.models.MEDICAMENTS;
 
 import java.util.List;
@@ -21,9 +21,9 @@ public class MedicamentsViewModel extends AndroidViewModel {
     private final LiveData<List<MEDICAMENTS>> allMedicamentsPeremptions;
     private LiveData<List<MEDICAMENTS>> SearchMedicaments;
     //WEBSERVICE
-    private final WebServiceRepository rep;
+   /* private final WebServiceRepository rep;
     private final LiveData<List<MEDICAMENTS>> allMedicamentsWS;
-    private final LiveData<List<MEDICAMENTS>> allMedicamentslaboratoiresWS;
+    private final LiveData<List<MEDICAMENTS>> allMedicamentslaboratoiresWS;*/
     private LiveData<List<MEDICAMENTS>> SearchMedicamentsWS;
 
 
@@ -37,9 +37,9 @@ public class MedicamentsViewModel extends AndroidViewModel {
         //SearchMedicaments = repository.getSearchMedicamemts(search);
 
         //WEBSERVICE
-        rep = new WebServiceRepository(application);
+      /*  rep = new WebServiceRepository(application);
         allMedicamentsWS = rep.getMyList();
-        allMedicamentslaboratoiresWS = rep.getMyListLaboratoire();
+        allMedicamentslaboratoiresWS = rep.getMyListLaboratoire();*/
         //SearchMedicamentsWS = rep.getMyListSearch(application ,search);
     }
 
@@ -47,7 +47,7 @@ public class MedicamentsViewModel extends AndroidViewModel {
     public void insert(MEDICAMENTS medicaments) {
 
         repository.insert(medicaments);
-        rep.AddMedicament(medicaments);
+      //  rep.AddMedicament(medicaments);
 
     }
 
@@ -92,7 +92,7 @@ public class MedicamentsViewModel extends AndroidViewModel {
     }
 
     //WEBSEVICE
-    public LiveData<List<MEDICAMENTS>> getAllMedicamentsWS() {
+   /* public LiveData<List<MEDICAMENTS>> getAllMedicamentsWS() {
         return allMedicamentsWS;
     }
 
@@ -102,6 +102,6 @@ public class MedicamentsViewModel extends AndroidViewModel {
 
     public LiveData<List<MEDICAMENTS>> getSearchMedicamentsWS(String search) {
         return rep.getMyListSearch(getApplication(), search);
-    }
+    }*/
 }
 

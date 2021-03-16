@@ -54,7 +54,7 @@ public class afficheTousLab extends Fragment {
 
 
         medicamentSviewModel = ViewModelProviders.of(this).get(MedicamentsViewModel.class);
-        if (TestConnectionStatu.getConnectionStatus(getContext()) != true) {
+        //if (TestConnectionStatu.getConnectionStatus(getContext()) != true) {
             medicamentSviewModel.getAllaboratoires().observe(getViewLifecycleOwner(), new Observer<List<MEDICAMENTS>>() {
 
                 @Override
@@ -62,7 +62,7 @@ public class afficheTousLab extends Fragment {
                     adapter.setMedicament(medicaments);
                 }
             });
-        } else {
+       /* } else {
             medicamentSviewModel.getAllaboratoiresWS().observe(getViewLifecycleOwner(), new Observer<List<MEDICAMENTS>>() {
 
                 @Override
@@ -70,7 +70,7 @@ public class afficheTousLab extends Fragment {
                     adapter.setMedicament(medicaments);
                 }
             });
-        }
+        }*/
         new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(0,
                 ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT) {
             @Override

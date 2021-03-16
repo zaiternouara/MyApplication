@@ -1,6 +1,6 @@
 package com.example.myapplication.Repository;
 
-import android.app.Application;
+/*import android.app.Application;
 
 import androidx.lifecycle.MutableLiveData;
 
@@ -230,4 +230,4 @@ public class WebServiceRepository {
         return getListOfSearchFromServer(application, search);
     }
 
-}
+}*/

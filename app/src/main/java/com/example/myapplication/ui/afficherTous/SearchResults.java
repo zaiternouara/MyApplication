@@ -60,7 +60,7 @@ public class SearchResults extends Fragment {
 
         medicamentSviewModel = ViewModelProviders.of(this).get(MedicamentsViewModel.class);
 
-        if (TestConnectionStatu.getConnectionStatus(getContext()) != true) {
+       // if (TestConnectionStatu.getConnectionStatus(getContext()) != true) {
             medicamentSviewModel.getSearchMedicaments(result).observe(getViewLifecycleOwner(), new Observer<List<MEDICAMENTS>>() {
 
                 @Override
@@ -68,7 +68,7 @@ public class SearchResults extends Fragment {
                     adapter.setMedicament(medicaments);
                 }
             });
-        } else {
+        /*} else {
             medicamentSviewModel.getSearchMedicamentsWS(result).observe(getViewLifecycleOwner(), new Observer<List<MEDICAMENTS>>() {
 
                 @Override
@@ -76,7 +76,7 @@ public class SearchResults extends Fragment {
                     adapter.setMedicament(medicaments);
                 }
             });
-        }
+        }*/
 
 
         new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(0,

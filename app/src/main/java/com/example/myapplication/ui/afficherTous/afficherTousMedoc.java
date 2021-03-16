@@ -31,8 +31,6 @@ public class afficherTousMedoc extends Fragment {
     public afficherTousMedoc() {
     }
 
-    // TODO: Rename and change types and number of parameters
-
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -43,12 +41,10 @@ public class afficherTousMedoc extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
+
+
         View root = inflater.inflate(R.layout.fragment_afficher_tous_medoc, container, false);
         RecyclerView recyclerView = root.findViewById(R.id.recycle_view);
-
-        TextView classeTh = (TextView) root.findViewById(R.id.text_view_Class);
-
 
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));//comment les infos sont afficher
         recyclerView.setHasFixedSize(true);
@@ -60,7 +56,7 @@ public class afficherTousMedoc extends Fragment {
 
         medicamentSviewModel = ViewModelProviders.of(this).get(MedicamentsViewModel.class);
         //medicamentSviewModel.insert(new MEDICAMENTS("ju","paralgan","bayer","jp","comprimé","3mois","23","21/09/2019","2019/09/06","bienn","12euros","89"));
-        if (TestConnectionStatu.getConnectionStatus(getContext()) != true) {
+       // if (TestConnectionStatu.getConnectionStatus(getContext()) != true) {
             medicamentSviewModel.getAllMedicaments().observe(getViewLifecycleOwner(), new Observer<List<MEDICAMENTS>>() {
 
                 @Override
@@ -68,7 +64,7 @@ public class afficherTousMedoc extends Fragment {
                     adapter.setMedicament(medicaments);
                 }
             });
-        } else {
+        /*} else {
             medicamentSviewModel.getAllMedicamentsWS().observe(getViewLifecycleOwner(), new Observer<List<MEDICAMENTS>>() {
 
                 @Override
@@ -76,7 +72,7 @@ public class afficherTousMedoc extends Fragment {
                     adapter.setMedicament(medicaments);
                 }
             });
-        }
+        }*/
 
         new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(0,
                 ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT) {
@@ -95,12 +91,7 @@ public class afficherTousMedoc extends Fragment {
         adapter.setOnItemClickListener(new MedicamentAdapter.OnItemClickListener() {
             @Override
             public void OnItemClick(MEDICAMENTS medicaments) {
-               /* FragmentTransaction transaction = getFragmentManager().beginTransaction();
-                transaction.replace(R.id.affichertous, new afficher_details());
-                transaction.addToBackStack(null);
-                transaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
 
-                transaction.commit();*/
                 Fragment fragment = new afficher_details();
 
                 String classTH = medicaments.getClasse_Therapeutique();
@@ -129,7 +120,7 @@ public class afficherTousMedoc extends Fragment {
                 i.putString("date de peremption", dateP);
                 i.putString("quantite de stock", quant);
                 i.putString("description", desc);
-                i.putString("laboratoire", desc);
+                i.putString("laboratoire", labo);
 
                 fragment.setArguments(i);
                 System.out.println(fragment);
