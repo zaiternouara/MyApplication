@@ -1,7 +1,5 @@
 package com.example.myapplication.ui.ajouter;
 
-import android.app.Activity;
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,24 +7,16 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RadioButton;
-import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.myapplication.models.MEDICAMENTS;
-import com.example.myapplication.ui.ajouter.DashboardFragment;
-
-
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.ViewModelProvider;
 import androidx.lifecycle.ViewModelProviders;
 
 import com.example.myapplication.R;
+import com.example.myapplication.models.MEDICAMENTS;
 import com.example.myapplication.viewModel.MedicamentsViewModel;
-
-import static android.app.Activity.RESULT_OK;
 
 public class DashboardFragment extends Fragment implements View.OnClickListener {
 
@@ -265,19 +255,19 @@ public class DashboardFragment extends Fragment implements View.OnClickListener 
 
     private ImageView logo;
     private TextView textView1;
-    private  TextView classeTh;
-    private TextView  nomM;
-    private TextView  labo;
-    private TextView  denom;
-    private TextView  form;
-    private TextView  duree;
-    private TextView  lot;
-    private TextView  dateF;
-    private TextView  dateP;
-    private TextView  descr;
-    private TextView  prix;
-    private TextView  quant;
-    private TextView  codeB;
+    private TextView classeTh;
+    private TextView nomM;
+    private TextView labo;
+    private TextView denom;
+    private TextView form;
+    private TextView duree;
+    private TextView lot;
+    private TextView dateF;
+    private TextView dateP;
+    private TextView descr;
+    private TextView prix;
+    private TextView quant;
+    private TextView codeB;
     private RadioButton boui;
     private RadioButton bnon;
     private Button ajout;
@@ -290,9 +280,9 @@ public class DashboardFragment extends Fragment implements View.OnClickListener 
 
         View root = inflater.inflate(R.layout.fragment_dashboard, container, false);
         //final TextView textView = root.findViewById(R.id.text_dashboard);
-        logo=(ImageView) root.findViewById(R.id.imageView);
+        logo = (ImageView) root.findViewById(R.id.imageView);
 
-        textView1=(TextView) root.findViewById(R.id.textView);
+        textView1 = (TextView) root.findViewById(R.id.textView);
         classeTh = (TextView) root.findViewById(R.id.inputClass);
         nomM = (TextView) root.findViewById(R.id.inputNom);
         labo = (TextView) root.findViewById(R.id.inputLabo);
@@ -305,16 +295,17 @@ public class DashboardFragment extends Fragment implements View.OnClickListener 
         prix = (TextView) root.findViewById(R.id.inputPrix);
         quant = (TextView) root.findViewById(R.id.inputQuant);
         codeB = (TextView) root.findViewById(R.id.inputCode);
-        lot= (TextView) root.findViewById(R.id.inputLot);
+        lot = (TextView) root.findViewById(R.id.inputLot);
 
 
-        ajout=(Button)root.findViewById(R.id.ajout);
+        ajout = (Button) root.findViewById(R.id.ajout);
 
         ajout.setOnClickListener(this);
 
         return root;
     }
-    private void ajouterM(){
+
+    private void ajouterM() {
 
         String NomCommercial = nomM.getText().toString();
         String classTH = classeTh.getText().toString();
@@ -330,13 +321,13 @@ public class DashboardFragment extends Fragment implements View.OnClickListener 
         String quantite = quant.getText().toString();
         String codeBarre = codeB.getText().toString();
 
-        if (NomCommercial.trim().isEmpty() || description.trim().isEmpty()|| classTH.trim().isEmpty()|| laboratoire.trim().isEmpty()|| lots.trim().isEmpty()|| denomination.trim().isEmpty()|| formePharmaceutique.trim().isEmpty()|| dureee.trim().isEmpty()|| dateFab.trim().isEmpty()|| datePer.trim().isEmpty()|| price.trim().isEmpty()|| quantite.trim().isEmpty()|| codeBarre.trim().isEmpty()) {
+        if (NomCommercial.trim().isEmpty() || description.trim().isEmpty() || classTH.trim().isEmpty() || laboratoire.trim().isEmpty() || lots.trim().isEmpty() || denomination.trim().isEmpty() || formePharmaceutique.trim().isEmpty() || dureee.trim().isEmpty() || dateFab.trim().isEmpty() || datePer.trim().isEmpty() || price.trim().isEmpty() || quantite.trim().isEmpty() || codeBarre.trim().isEmpty()) {
 
             Toast.makeText(getContext(), "Entrez tous les champs", Toast.LENGTH_SHORT).show();
 
             return;
         }
-        MEDICAMENTS medicaments = new MEDICAMENTS(classTH,NomCommercial, laboratoire,denomination,formePharmaceutique ,dureee,lots,dateFab,datePer ,description,price,quantite);
+        MEDICAMENTS medicaments = new MEDICAMENTS(classTH, NomCommercial, laboratoire, denomination, formePharmaceutique, dureee, lots, dateFab, datePer, description, price, quantite);
         medicamentSviewModel = ViewModelProviders.of(getActivity()).get(MedicamentsViewModel.class);
         medicamentSviewModel.insert(medicaments);
 
@@ -346,9 +337,10 @@ public class DashboardFragment extends Fragment implements View.OnClickListener 
         //getActivity().setResult(Activity.RESULT_OK, data);
         //getActivity().finish();
     }
+
     @Override
     public void onClick(View v) {
-        if(v.getId()==R.id.ajout){
+        if (v.getId() == R.id.ajout) {
             ajouterM();
             nomM.setText(null);
             classeTh.setText(null);

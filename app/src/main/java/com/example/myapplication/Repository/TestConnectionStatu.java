@@ -22,11 +22,11 @@ public class TestConnectionStatu {
         }
         else if ( mNetworkInfoMobile.getState() == NetworkInfo.State.DISCONNECTED
                 || mNetworkInfoWifi.getState() == NetworkInfo.State.DISCONNECTED) {
-
+             a=false;
             // notify user you are not online
         }
     } catch (Exception exception) {
-        // exception.printStackTrace();
+         exception.printStackTrace();
     }
         return false;
     }

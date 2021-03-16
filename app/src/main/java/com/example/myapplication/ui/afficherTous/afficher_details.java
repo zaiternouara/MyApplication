@@ -1,24 +1,15 @@
 package com.example.myapplication.ui.afficherTous;
 
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModelProviders;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.example.myapplication.Adapter.MedicamentAdapter;
-import com.example.myapplication.R;
-import com.example.myapplication.models.MEDICAMENTS;
-import com.example.myapplication.viewModel.MedicamentsViewModel;
+import androidx.fragment.app.Fragment;
 
-import java.util.List;
+import com.example.myapplication.R;
+import com.example.myapplication.viewModel.MedicamentsViewModel;
 
 public class afficher_details extends Fragment {
 
@@ -28,7 +19,6 @@ public class afficher_details extends Fragment {
     public afficher_details() {
         // Required empty public constructor
     }
-
 
 
     @Override
@@ -41,8 +31,8 @@ public class afficher_details extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View root= inflater.inflate(R.layout.fragment_afficher_details, container, false);
-         TextView classthe = root.findViewById(R.id.text_view_Class);
+        View root = inflater.inflate(R.layout.fragment_afficher_details, container, false);
+        TextView classthe = root.findViewById(R.id.text_view_Class);
         TextView nomC = root.findViewById(R.id.text_view_NomC);
         TextView prix = root.findViewById(R.id.text_view_Prix);
         TextView desc = root.findViewById(R.id.text_view_desc);
@@ -53,7 +43,6 @@ public class afficher_details extends Fragment {
         TextView quant = root.findViewById(R.id.text_view_quant);
         TextView duree = root.findViewById(R.id.textViewDure);
         TextView labo = root.findViewById(R.id.text_view_Labo);
-
 
 
         String classTH = getArguments().getString("classe therapeutique");
@@ -90,10 +79,6 @@ public class afficher_details extends Fragment {
         labo.setText(lab);
 
 
-
-
-
-
-     return root;
+        return root;
     }
 }

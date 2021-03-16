@@ -11,19 +11,26 @@ import androidx.sqlite.db.SupportSQLiteDatabase;
 
 import com.example.myapplication.models.MEDICAMENTS;
 
-@Database( entities = {MEDICAMENTS.class}, version = 9,  exportSchema = false)
+@Database(entities = {MEDICAMENTS.class}, version = 9, exportSchema = false)
 public abstract class MEDICAMENTSDataBase extends RoomDatabase {
     private static MEDICAMENTSDataBase instance;
-
-    public abstract MedicamentDAO medicamentDao();
+    private static final RoomDatabase.Callback roomCallback =
+            new RoomDatabase.Callback() {
+                @Override
+                public void onOpen(@NonNull SupportSQLiteDatabase db) {
+                    super.onOpen(db);
+                    new PopulateDbAsyncTask(instance).execute();
+                }
+            };
 
     public static synchronized MEDICAMENTSDataBase getInstance(Context context) {
         if (instance == null) {
             synchronized (MEDICAMENTSDataBase.class) {
-            instance = Room.databaseBuilder(context.getApplicationContext(),
-                    MEDICAMENTSDataBase.class, "MEDICAMENTS_database.db").fallbackToDestructiveMigration()
-                    .addCallback(roomCallback).build();
-        }}
+                instance = Room.databaseBuilder(context.getApplicationContext(),
+                        MEDICAMENTSDataBase.class, "MEDICAMENTS_database.db").fallbackToDestructiveMigration()
+                        .addCallback(roomCallback).build();
+            }
+        }
         return instance;
     }
 
@@ -35,8 +42,10 @@ public abstract class MEDICAMENTSDataBase extends RoomDatabase {
         }
     };*/
 
+    public abstract MedicamentDAO medicamentDao();
+
     private static class PopulateDbAsyncTask extends AsyncTask<Void, Void, Void> {
-        private MedicamentDAO medicamentDao;
+        private final MedicamentDAO medicamentDao;
 
         private PopulateDbAsyncTask(MEDICAMENTSDataBase db) {
             medicamentDao = db.medicamentDao();
@@ -48,15 +57,6 @@ public abstract class MEDICAMENTSDataBase extends RoomDatabase {
             return null;
         }
     }
-
-    private static RoomDatabase.Callback roomCallback =
-            new RoomDatabase.Callback(){
-                @Override
-                public void onOpen (@NonNull SupportSQLiteDatabase db){
-                    super.onOpen(db);
-                    new PopulateDbAsyncTask(instance).execute();
-                }
-            };
 }
 
 

@@ -7,10 +7,10 @@ import androidx.room.Entity;
 import androidx.room.Index;
 import androidx.room.PrimaryKey;
 
-@Entity(tableName = "TABLE_MEDICAMENTS",indices = {
-        @Index(value = "nom_Commercial",unique = true)
+@Entity(tableName = "TABLE_MEDICAMENTS", indices = {
+        @Index(value = "nom_Commercial", unique = true)
 })
-public class MEDICAMENTS  {
+public class MEDICAMENTS {
     @PrimaryKey(autoGenerate = true)
     private int id;
     private String classe_Therapeutique;
@@ -27,7 +27,7 @@ public class MEDICAMENTS  {
     private String prix;
     private String quantite_En_Stock;
 
-    public MEDICAMENTS(String classe_Therapeutique, String nom_Commercial, String laboratoire, String denominateur_De_Medicament, String forme_Pharmaceutique, String duree_De_Conservation,  String lot, String date_De_Fabrication, String date_Peremption, String description_De_Composant, String prix, String quantite_En_Stock) {
+    public MEDICAMENTS(String classe_Therapeutique, String nom_Commercial, String laboratoire, String denominateur_De_Medicament, String forme_Pharmaceutique, String duree_De_Conservation, String lot, String date_De_Fabrication, String date_Peremption, String description_De_Composant, String prix, String quantite_En_Stock) {
 
         this.classe_Therapeutique = classe_Therapeutique;
         this.nom_Commercial = nom_Commercial;
@@ -99,8 +99,6 @@ public class MEDICAMENTS  {
     public void setDuree_De_Conservation(String duree_De_Conservation) {
         this.duree_De_Conservation = duree_De_Conservation;
     }
-
-
 
 
     public String getLot() {
@@ -177,9 +175,6 @@ public class MEDICAMENTS  {
             return new MEDICAMENTS[size];
         }
     }*/
-
-
-
 
 
 /**

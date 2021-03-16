@@ -2,10 +2,7 @@ package com.example.myapplication.Repository;
 
 import android.app.Application;
 
-import androidx.annotation.Nullable;
-import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
-import androidx.lifecycle.ViewModelProvider;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
@@ -20,7 +17,6 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -41,15 +37,15 @@ public class WebServiceRepository {
     }
 
     private void getListFromServer(Application application) {
-        String url ="http://192.168.43.80/GetAllMedicaments";
+        String url = "http://192.168.43.80/GetAllMedicaments";
         JsonArrayRequest JsonArrayRequest = new JsonArrayRequest(Request.Method.GET, url, null, new Response.Listener<JSONArray>() {
             @Override
             public void onResponse(JSONArray response) {
 
-                List<MEDICAMENTS> medicamentslist= new ArrayList<>();
-                for (int i=0; i<response.length();i++){
+                List<MEDICAMENTS> medicamentslist = new ArrayList<>();
+                for (int i = 0; i < response.length(); i++) {
                     try {
-                        JSONObject jsonObject=response.getJSONObject(i);
+                        JSONObject jsonObject = response.getJSONObject(i);
                         String Classe_Therapeutique = jsonObject.getString("Classe_Therapeutique");
                         String Nom_Commercial = jsonObject.getString("Nom_Commercial");
                         String Laboratoire = jsonObject.getString("Laboratoire");
@@ -63,7 +59,7 @@ public class WebServiceRepository {
                         String Description_De_Composant = jsonObject.getString("Description_De_Composant");
                         String Prix = jsonObject.getString("Prix");
                         String Quantite_En_Stock = jsonObject.getString("Quantite_En_Stock");
-                        MEDICAMENTS medicamentsC = new MEDICAMENTS(Classe_Therapeutique,Nom_Commercial,Laboratoire,Denominateur_De_Medicament,Forme_Pharmaceutique,Duree_De_Conservation,Lot,Date_De_Fabrication,Date_Peremption,Description_De_Composant,Prix,Quantite_En_Stock);
+                        MEDICAMENTS medicamentsC = new MEDICAMENTS(Classe_Therapeutique, Nom_Commercial, Laboratoire, Denominateur_De_Medicament, Forme_Pharmaceutique, Duree_De_Conservation, Lot, Date_De_Fabrication, Date_Peremption, Description_De_Composant, Prix, Quantite_En_Stock);
                         medicamentslist.add(medicamentsC);
 
                     } catch (JSONException e) {
@@ -77,25 +73,25 @@ public class WebServiceRepository {
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                 //cree l erreur
+                //cree l erreur
 
             }
         });
 
-         MyfileRequeteSingleton.getInstance(application).addToRequestQueue(JsonArrayRequest);
+        MyfileRequeteSingleton.getInstance(application).addToRequestQueue(JsonArrayRequest);
     }
 
 
     private void getListLaboratoireFromServer(Application application) {
-        String url ="http://192.168.43.80/GetAllLaboratoire";
+        String url = "http://192.168.43.80/GetAllLaboratoire";
         JsonArrayRequest JsonArrayRequest = new JsonArrayRequest(Request.Method.GET, url, null, new Response.Listener<JSONArray>() {
             @Override
             public void onResponse(JSONArray response) {
 
-                List<MEDICAMENTS> medicamentslist= new ArrayList<>();
-                for (int i=0; i<response.length();i++){
+                List<MEDICAMENTS> medicamentslist = new ArrayList<>();
+                for (int i = 0; i < response.length(); i++) {
                     try {
-                        JSONObject jsonObject=response.getJSONObject(i);
+                        JSONObject jsonObject = response.getJSONObject(i);
                         String Classe_Therapeutique = jsonObject.getString("Classe_Therapeutique");
                         String Nom_Commercial = jsonObject.getString("Nom_Commercial");
                         String Laboratoire = jsonObject.getString("Laboratoire");
@@ -109,7 +105,7 @@ public class WebServiceRepository {
                         String Description_De_Composant = jsonObject.getString("Description_De_Composant");
                         String Prix = jsonObject.getString("Prix");
                         String Quantite_En_Stock = jsonObject.getString("Quantite_En_Stock");
-                        MEDICAMENTS medicamentsC = new MEDICAMENTS(Classe_Therapeutique,Nom_Commercial,Laboratoire,Denominateur_De_Medicament,Forme_Pharmaceutique,Duree_De_Conservation,Lot,Date_De_Fabrication,Date_Peremption,Description_De_Composant,Prix,Quantite_En_Stock);
+                        MEDICAMENTS medicamentsC = new MEDICAMENTS(Classe_Therapeutique, Nom_Commercial, Laboratoire, Denominateur_De_Medicament, Forme_Pharmaceutique, Duree_De_Conservation, Lot, Date_De_Fabrication, Date_Peremption, Description_De_Composant, Prix, Quantite_En_Stock);
                         medicamentslist.add(medicamentsC);
 
                     } catch (JSONException e) {
@@ -130,16 +126,16 @@ public class WebServiceRepository {
         MyfileRequeteSingleton.getInstance(application).addToRequestQueue(JsonArrayRequest);
     }
 
-    private MutableLiveData<List<MEDICAMENTS>> getListOfSearchFromServer(Application application ,String search) {
-        String url ="http://192.168.43.80/Search";
+    private MutableLiveData<List<MEDICAMENTS>> getListOfSearchFromServer(Application application, String search) {
+        String url = "http://192.168.43.80/Search";
         JsonArrayRequest JsonArrayRequest = new JsonArrayRequest(Request.Method.POST, url, null, new Response.Listener<JSONArray>() {
             @Override
             public void onResponse(JSONArray response) {
 
-                List<MEDICAMENTS> medicamentslist= new ArrayList<>();
-                for (int i=0; i<response.length();i++){
+                List<MEDICAMENTS> medicamentslist = new ArrayList<>();
+                for (int i = 0; i < response.length(); i++) {
                     try {
-                        JSONObject jsonObject=response.getJSONObject(i);
+                        JSONObject jsonObject = response.getJSONObject(i);
                         String Classe_Therapeutique = jsonObject.getString("Classe_Therapeutique");
                         String Nom_Commercial = jsonObject.getString("Nom_Commercial");
                         String Laboratoire = jsonObject.getString("Laboratoire");
@@ -153,7 +149,7 @@ public class WebServiceRepository {
                         String Description_De_Composant = jsonObject.getString("Description_De_Composant");
                         String Prix = jsonObject.getString("Prix");
                         String Quantite_En_Stock = jsonObject.getString("Quantite_En_Stock");
-                        MEDICAMENTS medicamentsC = new MEDICAMENTS(Classe_Therapeutique,Nom_Commercial,Laboratoire,Denominateur_De_Medicament,Forme_Pharmaceutique,Duree_De_Conservation,Lot,Date_De_Fabrication,Date_Peremption,Description_De_Composant,Prix,Quantite_En_Stock);
+                        MEDICAMENTS medicamentsC = new MEDICAMENTS(Classe_Therapeutique, Nom_Commercial, Laboratoire, Denominateur_De_Medicament, Forme_Pharmaceutique, Duree_De_Conservation, Lot, Date_De_Fabrication, Date_Peremption, Description_De_Composant, Prix, Quantite_En_Stock);
                         medicamentslist.add(medicamentsC);
 
                     } catch (JSONException e) {
@@ -170,8 +166,7 @@ public class WebServiceRepository {
                 //cree l erreur
 
             }
-        })
-        {
+        }) {
 
             @Override
             protected Map<String, String> getParams() {
@@ -186,9 +181,9 @@ public class WebServiceRepository {
         return myListSearch;
     }
 
-    public void AddMedicament (MEDICAMENTS medicaments){
-        String url ="http://192.168.43.80/createmedicament";
-        StringRequest request= new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
+    public void AddMedicament(MEDICAMENTS medicaments) {
+        String url = "http://192.168.43.80/createmedicament";
+        StringRequest request = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
 
@@ -198,32 +193,29 @@ public class WebServiceRepository {
             public void onErrorResponse(VolleyError error) {
 
             }
-        }){
+        }) {
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
-                Map medico =new HashMap();
-                medico.put("Classe_Therapeutique",medicaments.getClasse_Therapeutique());
-                medico.put("Nom_Commercial",medicaments.getNom_Commercial());
-                medico.put("Laboratoire",medicaments.getLaboratoire());
-                medico.put("Denominateur_De_Medicament",medicaments.getDenominateur_De_Medicament());
-                medico.put("Forme_Pharmaceutique",medicaments.getForme_Pharmaceutique());
-                medico.put("Duree_De_Conservation",medicaments.getDuree_De_Conservation());
+                Map medico = new HashMap();
+                medico.put("Classe_Therapeutique", medicaments.getClasse_Therapeutique());
+                medico.put("Nom_Commercial", medicaments.getNom_Commercial());
+                medico.put("Laboratoire", medicaments.getLaboratoire());
+                medico.put("Denominateur_De_Medicament", medicaments.getDenominateur_De_Medicament());
+                medico.put("Forme_Pharmaceutique", medicaments.getForme_Pharmaceutique());
+                medico.put("Duree_De_Conservation", medicaments.getDuree_De_Conservation());
                 //medico.put("Remborsable",medicaments.get);
-                medico.put("Lot",medicaments.getLot());
-                medico.put("Date_De_Fabrication",medicaments.getDate_De_Fabrication());
-                medico.put("Date_Peremption",medicaments.getDate_Peremption());
-                medico.put("Description_De_Composant",medicaments.getDescription_De_Composant());
-                medico.put("Prix",medicaments.getPrix());
-                medico.put("Quantite_En_Stock",medicaments.getQuantite_En_Stock());
+                medico.put("Lot", medicaments.getLot());
+                medico.put("Date_De_Fabrication", medicaments.getDate_De_Fabrication());
+                medico.put("Date_Peremption", medicaments.getDate_Peremption());
+                medico.put("Description_De_Composant", medicaments.getDescription_De_Composant());
+                medico.put("Prix", medicaments.getPrix());
+                medico.put("Quantite_En_Stock", medicaments.getQuantite_En_Stock());
 
                 return super.getParams();
             }
         };
 
     }
-
-
-
 
 
     public MutableLiveData<List<MEDICAMENTS>> getMyList() {
@@ -234,8 +226,8 @@ public class WebServiceRepository {
         return myListLaboratoire;
     }
 
-    public MutableLiveData<List<MEDICAMENTS>> getMyListSearch(Application application,String search) {
-        return getListOfSearchFromServer(application,search);
+    public MutableLiveData<List<MEDICAMENTS>> getMyListSearch(Application application, String search) {
+        return getListOfSearchFromServer(application, search);
     }
 
 }

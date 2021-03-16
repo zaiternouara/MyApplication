@@ -13,40 +13,48 @@ import java.util.List;
 
 public class MedicamentRepository {
 
-    private MedicamentDAO medicamentDao;
-    private LiveData<List<MEDICAMENTS>> allMedicaments;
-    private LiveData<List<MEDICAMENTS>> allMedicamentslaboratoires;
-    private LiveData<List<MEDICAMENTS>> AllMedicamentsPeremptions;
-    private LiveData<List<MEDICAMENTS>> SearchMedicaments;
+    private final MedicamentDAO medicamentDao;
+    private final LiveData<List<MEDICAMENTS>> allMedicaments;
+    private final LiveData<List<MEDICAMENTS>> allMedicamentslaboratoires;
+    private final LiveData<List<MEDICAMENTS>> AllMedicamentsPeremptions;
+    private final LiveData<List<MEDICAMENTS>> SearchMedicaments;
     String search;
+
     public MedicamentRepository(Application application) {
         MEDICAMENTSDataBase database = MEDICAMENTSDataBase.getInstance(application);
-        medicamentDao = database. medicamentDao();
+        medicamentDao = database.medicamentDao();
 
-        allMedicaments =  medicamentDao.getAllMEDICAMENTS();
-        allMedicamentslaboratoires =  medicamentDao.getAllaboratoires();
-        AllMedicamentsPeremptions =  medicamentDao.getAllPeremptioN();
-        SearchMedicaments =  medicamentDao.SearchMedicamemts(search);
+        allMedicaments = medicamentDao.getAllMEDICAMENTS();
+        allMedicamentslaboratoires = medicamentDao.getAllaboratoires();
+        AllMedicamentsPeremptions = medicamentDao.getAllPeremptioN();
+        SearchMedicaments = medicamentDao.SearchMedicamemts(search);
 
     }
+
     public void insert(MEDICAMENTS medicament) {
-        new InsertMedicamentAsyncTask( medicamentDao).execute(medicament);
+        new InsertMedicamentAsyncTask(medicamentDao).execute(medicament);
     }
+
     public void update(MEDICAMENTS medicament) {
-        new UpdateMedicamentAsyncTask( medicamentDao).execute(medicament);
+        new UpdateMedicamentAsyncTask(medicamentDao).execute(medicament);
     }
+
     public void delete(MEDICAMENTS medicament) {
-        new DeleteMedicamentAsyncTask( medicamentDao).execute(medicament);
+        new DeleteMedicamentAsyncTask(medicamentDao).execute(medicament);
     }
+
     public void deleteAllMedicaments() {
-        new DeleteAllMedicamentsAsyncTask( medicamentDao).execute();
+        new DeleteAllMedicamentsAsyncTask(medicamentDao).execute();
     }
+
     public LiveData<List<MEDICAMENTS>> getAllMedicaments() {
         return allMedicaments;
     }
+
     public LiveData<List<MEDICAMENTS>> getAllaboratoires() {
         return allMedicamentslaboratoires;
     }
+
     public LiveData<List<MEDICAMENTS>> getSearchMedicamemts(String search) {
         return medicamentDao.SearchMedicamemts(search);
     }
@@ -55,10 +63,12 @@ public class MedicamentRepository {
     public LiveData<List<MEDICAMENTS>> getAllMedicamentsPeremptions() {
         return AllMedicamentsPeremptions;
     }
+
     private static class InsertMedicamentAsyncTask extends AsyncTask<MEDICAMENTS, Void, Void> {
-        private MedicamentDAO  medicamentDao;
-        private InsertMedicamentAsyncTask(MedicamentDAO  medicamentDao) {
-            this.medicamentDao =  medicamentDao;
+        private final MedicamentDAO medicamentDao;
+
+        private InsertMedicamentAsyncTask(MedicamentDAO medicamentDao) {
+            this.medicamentDao = medicamentDao;
         }
 
         @Override
@@ -67,10 +77,12 @@ public class MedicamentRepository {
             return null;
         }
     }
+
     private static class UpdateMedicamentAsyncTask extends AsyncTask<MEDICAMENTS, Void, Void> {
-        private MedicamentDAO  medicamentDao;
-        private UpdateMedicamentAsyncTask(MedicamentDAO  medicamentDao) {
-            this.medicamentDao =  medicamentDao;
+        private final MedicamentDAO medicamentDao;
+
+        private UpdateMedicamentAsyncTask(MedicamentDAO medicamentDao) {
+            this.medicamentDao = medicamentDao;
         }
 
 
@@ -80,8 +92,10 @@ public class MedicamentRepository {
             return null;
         }
     }
+
     private static class DeleteMedicamentAsyncTask extends AsyncTask<MEDICAMENTS, Void, Void> {
-        private MedicamentDAO medicamentDao;
+        private final MedicamentDAO medicamentDao;
+
         private DeleteMedicamentAsyncTask(MedicamentDAO medicamentDao) {
             this.medicamentDao = medicamentDao;
         }
@@ -92,11 +106,14 @@ public class MedicamentRepository {
             return null;
         }
     }
+
     private static class DeleteAllMedicamentsAsyncTask extends AsyncTask<Void, Void, Void> {
-        private MedicamentDAO medicamentDao;
+        private final MedicamentDAO medicamentDao;
+
         private DeleteAllMedicamentsAsyncTask(MedicamentDAO medicamentDao) {
             this.medicamentDao = medicamentDao;
         }
+
         @Override
         protected Void doInBackground(Void... voids) {
             medicamentDao.deleteAllMEDICAMENTS();
