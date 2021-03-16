@@ -81,6 +81,7 @@ public class WebServiceRepository {
 
             }
         });
+
          MyfileRequeteSingleton.getInstance(application).addToRequestQueue(JsonArrayRequest);
     }
 

@@ -6,7 +6,7 @@ import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.Volley;
 //pour evite a chq fois de fair connection avec le web sevice
-/*public class MyfileRequeteSingleton {
+public class MyfileRequeteSingleton {
     Context context;
     private static MyfileRequeteSingleton ourInstance;
     private RequestQueue myRequestQueue;
