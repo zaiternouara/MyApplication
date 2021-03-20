@@ -114,8 +114,8 @@ public class WebServiceRep implements GlobaleRepository {
                         String Description_De_Composant = jsonObject.getString("Description_De_Composant");
                         String Prix = jsonObject.getString("Prix");
                         String Quantite_En_Stock = jsonObject.getString("Quantite_En_Stock");
-                        //String Code_a_Bare = jsonObject.getString("Code_a_Bare");
-                        MEDICAMENTS medicamentsC = new MEDICAMENTS(Classe_Therapeutique, Nom_Commercial, Laboratoire, Denominateur_De_Medicament, Forme_Pharmaceutique, Duree_De_Conservation, Lot, Date_De_Fabrication, Date_Peremption, Description_De_Composant, Prix, Quantite_En_Stock);
+                        String Code_a_Bare = jsonObject.getString("Code_a_Bare");
+                        MEDICAMENTS medicamentsC = new MEDICAMENTS(Classe_Therapeutique, Nom_Commercial, Laboratoire, Denominateur_De_Medicament, Forme_Pharmaceutique, Duree_De_Conservation, Lot,Remborsable,Date_De_Fabrication, Date_Peremption, Description_De_Composant, Prix, Quantite_En_Stock,Code_a_Bare);
                         medicamentslist.add(medicamentsC);
 
                     } catch (JSONException e) {
@@ -160,8 +160,8 @@ public class WebServiceRep implements GlobaleRepository {
                         String Description_De_Composant = jsonObject.getString("Description_De_Composant");
                         String Prix = jsonObject.getString("Prix");
                         String Quantite_En_Stock = jsonObject.getString("Quantite_En_Stock");
-                        //String Code_a_Bare = jsonObject.getString("Code_a_Bare");
-                        MEDICAMENTS medicamentsC = new MEDICAMENTS(Classe_Therapeutique, Nom_Commercial, Laboratoire, Denominateur_De_Medicament, Forme_Pharmaceutique, Duree_De_Conservation, Lot, Date_De_Fabrication, Date_Peremption, Description_De_Composant, Prix, Quantite_En_Stock);
+                        String Code_a_Bare = jsonObject.getString("Code_a_Bare");
+                        MEDICAMENTS medicamentsC = new MEDICAMENTS(Classe_Therapeutique, Nom_Commercial, Laboratoire, Denominateur_De_Medicament, Forme_Pharmaceutique, Duree_De_Conservation, Lot,Remborsable,Date_De_Fabrication, Date_Peremption, Description_De_Composant, Prix, Quantite_En_Stock,Code_a_Bare);
                         medicamentslist.add(medicamentsC);
 
                     } catch (JSONException e) {
@@ -205,7 +205,8 @@ public class WebServiceRep implements GlobaleRepository {
                         String Description_De_Composant = jsonObject.getString("Description_De_Composant");
                         String Prix = jsonObject.getString("Prix");
                         String Quantite_En_Stock = jsonObject.getString("Quantite_En_Stock");
-                        MEDICAMENTS medicamentsC = new MEDICAMENTS(Classe_Therapeutique, Nom_Commercial, Laboratoire, Denominateur_De_Medicament, Forme_Pharmaceutique, Duree_De_Conservation, Lot, Date_De_Fabrication, Date_Peremption, Description_De_Composant, Prix, Quantite_En_Stock);
+                        String Code_a_Bare = jsonObject.getString("Code_a_Bare");
+                        MEDICAMENTS medicamentsC = new MEDICAMENTS(Classe_Therapeutique, Nom_Commercial, Laboratoire, Denominateur_De_Medicament, Forme_Pharmaceutique, Duree_De_Conservation, Lot,Remborsable,Date_De_Fabrication, Date_Peremption, Description_De_Composant, Prix, Quantite_En_Stock,Code_a_Bare);
                         medicamentslist.add(medicamentsC);
 
                     } catch (JSONException e) {
