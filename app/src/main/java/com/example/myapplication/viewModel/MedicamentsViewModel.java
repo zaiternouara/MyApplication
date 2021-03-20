@@ -5,49 +5,56 @@ import android.app.Application;
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
+import androidx.lifecycle.MutableLiveData;
 
-import com.example.myapplication.Repository.MedicamentRepository;
-//import com.example.myapplication.Repository.WebServiceRepository;
+import com.example.myapplication.Repository.LocalRep;
+import com.example.myapplication.Repository.WebServiceRep;
 import com.example.myapplication.models.MEDICAMENTS;
 
 import java.util.List;
 
+//import com.example.myapplication.Repository.WebServiceRep;
+
 public class MedicamentsViewModel extends AndroidViewModel {
     public String search;
+    private LiveData<List<MEDICAMENTS>> allMedicaments;
+    private LiveData<List<MEDICAMENTS>> allMedicamentslaboratoires;
+    private LiveData<List<MEDICAMENTS>> allMedicamentsPeremptions;
+    private MutableLiveData<List<MEDICAMENTS>> allMedicamentsWS;
+    private MutableLiveData<List<MEDICAMENTS>> allMedicamentslaboratoiresWS;
     //SQLITE
-    private final MedicamentRepository repository;
-    private final LiveData<List<MEDICAMENTS>> allMedicaments;
-    private final LiveData<List<MEDICAMENTS>> allMedicamentslaboratoires;
-    private final LiveData<List<MEDICAMENTS>> allMedicamentsPeremptions;
+    private LocalRep repository;
     private LiveData<List<MEDICAMENTS>> SearchMedicaments;
     //WEBSERVICE
-   /* private final WebServiceRepository rep;
-    private final LiveData<List<MEDICAMENTS>> allMedicamentsWS;
-    private final LiveData<List<MEDICAMENTS>> allMedicamentslaboratoiresWS;*/
-    private LiveData<List<MEDICAMENTS>> SearchMedicamentsWS;
-
+    private WebServiceRep rep;
+    private MutableLiveData<List<MEDICAMENTS>> SearchMedicamentsWS;
+    int count ;
 
     public MedicamentsViewModel(@NonNull Application application) {
         super(application);
         //SQLITE
-        repository = new MedicamentRepository(application);
+        repository = new LocalRep(application);
         allMedicaments = repository.getAllMedicaments();
         allMedicamentslaboratoires = repository.getAllaboratoires();
         allMedicamentsPeremptions = repository.getAllMedicamentsPeremptions();
+        count = repository.getCount();
         //SearchMedicaments = repository.getSearchMedicamemts(search);
 
         //WEBSERVICE
-      /*  rep = new WebServiceRepository(application);
-        allMedicamentsWS = rep.getMyList();
-        allMedicamentslaboratoiresWS = rep.getMyListLaboratoire();*/
-        //SearchMedicamentsWS = rep.getMyListSearch(application ,search);
+        rep = new WebServiceRep(application);
+        allMedicamentsWS = rep.getAllMedicaments();
+        allMedicamentslaboratoiresWS = rep.getAllaboratoires();
+
+        //SearchMedicamentsWS = rep.getSearchMedicamemts(search);
     }
+
+
 
     //SQLITE
     public void insert(MEDICAMENTS medicaments) {
 
         repository.insert(medicaments);
-      //  rep.AddMedicament(medicaments);
+        //  rep.AddMedicament(medicaments);
 
     }
 
@@ -64,16 +71,17 @@ public class MedicamentsViewModel extends AndroidViewModel {
     //WEBSERVICE
     public void insertWS(MEDICAMENTS medicaments) {
 
-        repository.insert(medicaments);
+        rep.insert(medicaments);
 
     }
+    public void deleteWS(MEDICAMENTS medicaments) {
+
+        rep.delete(medicaments);
+    }
+
 
 
     //SQLITE
-    public void deleteAllMedicaments() {
-        repository.deleteAllMedicaments();
-    }
-
     public LiveData<List<MEDICAMENTS>> getAllMedicaments() {
         return allMedicaments;
     }
@@ -91,17 +99,23 @@ public class MedicamentsViewModel extends AndroidViewModel {
         return repository.getSearchMedicamemts(search);
     }
 
-    //WEBSEVICE
-   /* public LiveData<List<MEDICAMENTS>> getAllMedicamentsWS() {
+    public int count() {
+        return count;
+    }
+
+
+    //webService
+    public MutableLiveData<List<MEDICAMENTS>> getAllMedicamentsWS() {
         return allMedicamentsWS;
     }
 
-    public LiveData<List<MEDICAMENTS>> getAllaboratoiresWS() {
+    public MutableLiveData<List<MEDICAMENTS>> getAllaboratoiresWS() {
         return allMedicamentslaboratoiresWS;
     }
 
-    public LiveData<List<MEDICAMENTS>> getSearchMedicamentsWS(String search) {
-        return rep.getMyListSearch(getApplication(), search);
-    }*/
+    public MutableLiveData<List<MEDICAMENTS>> getSearchMedicamentsWS(String search) {
+        return rep.getSearchMedicamemts(getApplication(), search);
+    }
+
 }
 

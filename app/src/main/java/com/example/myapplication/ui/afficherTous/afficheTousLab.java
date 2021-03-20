@@ -15,8 +15,8 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.myapplication.Adapter.MedicamentAdapter;
+import com.example.myapplication.Connection.NetworkConnection;
 import com.example.myapplication.R;
-import com.example.myapplication.Repository.TestConnectionStatu;
 import com.example.myapplication.models.MEDICAMENTS;
 import com.example.myapplication.viewModel.MedicamentsViewModel;
 
@@ -55,15 +55,9 @@ public class afficheTousLab extends Fragment {
 
 
         medicamentSviewModel = ViewModelProviders.of(this).get(MedicamentsViewModel.class);
-        //if (TestConnectionStatu.getConnectionStatus(getContext()) != true) {
-            medicamentSviewModel.getAllaboratoires().observe(getViewLifecycleOwner(), new Observer<List<MEDICAMENTS>>() {
-
-                @Override
-                public void onChanged(List<MEDICAMENTS> medicaments) {
-                    adapter.setMedicament(medicaments);
-                }
-            });
-       /* } else {
+        NetworkConnection network = new NetworkConnection(getContext());
+        if (network.isConnected()){
+            Toast.makeText(getContext(), "Network connection is available", Toast.LENGTH_SHORT).show();
             medicamentSviewModel.getAllaboratoiresWS().observe(getViewLifecycleOwner(), new Observer<List<MEDICAMENTS>>() {
 
                 @Override
@@ -71,7 +65,17 @@ public class afficheTousLab extends Fragment {
                     adapter.setMedicament(medicaments);
                 }
             });
-        }*/
+        }else{
+            Toast.makeText(getContext(), "Network connection is not available", Toast.LENGTH_SHORT).show();
+            medicamentSviewModel.getAllaboratoires().observe(getViewLifecycleOwner(),
+                    new Observer<List<MEDICAMENTS>>() {
+
+                        @Override
+                        public void onChanged(List<MEDICAMENTS> medicaments) {
+                            adapter.setMedicament(medicaments);
+                        }
+                    });
+        }
         new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(0,
                 ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT) {
             @Override
@@ -81,10 +85,13 @@ public class afficheTousLab extends Fragment {
 
             @Override
             public void onSwiped(RecyclerView.ViewHolder viewHolder, int direction) {
-                medicamentSviewModel.delete(adapter.getMedicamentAt(viewHolder.getAdapterPosition()));
-                Toast.makeText(getContext(), "Medicament deleted", Toast.LENGTH_SHORT).show();
+                if (network.isConnected()){
+                    medicamentSviewModel.deleteWS(adapter.getMedicamentAt(viewHolder.getAdapterPosition()));
+                }else{
+                    medicamentSviewModel.delete(adapter.getMedicamentAt(viewHolder.getAdapterPosition()));
+                    Toast.makeText(getContext(), "Medicament deleted", Toast.LENGTH_SHORT).show();
 
-            }
+                }}
         }).attachToRecyclerView(recyclerView);
         adapter.setOnItemClickListener(new MedicamentAdapter.OnItemClickListener() {
             @Override

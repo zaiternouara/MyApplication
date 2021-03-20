@@ -4,6 +4,7 @@ import android.app.Application;
 import android.os.AsyncTask;
 
 import androidx.lifecycle.LiveData;
+import androidx.lifecycle.MutableLiveData;
 
 import com.example.myapplication.OperationsSQLite.MEDICAMENTSDataBase;
 import com.example.myapplication.OperationsSQLite.MedicamentDAO;
@@ -11,16 +12,16 @@ import com.example.myapplication.models.MEDICAMENTS;
 
 import java.util.List;
 
-public class MedicamentRepository {
-
-    private final MedicamentDAO medicamentDao;
-    private final LiveData<List<MEDICAMENTS>> allMedicaments;
-    private final LiveData<List<MEDICAMENTS>> allMedicamentslaboratoires;
-    private final LiveData<List<MEDICAMENTS>> AllMedicamentsPeremptions;
-    private final LiveData<List<MEDICAMENTS>> SearchMedicaments;
+public class LocalRep implements GlobaleRepository {
+    private MedicamentDAO medicamentDao;
+    private LiveData<List<MEDICAMENTS>> allMedicaments;
+    private LiveData<List<MEDICAMENTS>> allMedicamentslaboratoires;
+    private LiveData<List<MEDICAMENTS>> AllMedicamentsPeremptions;
+    private LiveData<List<MEDICAMENTS>> SearchMedicaments;
+    int count ;
     String search;
 
-    public MedicamentRepository(Application application) {
+    public LocalRep(Application application) {
         MEDICAMENTSDataBase database = MEDICAMENTSDataBase.getInstance(application);
         medicamentDao = database.medicamentDao();
 
@@ -28,40 +29,59 @@ public class MedicamentRepository {
         allMedicamentslaboratoires = medicamentDao.getAllaboratoires();
         AllMedicamentsPeremptions = medicamentDao.getAllPeremptioN();
         SearchMedicaments = medicamentDao.SearchMedicamemts(search);
+        count = medicamentDao.getDataCount();
 
     }
 
+    @Override
     public void insert(MEDICAMENTS medicament) {
-        new InsertMedicamentAsyncTask(medicamentDao).execute(medicament);
+        new LocalRep.InsertMedicamentAsyncTask(medicamentDao).execute(medicament);
     }
 
+    @Override
     public void update(MEDICAMENTS medicament) {
-        new UpdateMedicamentAsyncTask(medicamentDao).execute(medicament);
+        new LocalRep.UpdateMedicamentAsyncTask(medicamentDao).execute(medicament);
     }
 
+    @Override
     public void delete(MEDICAMENTS medicament) {
-        new DeleteMedicamentAsyncTask(medicamentDao).execute(medicament);
+        new LocalRep.DeleteMedicamentAsyncTask(medicamentDao).execute(medicament);
     }
 
+    @Override
     public void deleteAllMedicaments() {
-        new DeleteAllMedicamentsAsyncTask(medicamentDao).execute();
+
+
+        new LocalRep.DeleteAllMedicamentsAsyncTask(medicamentDao).execute();
     }
 
+    @Override
     public LiveData<List<MEDICAMENTS>> getAllMedicaments() {
         return allMedicaments;
     }
 
+    @Override
     public LiveData<List<MEDICAMENTS>> getAllaboratoires() {
         return allMedicamentslaboratoires;
     }
 
+    @Override
     public LiveData<List<MEDICAMENTS>> getSearchMedicamemts(String search) {
         return medicamentDao.SearchMedicamemts(search);
     }
 
+    @Override
+    public MutableLiveData<List<MEDICAMENTS>> getSearchMedicamemts(Application application, String search) {
+        return null;
+    }
 
+    @Override
     public LiveData<List<MEDICAMENTS>> getAllMedicamentsPeremptions() {
         return AllMedicamentsPeremptions;
+    }
+
+    public int getCount() {
+        return count;
     }
 
     private static class InsertMedicamentAsyncTask extends AsyncTask<MEDICAMENTS, Void, Void> {
@@ -120,5 +140,4 @@ public class MedicamentRepository {
             return null;
         }
     }
-
 }

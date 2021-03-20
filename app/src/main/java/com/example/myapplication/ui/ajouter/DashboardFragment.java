@@ -1,6 +1,7 @@
 package com.example.myapplication.ui.ajouter;
 
 import android.app.DatePickerDialog;
+import android.app.Application;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,8 +19,11 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.lifecycle.ViewModelProviders;
 
+import com.example.myapplication.Connection.NetworkConnection;
 import com.example.myapplication.R;
 import com.example.myapplication.models.MEDICAMENTS;
 import com.example.myapplication.viewModel.MedicamentsViewModel;
@@ -28,7 +32,7 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Locale;
 
-public class DashboardFragment extends Fragment implements View.OnClickListener, DatePickerDialog.OnDateSetListener, AdapterView.OnItemSelectedListener {
+public class DashboardFragment extends Fragment implements View.OnClickListener, DatePickerDialog.OnDateSetListener {
 
    /* public static final int ADD_NOTE_REQUEST = 1;
     private MedicamentsViewModel medicamentSviewModel;
@@ -267,7 +271,7 @@ public class DashboardFragment extends Fragment implements View.OnClickListener,
     private TextView textView1;
     private EditText classeTh;
     private EditText nomM;
-    private Spinner labo;
+    private EditText labo;
     private EditText denom;
     private EditText form;
     private EditText duree;
@@ -295,7 +299,7 @@ public class DashboardFragment extends Fragment implements View.OnClickListener,
         textView1 = (TextView) root.findViewById(R.id.textView);
         classeTh = (EditText) root.findViewById(R.id.inputClass);
         nomM = (EditText) root.findViewById(R.id.inputNom);
-        labo = (Spinner) root.findViewById(R.id.inputLabo);
+        labo = (EditText) root.findViewById(R.id.inputLabo);
         denom = (EditText) root.findViewById(R.id.inputDenom);
         form = (EditText) root.findViewById(R.id.inputForm);
         duree = (EditText) root.findViewById(R.id.inputDuree);
@@ -387,11 +391,23 @@ public class DashboardFragment extends Fragment implements View.OnClickListener,
       //  MEDICAMENTS medicaments = new MEDICAMENTS(classTH, NomCommercial, laboratoire, denomination, formePharmaceutique, dureee, lots, dateFab, datePer, description, price, quantite,codeBarre);
         medicamentSviewModel = ViewModelProviders.of(getActivity()).get(MedicamentsViewModel.class);
 
-        medicamentSviewModel.insert(new MEDICAMENTS(classTH, NomCommercial, laboratoire, denomination, formePharmaceutique, dureee,remboursable, lots, dateFab, datePer, description, price, quantite,codeBarre));
+         NetworkConnection network = new NetworkConnection(getContext());
+
+        // Check network connection
+        /*if (network.isConnected()){
+            Toast.makeText(getContext(), "Network connection is available", Toast.LENGTH_SHORT).show();
+            medicamentSviewModel.insertWS(medicaments);
+        }else{*/
+            Toast.makeText(getContext(), "Network connection is not available", Toast.LENGTH_SHORT).show();
+            medicamentSviewModel.insert(medicaments);
+        //}
 
 
         Toast.makeText(getContext(), "medicament saved", Toast.LENGTH_SHORT).show();
 
+
+        //getActivity().setResult(Activity.RESULT_OK, data);
+        //getActivity().finish();
     }
 
     @Override
@@ -402,7 +418,7 @@ public class DashboardFragment extends Fragment implements View.OnClickListener,
             classeTh.setText(null);
             descr.setText(null);
             lot.setText(null);
-           // labo.setText(null);
+            labo.setText(null);
             denom.setText(null);
             form.setText(null);
             duree.setText(null);
