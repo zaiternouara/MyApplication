@@ -55,7 +55,7 @@ public class afficherTousMedoc extends Fragment {
 
 
         medicamentSviewModel = ViewModelProviders.of(this).get(MedicamentsViewModel.class);
-        //medicamentSviewModel.insert(new MEDICAMENTS("ju","paralgan","bayer","jp","comprimé","3mois","23","21/09/2019","2019/09/06","bienn","12euros","89"));
+        //medicamentSviewModel.insert(new MEDICAMENTS("ju","paralgan","bayer","jp","comprimé","3mois","23","21/09/2019","2019/09/06","bienn","12euros","89","12233"));
        // if (TestConnectionStatu.getConnectionStatus(getContext()) != true) {
             medicamentSviewModel.getAllMedicaments().observe(getViewLifecycleOwner(), new Observer<List<MEDICAMENTS>>() {
 
@@ -106,6 +106,16 @@ public class afficherTousMedoc extends Fragment {
                 String quant = medicaments.getQuantite_En_Stock();
                 String desc = medicaments.getDescription_De_Composant();
                 String labo = medicaments.getLaboratoire();
+                String codeB =medicaments.getCodeB();
+                String rembou =medicaments.getRemboursable();
+                String remboursable="remboursble";
+
+                if(rembou=="1"){
+                     remboursable="remboursable";
+
+                }else{
+                    remboursable="non remboursable";
+                }
 
 
                 Bundle i = new Bundle();
@@ -121,6 +131,8 @@ public class afficherTousMedoc extends Fragment {
                 i.putString("quantite de stock", quant);
                 i.putString("description", desc);
                 i.putString("laboratoire", labo);
+                i.putString("code barre", codeB);
+                i.putString("remboursable", remboursable);
 
                 fragment.setArguments(i);
                 System.out.println(fragment);

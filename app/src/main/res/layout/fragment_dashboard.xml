@@ -42,67 +42,100 @@
         android:layout_marginTop="180dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView">
+        app:layout_constraintTop_toBottomOf="@+id/textView"
+        app:layout_constraintVertical_bias="1.0">
 
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
             android:layout_marginStart="15dp"
             android:layout_marginLeft="15dp"
             android:layout_marginEnd="100dp"
-            android:layout_marginRight="100dp">
+            android:layout_marginRight="100dp"
+            android:orientation="vertical">
 
             <EditText
                 android:id="@+id/inputClass"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="20"
-                android:inputType="textPersonName"
-                android:hint="Classe Thérapeutique" />
+                android:hint="Classe Thérapeutique"
+                android:inputType="textPersonName" />
 
             <EditText
                 android:id="@+id/inputNom"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="20"
-                android:inputType="textPersonName"
-                android:hint="Nom Commercial" />
+                android:hint="Nom Commercial"
+                android:inputType="textPersonName" />
 
             <EditText
                 android:id="@+id/inputLabo"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="20"
-                android:inputType="textPersonName"
-                android:hint="Laboratoire" />
+                android:hint="Laboratoire"
+                android:inputType="textPersonName" />
 
             <EditText
                 android:id="@+id/inputDenom"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="20"
-                android:inputType="textPersonName"
-                android:hint="Dénomination du médicament" />
+                android:hint="Dénomination du médicament"
+                android:inputType="textPersonName" />
 
             <EditText
                 android:id="@+id/inputForm"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="20"
-                android:inputType="textPersonName"
-                android:hint="Forme Pharmaceutique" />
+                android:hint="Forme Pharmaceutique"
+                android:inputType="textPersonName" />
 
             <EditText
                 android:id="@+id/inputDuree"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="20"
-                android:inputType="number"
-                android:hint="Durée de conservation"/>
+                android:hint="Durée de conservation"
+                android:inputType="number" />
 
+            <RadioGroup
+                android:id="@+id/inputRembou"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:id="@+id/question"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Est-il remboursable ?" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal">
+
+                    <RadioButton
+                        android:id="@+id/inputOui"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="oui" />
+
+                    <RadioButton
+                        android:id="@+id/inputNon"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="non" />
+                </LinearLayout>
+            </RadioGroup>
 
 
             <EditText
@@ -110,56 +143,68 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="20"
-                android:inputType="textPersonName"
-                android:hint="Lot" />
+                android:hint="Lot"
+                android:inputType="textPersonName" />
 
             <EditText
                 android:id="@+id/inputDateF"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:ems="20"
-                android:inputType="date"
-                android:hint="Date de Fabrication"/>
+                android:layout_alignParentStart="true"
+                android:layout_alignParentLeft="true"
+                android:clickable="false"
+                android:cursorVisible="false"
+                android:focusable="false"
+                android:focusableInTouchMode="false"
+                android:drawableRight="@drawable/ic_baseline_calendar_today_24"
+                android:hint="Date de Fabrication" />
+
+
+
 
             <EditText
                 android:id="@+id/inputDateP"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:ems="20"
-                android:inputType="date"
-                android:hint="Date de péremption"/>
+                android:clickable="false"
+                android:cursorVisible="false"
+                android:focusable="false"
+                android:focusableInTouchMode="false"
+                android:drawableRight="@drawable/ic_baseline_calendar_today_24"
+                             android:hint="Date de péremption" />
 
             <EditText
                 android:id="@+id/inputDescr"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="20"
-                android:inputType="textPersonName"
-                android:hint="Description du composant" />
+                android:hint="Description du composant"
+                android:inputType="textPersonName" />
 
             <EditText
                 android:id="@+id/inputPrix"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="20"
-                android:inputType="number"
-                android:hint="Prix du Médicament"/>
+                android:hint="Prix du Médicament"
+                android:inputType="number" />
 
             <EditText
                 android:id="@+id/inputQuant"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
-                android:inputType="number"
-                android:hint="Quantité en stock"/>
+                android:hint="Quantité en stock"
+                android:inputType="number" />
 
             <EditText
                 android:id="@+id/inputCode"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
-                android:inputType="number"
-                android:hint="Code à barre"/>
+                android:hint="Code à barre"
+                android:inputType="number" />
+
 
             <Button
                 android:id="@+id/ajout"

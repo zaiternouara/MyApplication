@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.ItemTouchHelper;
@@ -93,6 +94,53 @@ public class SearchResults extends Fragment {
 
             }
         }).attachToRecyclerView(recyclerView);
+        adapter.setOnItemClickListener(new MedicamentAdapter.OnItemClickListener() {
+            @Override
+            public void OnItemClick(MEDICAMENTS medicaments) {
+                Fragment fragment = new afficher_details();
+
+                String classTH = medicaments.getClasse_Therapeutique();
+                String nomC = medicaments.getNom_Commercial();
+                String prix = medicaments.getPrix();
+                String denom = medicaments.getDenominateur_De_Medicament();
+                String lot = medicaments.getLot();
+                String forme = medicaments.getForme_Pharmaceutique();
+                String dateF = medicaments.getDate_De_Fabrication();
+                String dateP = medicaments.getDate_Peremption();
+                String duree = medicaments.getDuree_De_Conservation();
+                String quant = medicaments.getQuantite_En_Stock();
+                String desc = medicaments.getDescription_De_Composant();
+                String labo = medicaments.getLaboratoire();
+                String codeB = medicaments.getCodeB();
+
+
+                Bundle i = new Bundle();
+                i.putString("classe therapeutique", classTH);
+                i.putString("Nom commercial", nomC);
+                i.putString("prix", prix);
+                i.putString("denominateur", denom);
+                i.putString("lot", lot);
+                i.putString("duree de conservation", duree);
+                i.putString("forme pharmaceutique", forme);
+                i.putString("date de fabrication", dateF);
+                i.putString("date de peremption", dateP);
+                i.putString("quantite de stock", quant);
+                i.putString("description", desc);
+                i.putString("laboratoire", labo);
+                i.putString("code barre", codeB);
+
+                fragment.setArguments(i);
+                System.out.println(fragment);
+                FragmentManager fragmentManager = getFragmentManager();
+                fragmentManager.beginTransaction()
+                        .replace(R.id.affichertous
+                                , fragment)
+                        .addToBackStack(null)
+                        .commit();
+
+
+            }
+        });
 
         return root;
     }
