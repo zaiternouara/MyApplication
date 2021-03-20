@@ -18,7 +18,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.myapplication.Adapter.MedicamentAdapter;
 import com.example.myapplication.Connection.NetworkConnection;
 import com.example.myapplication.R;
-import com.example.myapplication.Repository.TestConnectionStatu;
 import com.example.myapplication.models.MEDICAMENTS;
 import com.example.myapplication.viewModel.MedicamentsViewModel;
 
@@ -77,7 +76,7 @@ public class afficherTousMedoc extends Fragment {
                     adapter.setMedicament(medicaments);
                 }
             });
-        }*/
+        }
 
         new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(0,
                 ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT) {

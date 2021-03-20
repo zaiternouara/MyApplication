@@ -379,13 +379,9 @@ public class DashboardFragment extends Fragment implements View.OnClickListener,
 
             return;
         }
-      //  MEDICAMENTS medicaments = new MEDICAMENTS(classTH, NomCommercial, laboratoire, denomination, formePharmaceutique, dureee, lots, dateFab, datePer, description, price, quantite,codeBarre);
+     MEDICAMENTS medicaments = new MEDICAMENTS(classTH, NomCommercial, laboratoire, denomination, formePharmaceutique, dureee, lots, remboursable ,dateFab, datePer, description, price, quantite,codeBarre);
         medicamentSviewModel = ViewModelProviders.of(getActivity()).get(MedicamentsViewModel.class);
 
-        medicamentSviewModel.insert(new MEDICAMENTS(classTH, NomCommercial, laboratoire, denomination, formePharmaceutique, dureee,remboursable, lots, dateFab, datePer, description, price, quantite,codeBarre));
-
-        MEDICAMENTS medicaments = new MEDICAMENTS(classTH, NomCommercial, laboratoire, denomination, formePharmaceutique, dureee, lots, dateFab, datePer, description, price, quantite);
-         medicamentSviewModel = ViewModelProviders.of(this).get(MedicamentsViewModel.class);
          NetworkConnection network = new NetworkConnection(getContext());
 
         // Check network connection

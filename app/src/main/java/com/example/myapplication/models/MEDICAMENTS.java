@@ -29,7 +29,7 @@ public class MEDICAMENTS {
     private String description_De_Composant;
     private String prix;
     private String quantite_En_Stock;
-   private String remboursable;
+    private String remboursable;
     private String codeB;
 
 
