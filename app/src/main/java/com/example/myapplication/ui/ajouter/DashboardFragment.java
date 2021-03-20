@@ -5,11 +5,14 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RadioButton;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -25,7 +28,7 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Locale;
 
-public class DashboardFragment extends Fragment implements View.OnClickListener, DatePickerDialog.OnDateSetListener {
+public class DashboardFragment extends Fragment implements View.OnClickListener, DatePickerDialog.OnDateSetListener, AdapterView.OnItemSelectedListener {
 
    /* public static final int ADD_NOTE_REQUEST = 1;
     private MedicamentsViewModel medicamentSviewModel;
@@ -264,7 +267,7 @@ public class DashboardFragment extends Fragment implements View.OnClickListener,
     private TextView textView1;
     private EditText classeTh;
     private EditText nomM;
-    private EditText labo;
+    private Spinner labo;
     private EditText denom;
     private EditText form;
     private EditText duree;
@@ -292,7 +295,7 @@ public class DashboardFragment extends Fragment implements View.OnClickListener,
         textView1 = (TextView) root.findViewById(R.id.textView);
         classeTh = (EditText) root.findViewById(R.id.inputClass);
         nomM = (EditText) root.findViewById(R.id.inputNom);
-        labo = (EditText) root.findViewById(R.id.inputLabo);
+        labo = (Spinner) root.findViewById(R.id.inputLabo);
         denom = (EditText) root.findViewById(R.id.inputDenom);
         form = (EditText) root.findViewById(R.id.inputForm);
         duree = (EditText) root.findViewById(R.id.inputDuree);
@@ -306,6 +309,12 @@ public class DashboardFragment extends Fragment implements View.OnClickListener,
 
         boui=(RadioButton)root.findViewById(R.id.inputOui);
         bnon=(RadioButton)root.findViewById(R.id.inputNon);
+
+        ArrayAdapter<CharSequence> adap = ArrayAdapter.createFromResource(getContext(),
+                R.array.numbers, android.R.layout.simple_spinner_item);
+        adap.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        labo.setAdapter(adap);
+        labo.setOnItemSelectedListener(this);
         DatePickerDialog.OnDateSetListener date = new DatePickerDialog.OnDateSetListener() {
             @Override
             public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
@@ -355,7 +364,7 @@ public class DashboardFragment extends Fragment implements View.OnClickListener,
         String NomCommercial = nomM.getText().toString();
         String classTH = classeTh.getText().toString();
         String description = descr.getText().toString();
-        String laboratoire = labo.getText().toString();
+       // String laboratoire = labo.getText().toString();
         String denomination = denom.getText().toString();
         String lots = lot.getText().toString();
         String formePharmaceutique = form.getText().toString();
@@ -393,7 +402,7 @@ public class DashboardFragment extends Fragment implements View.OnClickListener,
             classeTh.setText(null);
             descr.setText(null);
             lot.setText(null);
-            labo.setText(null);
+           // labo.setText(null);
             denom.setText(null);
             form.setText(null);
             duree.setText(null);
@@ -410,6 +419,17 @@ public class DashboardFragment extends Fragment implements View.OnClickListener,
 
     @Override
     public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+
+    }
+
+    @Override
+    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+        String laboratoire = labo.getItemAtPosition(position).toString();
+
+    }
+
+    @Override
+    public void onNothingSelected(AdapterView<?> parent) {
 
     }
 }
