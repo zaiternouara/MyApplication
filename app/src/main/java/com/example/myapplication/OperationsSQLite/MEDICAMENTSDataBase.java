@@ -14,11 +14,12 @@ import com.example.myapplication.models.MEDICAMENTS;
 @Database(entities = {MEDICAMENTS.class}, version = 9, exportSchema = false)
 public abstract class MEDICAMENTSDataBase extends RoomDatabase {
     private static MEDICAMENTSDataBase instance;
-    private static final RoomDatabase.Callback roomCallback =
+    private static RoomDatabase.Callback roomCallback =
             new RoomDatabase.Callback() {
                 @Override
                 public void onOpen(@NonNull SupportSQLiteDatabase db) {
                     super.onOpen(db);
+                    super.onCreate(db);
                     new PopulateDbAsyncTask(instance).execute();
                 }
             };
@@ -41,6 +42,7 @@ public abstract class MEDICAMENTSDataBase extends RoomDatabase {
             new PopulateDbAsyncTask(instance).execute();
         }
     };*/
+
 
     public abstract MedicamentDAO medicamentDao();
 

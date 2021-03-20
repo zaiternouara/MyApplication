@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.myapplication.Adapter.MedicamentAdapter;
+import com.example.myapplication.Connection.NetworkConnection;
 import com.example.myapplication.R;
 import com.example.myapplication.models.MEDICAMENTS;
 import com.example.myapplication.viewModel.MedicamentsViewModel;
@@ -49,7 +50,7 @@ public class afficherExpire extends Fragment {
         final MedicamentAdapter adapter = new MedicamentAdapter(getContext());
         recyclerView.setAdapter(adapter);
 
-
+        NetworkConnection network = new NetworkConnection(getContext());
         medicamentSviewModel = ViewModelProviders.of(this).get(MedicamentsViewModel.class);
         //medicamentSviewModel.insert(new MEDICAMENTS("ju","paralgan","bayer","jp","3mois","oui","23","21/09/2019","21/09/2022","bienn","12euros","89"));
         medicamentSviewModel.getAllPeremptions().observe(getViewLifecycleOwner(), new Observer<List<MEDICAMENTS>>() {
@@ -68,10 +69,13 @@ public class afficherExpire extends Fragment {
 
             @Override
             public void onSwiped(RecyclerView.ViewHolder viewHolder, int direction) {
-                medicamentSviewModel.delete(adapter.getMedicamentAt(viewHolder.getAdapterPosition()));
-                Toast.makeText(getContext(), "Medicament deleted", Toast.LENGTH_SHORT).show();
+                if (network.isConnected()){
+                    medicamentSviewModel.deleteWS(adapter.getMedicamentAt(viewHolder.getAdapterPosition()));
+                }else{
+                    medicamentSviewModel.delete(adapter.getMedicamentAt(viewHolder.getAdapterPosition()));
+                    Toast.makeText(getContext(), "Medicament deleted", Toast.LENGTH_SHORT).show();
 
-            }
+                }}
         }).attachToRecyclerView(recyclerView);
         return root;
 

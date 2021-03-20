@@ -1,5 +1,6 @@
 package com.example.myapplication.ui.ajouter;
 
+import android.app.Application;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,11 +13,16 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.lifecycle.ViewModelProviders;
 
+import com.example.myapplication.Connection.NetworkConnection;
 import com.example.myapplication.R;
 import com.example.myapplication.models.MEDICAMENTS;
 import com.example.myapplication.viewModel.MedicamentsViewModel;
+
+import java.util.List;
 
 public class DashboardFragment extends Fragment implements View.OnClickListener {
 
@@ -328,8 +334,18 @@ public class DashboardFragment extends Fragment implements View.OnClickListener 
             return;
         }
         MEDICAMENTS medicaments = new MEDICAMENTS(classTH, NomCommercial, laboratoire, denomination, formePharmaceutique, dureee, lots, dateFab, datePer, description, price, quantite);
-        medicamentSviewModel = ViewModelProviders.of(getActivity()).get(MedicamentsViewModel.class);
-        medicamentSviewModel.insert(medicaments);
+         medicamentSviewModel = ViewModelProviders.of(this).get(MedicamentsViewModel.class);
+         NetworkConnection network = new NetworkConnection(getContext());
+
+        // Check network connection
+        /*if (network.isConnected()){
+            Toast.makeText(getContext(), "Network connection is available", Toast.LENGTH_SHORT).show();
+            medicamentSviewModel.insertWS(medicaments);
+        }else{*/
+            Toast.makeText(getContext(), "Network connection is not available", Toast.LENGTH_SHORT).show();
+            medicamentSviewModel.insert(medicaments);
+        //}
+
 
         Toast.makeText(getContext(), "medicament saved", Toast.LENGTH_SHORT).show();
 

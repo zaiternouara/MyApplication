@@ -1,7 +1,8 @@
 package com.example.myapplication.Repository;
 
-/*import android.app.Application;
+import android.app.Application;
 
+import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
 import com.android.volley.AuthFailureError;
@@ -21,23 +22,77 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class WebServiceRepository {
-
+public class WebServiceRep implements GlobaleRepository {
     MutableLiveData<List<MEDICAMENTS>> myList;
     MutableLiveData<List<MEDICAMENTS>> myListLaboratoire;
     MutableLiveData<List<MEDICAMENTS>> myListSearch;
+    String search;
 
-    public WebServiceRepository(Application application) {
+    public WebServiceRep(Application application) {
         myList = new MutableLiveData<>();
         myListLaboratoire = new MutableLiveData<>();
+        myListSearch = new MutableLiveData<>();
         getListFromServer(application);
         getListLaboratoireFromServer(application);
+        getListOfSearchFromServer(application, search);
+
+    }
+
+    @Override
+    public void insert(MEDICAMENTS medicament) {
+        AddMedicament(medicament);
+    }
+
+    @Override
+    public void update(MEDICAMENTS medicament) {
 
 
     }
 
+    @Override
+    public void delete(MEDICAMENTS medicament) {
+        deleteMe(medicament);
+
+    }
+
+    @Override
+    public void deleteAllMedicaments() {
+
+    }
+
+    @Override
+    public MutableLiveData<List<MEDICAMENTS>> getAllMedicaments() {
+        return myList;
+    }
+
+    @Override
+    public MutableLiveData<List<MEDICAMENTS>> getAllaboratoires() {
+        return myListLaboratoire;
+    }
+
+    @Override
+    public MutableLiveData<List<MEDICAMENTS>> getSearchMedicamemts(String search) {
+        return null;
+    }
+
+    @Override
+    public MutableLiveData<List<MEDICAMENTS>> getSearchMedicamemts(Application application, String search) {
+            return getListOfSearchFromServer(application, search);
+        }
+
+
+
+    @Override
+    public LiveData<List<MEDICAMENTS>> getAllMedicamentsPeremptions() {
+        return null;
+    }
+
+
+
+
+
     private void getListFromServer(Application application) {
-        String url = "http://192.168.43.80/GetAllMedicaments";
+        String url = "http://172.20.10.2/GetAllMedicaments";
         JsonArrayRequest JsonArrayRequest = new JsonArrayRequest(Request.Method.GET, url, null, new Response.Listener<JSONArray>() {
             @Override
             public void onResponse(JSONArray response) {
@@ -59,6 +114,7 @@ public class WebServiceRepository {
                         String Description_De_Composant = jsonObject.getString("Description_De_Composant");
                         String Prix = jsonObject.getString("Prix");
                         String Quantite_En_Stock = jsonObject.getString("Quantite_En_Stock");
+                        //String Code_a_Bare = jsonObject.getString("Code_a_Bare");
                         MEDICAMENTS medicamentsC = new MEDICAMENTS(Classe_Therapeutique, Nom_Commercial, Laboratoire, Denominateur_De_Medicament, Forme_Pharmaceutique, Duree_De_Conservation, Lot, Date_De_Fabrication, Date_Peremption, Description_De_Composant, Prix, Quantite_En_Stock);
                         medicamentslist.add(medicamentsC);
 
@@ -81,9 +137,8 @@ public class WebServiceRepository {
         MyfileRequeteSingleton.getInstance(application).addToRequestQueue(JsonArrayRequest);
     }
 
-
     private void getListLaboratoireFromServer(Application application) {
-        String url = "http://192.168.43.80/GetAllLaboratoire";
+        String url = "http://172.20.10.2/GetAllLaboratoire";
         JsonArrayRequest JsonArrayRequest = new JsonArrayRequest(Request.Method.GET, url, null, new Response.Listener<JSONArray>() {
             @Override
             public void onResponse(JSONArray response) {
@@ -105,6 +160,7 @@ public class WebServiceRepository {
                         String Description_De_Composant = jsonObject.getString("Description_De_Composant");
                         String Prix = jsonObject.getString("Prix");
                         String Quantite_En_Stock = jsonObject.getString("Quantite_En_Stock");
+                        //String Code_a_Bare = jsonObject.getString("Code_a_Bare");
                         MEDICAMENTS medicamentsC = new MEDICAMENTS(Classe_Therapeutique, Nom_Commercial, Laboratoire, Denominateur_De_Medicament, Forme_Pharmaceutique, Duree_De_Conservation, Lot, Date_De_Fabrication, Date_Peremption, Description_De_Composant, Prix, Quantite_En_Stock);
                         medicamentslist.add(medicamentsC);
 
@@ -127,7 +183,7 @@ public class WebServiceRepository {
     }
 
     private MutableLiveData<List<MEDICAMENTS>> getListOfSearchFromServer(Application application, String search) {
-        String url = "http://192.168.43.80/Search";
+        String url = "http://172.20.10.2/Search";
         JsonArrayRequest JsonArrayRequest = new JsonArrayRequest(Request.Method.POST, url, null, new Response.Listener<JSONArray>() {
             @Override
             public void onResponse(JSONArray response) {
@@ -182,7 +238,7 @@ public class WebServiceRepository {
     }
 
     public void AddMedicament(MEDICAMENTS medicaments) {
-        String url = "http://192.168.43.80/createmedicament";
+        String url = "http://172.20.10.2/createmedicament";
         StringRequest request = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
@@ -210,6 +266,31 @@ public class WebServiceRepository {
                 medico.put("Description_De_Composant", medicaments.getDescription_De_Composant());
                 medico.put("Prix", medicaments.getPrix());
                 medico.put("Quantite_En_Stock", medicaments.getQuantite_En_Stock());
+                //medico.put("Code_a_Bare", medicaments.getCode_a_Bare());
+
+                return super.getParams();
+            }
+        };
+
+    }
+
+    public void deleteMe (MEDICAMENTS medicaments) {
+        String url = "http://192.168.43.80//deletMedicament//{medicaments.getNom_Commercial()}";
+        StringRequest request = new StringRequest(Request.Method.DELETE, url, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+            }
+        }) {
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map medico = new HashMap();
+                 medico.put("Nom_Commercial", medicaments.getNom_Commercial());
 
                 return super.getParams();
             }
@@ -218,16 +299,4 @@ public class WebServiceRepository {
     }
 
 
-    public MutableLiveData<List<MEDICAMENTS>> getMyList() {
-        return myList;
-    }
-
-    public MutableLiveData<List<MEDICAMENTS>> getMyListLaboratoire() {
-        return myListLaboratoire;
-    }
-
-    public MutableLiveData<List<MEDICAMENTS>> getMyListSearch(Application application, String search) {
-        return getListOfSearchFromServer(application, search);
-    }
-
-}*/
+}
