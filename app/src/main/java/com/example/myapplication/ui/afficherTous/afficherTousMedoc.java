@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
@@ -17,6 +18,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.myapplication.Adapter.MedicamentAdapter;
 import com.example.myapplication.Connection.NetworkConnection;
 import com.example.myapplication.R;
+import com.example.myapplication.Repository.TestConnectionStatu;
 import com.example.myapplication.models.MEDICAMENTS;
 import com.example.myapplication.viewModel.MedicamentsViewModel;
 
@@ -75,7 +77,7 @@ public class afficherTousMedoc extends Fragment {
                     adapter.setMedicament(medicaments);
                 }
             });
-        }
+        }*/
 
         new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(0,
                 ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT) {
@@ -86,13 +88,10 @@ public class afficherTousMedoc extends Fragment {
 
             @Override
             public void onSwiped(RecyclerView.ViewHolder viewHolder, int direction) {
-                if (network.isConnected()){
-                    medicamentSviewModel.deleteWS(adapter.getMedicamentAt(viewHolder.getAdapterPosition()));
-                }else{
-                    medicamentSviewModel.delete(adapter.getMedicamentAt(viewHolder.getAdapterPosition()));
-                    Toast.makeText(getContext(), "Medicament deleted", Toast.LENGTH_SHORT).show();
+                medicamentSviewModel.delete(adapter.getMedicamentAt(viewHolder.getAdapterPosition()));
+                Toast.makeText(getContext(), "Medicament deleted", Toast.LENGTH_SHORT).show();
 
-                }}
+            }
         }).attachToRecyclerView(recyclerView);
         adapter.setOnItemClickListener(new MedicamentAdapter.OnItemClickListener() {
             @Override
@@ -112,6 +111,16 @@ public class afficherTousMedoc extends Fragment {
                 String quant = medicaments.getQuantite_En_Stock();
                 String desc = medicaments.getDescription_De_Composant();
                 String labo = medicaments.getLaboratoire();
+                String codeB =medicaments.getCodeB();
+                String rembou =medicaments.getRemboursable();
+                String remboursable="remboursble";
+
+                if(rembou=="1"){
+                     remboursable="remboursable";
+
+                }else{
+                    remboursable="non remboursable";
+                }
 
 
                 Bundle i = new Bundle();
@@ -127,6 +136,8 @@ public class afficherTousMedoc extends Fragment {
                 i.putString("quantite de stock", quant);
                 i.putString("description", desc);
                 i.putString("laboratoire", labo);
+                i.putString("code barre", codeB);
+                i.putString("remboursable", remboursable);
 
                 fragment.setArguments(i);
                 System.out.println(fragment);

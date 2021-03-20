@@ -43,6 +43,8 @@ public class afficher_details extends Fragment {
         TextView quant = root.findViewById(R.id.text_view_quant);
         TextView duree = root.findViewById(R.id.textViewDure);
         TextView labo = root.findViewById(R.id.text_view_Labo);
+        TextView codeB = root.findViewById(R.id.text_view_code);
+        TextView rembou = root.findViewById(R.id.text_view_rembou);
 
 
         String classTH = getArguments().getString("classe therapeutique");
@@ -78,6 +80,11 @@ public class afficher_details extends Fragment {
         String lab = getArguments().getString("laboratoire");
         labo.setText(lab);
 
+        String codeBarre = getArguments().getString("code barre");
+        codeB.setText(codeBarre);
+
+        String remb = getArguments().getString("remboursable");
+        rembou.setText(remb);
 
         return root;
     }

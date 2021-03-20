@@ -49,6 +49,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/text_view_Labo"
             android:text="Lot"/>
+
         <TextView
             android:id="@+id/text_view_form"
             android:layout_width="wrap_content"
@@ -85,12 +86,21 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/text_view_desc"
             android:text="quantite"/>
+
         <TextView
             android:id="@+id/text_view_code"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_below="@id/text_view_Prix"
+            android:text="code" />
+        <TextView
+            android:id="@+id/text_view_rembou"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_below="@id/text_view_quant"
-            android:text="code"/>
+            android:text="rembou"/>
 
     </RelativeLayout>
 

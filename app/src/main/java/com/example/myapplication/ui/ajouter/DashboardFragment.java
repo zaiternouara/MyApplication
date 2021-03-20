@@ -1,11 +1,14 @@
 package com.example.myapplication.ui.ajouter;
 
+import android.app.DatePickerDialog;
 import android.app.Application;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.DatePicker;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.TextView;
@@ -22,9 +25,11 @@ import com.example.myapplication.R;
 import com.example.myapplication.models.MEDICAMENTS;
 import com.example.myapplication.viewModel.MedicamentsViewModel;
 
-import java.util.List;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Locale;
 
-public class DashboardFragment extends Fragment implements View.OnClickListener {
+public class DashboardFragment extends Fragment implements View.OnClickListener, DatePickerDialog.OnDateSetListener {
 
    /* public static final int ADD_NOTE_REQUEST = 1;
     private MedicamentsViewModel medicamentSviewModel;
@@ -261,22 +266,23 @@ public class DashboardFragment extends Fragment implements View.OnClickListener 
 
     private ImageView logo;
     private TextView textView1;
-    private TextView classeTh;
-    private TextView nomM;
-    private TextView labo;
-    private TextView denom;
-    private TextView form;
-    private TextView duree;
-    private TextView lot;
-    private TextView dateF;
-    private TextView dateP;
-    private TextView descr;
-    private TextView prix;
-    private TextView quant;
-    private TextView codeB;
+    private EditText classeTh;
+    private EditText nomM;
+    private EditText labo;
+    private EditText denom;
+    private EditText form;
+    private EditText duree;
+    private EditText lot;
+    private EditText dateF;
+    private EditText dateP;
+    private EditText descr;
+    private EditText prix;
+    private EditText quant;
+    private EditText codeB;
     private RadioButton boui;
     private RadioButton bnon;
     private Button ajout;
+    final Calendar myCalendar = Calendar.getInstance();
 
 
     private MedicamentsViewModel medicamentSviewModel;
@@ -285,30 +291,67 @@ public class DashboardFragment extends Fragment implements View.OnClickListener 
                              ViewGroup container, Bundle savedInstanceState) {
 
         View root = inflater.inflate(R.layout.fragment_dashboard, container, false);
-        //final TextView textView = root.findViewById(R.id.text_dashboard);
         logo = (ImageView) root.findViewById(R.id.imageView);
 
         textView1 = (TextView) root.findViewById(R.id.textView);
-        classeTh = (TextView) root.findViewById(R.id.inputClass);
-        nomM = (TextView) root.findViewById(R.id.inputNom);
-        labo = (TextView) root.findViewById(R.id.inputLabo);
-        denom = (TextView) root.findViewById(R.id.inputDenom);
-        form = (TextView) root.findViewById(R.id.inputForm);
-        duree = (TextView) root.findViewById(R.id.inputDuree);
-        dateF = (TextView) root.findViewById(R.id.inputDateF);
-        dateP = (TextView) root.findViewById(R.id.inputDateP);
-        descr = (TextView) root.findViewById(R.id.inputDescr);
-        prix = (TextView) root.findViewById(R.id.inputPrix);
-        quant = (TextView) root.findViewById(R.id.inputQuant);
-        codeB = (TextView) root.findViewById(R.id.inputCode);
-        lot = (TextView) root.findViewById(R.id.inputLot);
+        classeTh = (EditText) root.findViewById(R.id.inputClass);
+        nomM = (EditText) root.findViewById(R.id.inputNom);
+        labo = (EditText) root.findViewById(R.id.inputLabo);
+        denom = (EditText) root.findViewById(R.id.inputDenom);
+        form = (EditText) root.findViewById(R.id.inputForm);
+        duree = (EditText) root.findViewById(R.id.inputDuree);
+        dateF = (EditText) root.findViewById(R.id.inputDateF);
+        dateP = (EditText) root.findViewById(R.id.inputDateP);
+        descr = (EditText) root.findViewById(R.id.inputDescr);
+        prix = (EditText) root.findViewById(R.id.inputPrix);
+        quant = (EditText) root.findViewById(R.id.inputQuant);
+        codeB = (EditText) root.findViewById(R.id.inputCode);
+        lot = (EditText) root.findViewById(R.id.inputLot);
+
+        boui=(RadioButton)root.findViewById(R.id.inputOui);
+        bnon=(RadioButton)root.findViewById(R.id.inputNon);
+        DatePickerDialog.OnDateSetListener date = new DatePickerDialog.OnDateSetListener() {
+            @Override
+            public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+                myCalendar.set(Calendar.YEAR, year);
+                myCalendar.set(Calendar.MONTH, month);
+                myCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+                updateLabel();
+            }
+        };
+        dateP.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                new DatePickerDialog(getContext(), date, myCalendar
+                        .get(Calendar.YEAR), myCalendar.get(Calendar.MONTH),
+                        myCalendar.get(Calendar.DAY_OF_MONTH)).show();
+
+            }
+        });
+        dateF.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                new DatePickerDialog(getContext(), date, myCalendar
+                        .get(Calendar.YEAR), myCalendar.get(Calendar.MONTH),
+                        myCalendar.get(Calendar.DAY_OF_MONTH)).show();
+
+            }
+        });
 
 
-        ajout = (Button) root.findViewById(R.id.ajout);
+
+                ajout = (Button) root.findViewById(R.id.ajout);
 
         ajout.setOnClickListener(this);
 
         return root;
+    }
+
+    private void updateLabel() {
+        String myFormat = "dd-MM-yy"; //In which you need put here
+        SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
+        dateP.setText(sdf.format(myCalendar.getTime()));
+        dateF.setText(sdf.format(myCalendar.getTime()));
     }
 
     private void ajouterM() {
@@ -326,6 +369,9 @@ public class DashboardFragment extends Fragment implements View.OnClickListener 
         String price = prix.getText().toString();
         String quantite = quant.getText().toString();
         String codeBarre = codeB.getText().toString();
+        String remboursable="1";
+        if (boui.isChecked())remboursable="1";
+        if (bnon.isChecked())remboursable="0";
 
         if (NomCommercial.trim().isEmpty() || description.trim().isEmpty() || classTH.trim().isEmpty() || laboratoire.trim().isEmpty() || lots.trim().isEmpty() || denomination.trim().isEmpty() || formePharmaceutique.trim().isEmpty() || dureee.trim().isEmpty() || dateFab.trim().isEmpty() || datePer.trim().isEmpty() || price.trim().isEmpty() || quantite.trim().isEmpty() || codeBarre.trim().isEmpty()) {
 
@@ -333,6 +379,11 @@ public class DashboardFragment extends Fragment implements View.OnClickListener 
 
             return;
         }
+      //  MEDICAMENTS medicaments = new MEDICAMENTS(classTH, NomCommercial, laboratoire, denomination, formePharmaceutique, dureee, lots, dateFab, datePer, description, price, quantite,codeBarre);
+        medicamentSviewModel = ViewModelProviders.of(getActivity()).get(MedicamentsViewModel.class);
+
+        medicamentSviewModel.insert(new MEDICAMENTS(classTH, NomCommercial, laboratoire, denomination, formePharmaceutique, dureee,remboursable, lots, dateFab, datePer, description, price, quantite,codeBarre));
+
         MEDICAMENTS medicaments = new MEDICAMENTS(classTH, NomCommercial, laboratoire, denomination, formePharmaceutique, dureee, lots, dateFab, datePer, description, price, quantite);
          medicamentSviewModel = ViewModelProviders.of(this).get(MedicamentsViewModel.class);
          NetworkConnection network = new NetworkConnection(getContext());
@@ -374,5 +425,11 @@ public class DashboardFragment extends Fragment implements View.OnClickListener 
 
 
         }
+    }
+
+
+    @Override
+    public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+
     }
 }
