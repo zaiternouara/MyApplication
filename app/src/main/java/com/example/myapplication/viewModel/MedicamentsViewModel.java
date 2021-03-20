@@ -17,17 +17,17 @@ import java.util.List;
 
 public class MedicamentsViewModel extends AndroidViewModel {
     public String search;
-    private LiveData<List<MEDICAMENTS>> allMedicaments;
-    private LiveData<List<MEDICAMENTS>> allMedicamentslaboratoires;
-    private LiveData<List<MEDICAMENTS>> allMedicamentsPeremptions;
-    private MutableLiveData<List<MEDICAMENTS>> allMedicamentsWS;
-    private MutableLiveData<List<MEDICAMENTS>> allMedicamentslaboratoiresWS;
+    public LiveData<List<MEDICAMENTS>> allMedicaments;
+    public LiveData<List<MEDICAMENTS>> allMedicamentslaboratoires;
+    public LiveData<List<MEDICAMENTS>> allMedicamentsPeremptions;
+    public MutableLiveData<List<MEDICAMENTS>> allMedicamentsWS;
+    public MutableLiveData<List<MEDICAMENTS>> allMedicamentslaboratoiresWS;
     //SQLITE
-    private LocalRep repository;
-    private LiveData<List<MEDICAMENTS>> SearchMedicaments;
+    public LocalRep repository;
+    public LiveData<List<MEDICAMENTS>> SearchMedicaments;
     //WEBSERVICE
-    private WebServiceRep rep;
-    private MutableLiveData<List<MEDICAMENTS>> SearchMedicamentsWS;
+    public WebServiceRep rep;
+    public MutableLiveData<List<MEDICAMENTS>> SearchMedicamentsWS;
     int count ;
 
     public MedicamentsViewModel(@NonNull Application application) {
