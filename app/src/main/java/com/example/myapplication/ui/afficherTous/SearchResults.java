@@ -9,6 +9,7 @@ import android.widget.Toast;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -59,9 +60,9 @@ public class SearchResults extends Fragment {
         recyclerView.setAdapter(adapter);
 
 
-        medicamentSviewModel = ViewModelProviders.of(this).get(MedicamentsViewModel.class);
+        medicamentSviewModel = new ViewModelProvider(this).get(MedicamentsViewModel.class);
 
-        NetworkConnection network = new NetworkConnection(getContext());
+        NetworkConnection network = new NetworkConnection(getContext(),medicamentSviewModel);
 
         // Check network connection
         if (network.isConnected()){

@@ -9,7 +9,7 @@ import android.widget.Toast;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModelProviders;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -54,18 +54,19 @@ public class afficheTousLab extends Fragment {
         recyclerView.setAdapter(adapter);
 
 
-        medicamentSviewModel = ViewModelProviders.of(this).get(MedicamentsViewModel.class);
-        NetworkConnection network = new NetworkConnection(getContext());
-        if (network.isConnected()){
+        medicamentSviewModel = new ViewModelProvider(this).get(MedicamentsViewModel.class);
+        NetworkConnection network = new NetworkConnection(getContext(), medicamentSviewModel);
+        if (network.isConnected()) {
             Toast.makeText(getContext(), "Network connection is available", Toast.LENGTH_SHORT).show();
-            medicamentSviewModel.getAllaboratoiresWS().observe(getViewLifecycleOwner(), new Observer<List<MEDICAMENTS>>() {
+            medicamentSviewModel.getAllaboratoiresWS().observe(getViewLifecycleOwner(),
+                    new Observer<List<MEDICAMENTS>>() {
 
-                @Override
-                public void onChanged(List<MEDICAMENTS> medicaments) {
-                    adapter.setMedicament(medicaments);
-                }
-            });
-        }else{
+                        @Override
+                        public void onChanged(List<MEDICAMENTS> medicaments) {
+                            adapter.setMedicament(medicaments);
+                        }
+                    });
+        } else {
             Toast.makeText(getContext(), "Network connection is not available", Toast.LENGTH_SHORT).show();
             medicamentSviewModel.getAllaboratoires().observe(getViewLifecycleOwner(),
                     new Observer<List<MEDICAMENTS>>() {
@@ -85,13 +86,14 @@ public class afficheTousLab extends Fragment {
 
             @Override
             public void onSwiped(RecyclerView.ViewHolder viewHolder, int direction) {
-                if (network.isConnected()){
+                if (network.isConnected()) {
                     medicamentSviewModel.deleteWS(adapter.getMedicamentAt(viewHolder.getAdapterPosition()));
-                }else{
+                } else {
                     medicamentSviewModel.delete(adapter.getMedicamentAt(viewHolder.getAdapterPosition()));
                     Toast.makeText(getContext(), "Medicament deleted", Toast.LENGTH_SHORT).show();
 
-                }}
+                }
+            }
         }).attachToRecyclerView(recyclerView);
         adapter.setOnItemClickListener(new MedicamentAdapter.OnItemClickListener() {
             @Override

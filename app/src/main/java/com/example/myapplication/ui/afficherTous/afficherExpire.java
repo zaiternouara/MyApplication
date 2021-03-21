@@ -51,7 +51,7 @@ public class afficherExpire extends Fragment {
         final MedicamentAdapter adapter = new MedicamentAdapter(getContext());
         recyclerView.setAdapter(adapter);
 
-        NetworkConnection network = new NetworkConnection(getContext());
+        NetworkConnection network = new NetworkConnection(getContext(),medicamentSviewModel);
         medicamentSviewModel = ViewModelProviders.of(this).get(MedicamentsViewModel.class);
         //medicamentSviewModel.insert(new MEDICAMENTS("ju","paralgan","bayer","jp","3mois","oui","23","21/09/2019","21/09/2022","bienn","12euros","89"));
         medicamentSviewModel.getAllPeremptions().observe(getViewLifecycleOwner(), new Observer<List<MEDICAMENTS>>() {

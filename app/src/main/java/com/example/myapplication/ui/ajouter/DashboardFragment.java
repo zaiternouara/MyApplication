@@ -373,25 +373,25 @@ public class DashboardFragment extends Fragment implements View.OnClickListener,
         if (boui.isChecked())remboursable="1";
         if (bnon.isChecked())remboursable="0";
 
-        if (NomCommercial.trim().isEmpty() || description.trim().isEmpty() || classTH.trim().isEmpty() || laboratoire.trim().isEmpty() || lots.trim().isEmpty() || denomination.trim().isEmpty() || formePharmaceutique.trim().isEmpty() || dureee.trim().isEmpty() || dateFab.trim().isEmpty() || datePer.trim().isEmpty() || price.trim().isEmpty() || quantite.trim().isEmpty() || codeBarre.trim().isEmpty()) {
+        if (NomCommercial.trim().isEmpty() || description.trim().isEmpty() || classTH.trim().isEmpty() || laboratoire.trim().isEmpty() ||remboursable.isEmpty()  ||lots.trim().isEmpty() || denomination.trim().isEmpty() || formePharmaceutique.trim().isEmpty() || dureee.trim().isEmpty() || dateFab.trim().isEmpty() || datePer.trim().isEmpty() || price.trim().isEmpty() || quantite.trim().isEmpty() || codeBarre.trim().isEmpty()) {
 
             Toast.makeText(getContext(), "Entrez tous les champs", Toast.LENGTH_SHORT).show();
 
             return;
         }
+     medicamentSviewModel = new ViewModelProvider(getActivity()).get(MedicamentsViewModel.class);
      MEDICAMENTS medicaments = new MEDICAMENTS(classTH, NomCommercial, laboratoire, denomination, formePharmaceutique, dureee, lots, remboursable ,dateFab, datePer, description, price, quantite,codeBarre);
-        medicamentSviewModel = ViewModelProviders.of(getActivity()).get(MedicamentsViewModel.class);
 
-         NetworkConnection network = new NetworkConnection(getContext());
+        NetworkConnection network = new NetworkConnection(getContext(),medicamentSviewModel);
 
         // Check network connection
-        /*if (network.isConnected()){
+      if (network.isConnected()){
             Toast.makeText(getContext(), "Network connection is available", Toast.LENGTH_SHORT).show();
             medicamentSviewModel.insertWS(medicaments);
-        }else{*/
+        }else{
             Toast.makeText(getContext(), "Network connection is not available", Toast.LENGTH_SHORT).show();
             medicamentSviewModel.insert(medicaments);
-        //}
+       }
 
 
         Toast.makeText(getContext(), "medicament saved", Toast.LENGTH_SHORT).show();

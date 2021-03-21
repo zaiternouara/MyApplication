@@ -28,7 +28,7 @@ public class MedicamentsViewModel extends AndroidViewModel {
     //WEBSERVICE
     public WebServiceRep rep;
     public MutableLiveData<List<MEDICAMENTS>> SearchMedicamentsWS;
-    int count ;
+    int count;
 
     public MedicamentsViewModel(@NonNull Application application) {
         super(application);
@@ -37,7 +37,7 @@ public class MedicamentsViewModel extends AndroidViewModel {
         allMedicaments = repository.getAllMedicaments();
         allMedicamentslaboratoires = repository.getAllaboratoires();
         allMedicamentsPeremptions = repository.getAllMedicamentsPeremptions();
-        count = repository.getCount();
+        //count = repository.getCount();
         //SearchMedicaments = repository.getSearchMedicamemts(search);
 
         //WEBSERVICE
@@ -45,9 +45,8 @@ public class MedicamentsViewModel extends AndroidViewModel {
         allMedicamentsWS = rep.getAllMedicaments();
         allMedicamentslaboratoiresWS = rep.getAllaboratoires();
 
-        //SearchMedicamentsWS = rep.getSearchMedicamemts(search);
+        SearchMedicamentsWS = rep.getSearchMedicamemts(search);
     }
-
 
 
     //SQLITE
@@ -74,11 +73,11 @@ public class MedicamentsViewModel extends AndroidViewModel {
         rep.insert(medicaments);
 
     }
+
     public void deleteWS(MEDICAMENTS medicaments) {
 
         rep.delete(medicaments);
     }
-
 
 
     //SQLITE
