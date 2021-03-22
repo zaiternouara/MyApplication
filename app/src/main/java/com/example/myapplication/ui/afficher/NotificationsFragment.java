@@ -17,6 +17,7 @@ import androidx.lifecycle.ViewModelProvider;
 import com.example.myapplication.R;
 import com.example.myapplication.ui.afficherTous.SearchResults;
 import com.example.myapplication.ui.afficherTous.afficheTousLab;
+import com.example.myapplication.ui.afficherTous.afficherExpire;
 import com.example.myapplication.ui.afficherTous.afficherTousMedoc;
 
 public class NotificationsFragment extends Fragment implements View.OnClickListener {
@@ -69,8 +70,7 @@ public class NotificationsFragment extends Fragment implements View.OnClickListe
         }
         switch (v.getId()) {
             case R.id.expire:
-                fragment = new afficherTousMedoc();
-                mCallback.passData("Text to pass FragmentB");
+                fragment = new afficherExpire();
                 replaceFragment(fragment);
                 break;
 

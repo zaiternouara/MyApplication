@@ -11,8 +11,6 @@ import com.example.myapplication.Repository.LocalRep;
 import com.example.myapplication.Repository.WebServiceRep;
 import com.example.myapplication.models.MEDICAMENTS;
 
-import org.json.JSONException;
-
 import java.util.List;
 
 //import com.example.myapplication.Repository.WebServiceRep;
@@ -21,9 +19,10 @@ public class MedicamentsViewModel extends AndroidViewModel {
     public String search;
     public LiveData<List<MEDICAMENTS>> allMedicaments;
     public LiveData<List<MEDICAMENTS>> allMedicamentslaboratoires;
-    public LiveData<List<MEDICAMENTS>> allMedicamentsPeremptions;
+    public LiveData<List<MEDICAMENTS>> allMedicamentsExpire;
     public MutableLiveData<List<MEDICAMENTS>> allMedicamentsWS;
     public MutableLiveData<List<MEDICAMENTS>> allMedicamentslaboratoiresWS;
+    public MutableLiveData<List<MEDICAMENTS>> allMedicamentsExpireWS;
     //SQLITE
     public LocalRep repository;
     public LiveData<List<MEDICAMENTS>> SearchMedicaments;
@@ -38,7 +37,7 @@ public class MedicamentsViewModel extends AndroidViewModel {
         repository = new LocalRep(application);
         allMedicaments = repository.getAllMedicaments();
         allMedicamentslaboratoires = repository.getAllaboratoires();
-        allMedicamentsPeremptions = repository.getAllMedicamentsPeremptions();
+        allMedicamentsExpire = repository.getAllExpire();
         //count = repository.getCount();
         //SearchMedicaments = repository.getSearchMedicamemts(search);
 
@@ -46,7 +45,7 @@ public class MedicamentsViewModel extends AndroidViewModel {
         rep = new WebServiceRep(application);
         allMedicamentsWS = rep.getAllMedicaments();
         allMedicamentslaboratoiresWS = rep.getAllaboratoires();
-
+        allMedicamentsExpireWS = rep.getAllExpire();
         SearchMedicamentsWS = rep.getSearchMedicamemts(search);
     }
 
@@ -76,7 +75,7 @@ public class MedicamentsViewModel extends AndroidViewModel {
 
     }
 
-    public void deleteWS(MEDICAMENTS medicaments){
+    public void deleteWS(MEDICAMENTS medicaments) {
 
         rep.delete(medicaments);
     }
@@ -91,8 +90,8 @@ public class MedicamentsViewModel extends AndroidViewModel {
         return allMedicamentslaboratoires;
     }
 
-    public LiveData<List<MEDICAMENTS>> getAllPeremptions() {
-        return allMedicamentsPeremptions;
+    public LiveData<List<MEDICAMENTS>> getAllExpire() {
+        return allMedicamentsExpire;
     }
 
     public LiveData<List<MEDICAMENTS>> getSearchMedicaments(String search) {
@@ -114,9 +113,14 @@ public class MedicamentsViewModel extends AndroidViewModel {
         return allMedicamentslaboratoiresWS;
     }
 
+    public LiveData<List<MEDICAMENTS>> getAllExpireWS() {
+        return allMedicamentsExpireWS;
+    }
+
     public MutableLiveData<List<MEDICAMENTS>> getSearchMedicamentsWS(String search) {
         return rep.getSearchMedicamemts(getApplication(), search);
     }
+
 
 }
 

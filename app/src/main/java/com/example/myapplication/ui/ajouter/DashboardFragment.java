@@ -348,7 +348,7 @@ public class DashboardFragment extends Fragment implements View.OnClickListener,
     }
 
     private void updateLabel() {
-        String myFormat = "yy-MM-dd"; //In which you need put here
+        String myFormat = "yyyy-MM-dd"; //In which you need put here
         SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
         dateP.setText(sdf.format(myCalendar.getTime()));
         dateF.setText(sdf.format(myCalendar.getTime()));
@@ -391,10 +391,11 @@ public class DashboardFragment extends Fragment implements View.OnClickListener,
         }else{
             Toast.makeText(getContext(), "Network connection is not available", Toast.LENGTH_SHORT).show();
             medicamentSviewModel.insert(medicaments);
+          Toast.makeText(getContext(), "medicament saved", Toast.LENGTH_SHORT).show();
        }
 
 
-        Toast.makeText(getContext(), "medicament saved", Toast.LENGTH_SHORT).show();
+
 
 
         //getActivity().setResult(Activity.RESULT_OK, data);

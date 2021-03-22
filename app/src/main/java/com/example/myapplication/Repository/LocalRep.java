@@ -16,7 +16,7 @@ public class LocalRep implements GlobaleRepository {
     private MedicamentDAO medicamentDao;
     private LiveData<List<MEDICAMENTS>> allMedicaments;
     private LiveData<List<MEDICAMENTS>> allMedicamentslaboratoires;
-    private LiveData<List<MEDICAMENTS>> AllMedicamentsPeremptions;
+    private LiveData<List<MEDICAMENTS>> allMedicamentsExpire;
     private LiveData<List<MEDICAMENTS>> SearchMedicaments;
     private int count ;
     private String search;
@@ -27,8 +27,9 @@ public class LocalRep implements GlobaleRepository {
 
         allMedicaments = medicamentDao.getAllMEDICAMENTS();
         allMedicamentslaboratoires = medicamentDao.getAllaboratoires();
-        AllMedicamentsPeremptions = medicamentDao.getAllPeremptioN();
+        allMedicamentsExpire = medicamentDao.getAllExpire();
         SearchMedicaments = medicamentDao.SearchMedicamemts(search);
+
         //count = medicamentDao.getDataCount();
 
     }
@@ -55,6 +56,8 @@ public class LocalRep implements GlobaleRepository {
         new LocalRep.DeleteAllMedicamentsAsyncTask(medicamentDao).execute();
     }
 
+
+
     @Override
     public LiveData<List<MEDICAMENTS>> getAllMedicaments() {
         return allMedicaments;
@@ -63,6 +66,11 @@ public class LocalRep implements GlobaleRepository {
     @Override
     public LiveData<List<MEDICAMENTS>> getAllaboratoires() {
         return allMedicamentslaboratoires;
+    }
+
+    @Override
+    public LiveData<List<MEDICAMENTS>> getAllExpire() {
+        return allMedicamentsExpire;
     }
 
     @Override
@@ -75,10 +83,7 @@ public class LocalRep implements GlobaleRepository {
         return null;
     }
 
-    @Override
-    public LiveData<List<MEDICAMENTS>> getAllMedicamentsPeremptions() {
-        return AllMedicamentsPeremptions;
-    }
+
 
     /*public int  getCount() {
         return medicamentDao.getDataCount();

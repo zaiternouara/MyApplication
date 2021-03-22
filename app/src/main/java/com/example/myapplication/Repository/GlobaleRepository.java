@@ -16,7 +16,7 @@ public interface GlobaleRepository {
 
     void update(MEDICAMENTS medicament);
 
-    void delete(MEDICAMENTS medicament) throws JSONException;
+    void delete(MEDICAMENTS medicament);
 
     void deleteAllMedicaments();
 
@@ -24,11 +24,14 @@ public interface GlobaleRepository {
 
     LiveData<List<MEDICAMENTS>> getAllaboratoires();
 
+    LiveData<List<MEDICAMENTS>> getAllExpire();
+
     LiveData<List<MEDICAMENTS>> getSearchMedicamemts(String search);
+
 
 
     MutableLiveData<List<MEDICAMENTS>> getSearchMedicamemts(Application application, String search);
 
-    LiveData<List<MEDICAMENTS>> getAllMedicamentsPeremptions();
+
 
 }

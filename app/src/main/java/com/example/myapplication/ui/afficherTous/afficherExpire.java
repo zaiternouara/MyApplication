@@ -9,6 +9,7 @@ import android.widget.Toast;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -53,16 +54,32 @@ public class afficherExpire extends Fragment {
         final MedicamentAdapter adapter = new MedicamentAdapter(getContext());
         recyclerView.setAdapter(adapter);
 
-        NetworkConnection network = new NetworkConnection(getContext(),medicamentSviewModel);
-        medicamentSviewModel = ViewModelProviders.of(this).get(MedicamentsViewModel.class);
-        //medicamentSviewModel.insert(new MEDICAMENTS("ju","paralgan","bayer","jp","3mois","oui","23","21/09/2019","21/09/2022","bienn","12euros","89"));
-        medicamentSviewModel.getAllPeremptions().observe(getViewLifecycleOwner(), new Observer<List<MEDICAMENTS>>() {
+        medicamentSviewModel = new ViewModelProvider(this).get(MedicamentsViewModel.class);
+        NetworkConnection network = new NetworkConnection(getContext(), medicamentSviewModel);
 
-            @Override
-            public void onChanged(List<MEDICAMENTS> medicaments) {
-                adapter.setMedicament(medicaments);
-            }
-        });
+        if (network.isConnected()) {
+
+
+            Toast.makeText(getContext(), "Network connection is available", Toast.LENGTH_SHORT).show();
+            medicamentSviewModel.getAllExpireWS().observe(getViewLifecycleOwner(), new Observer<List<MEDICAMENTS>>() {
+
+                @Override
+                public void onChanged(List<MEDICAMENTS> medicaments) {
+                    adapter.setMedicament(medicaments);
+                }
+            });
+
+        } else {
+            //medicamentSviewModel = new ViewModelProvider(this).get(MedicamentsViewModel.class);
+            Toast.makeText(getContext(), "Network connection not is available", Toast.LENGTH_SHORT).show();
+            medicamentSviewModel.getAllExpire().observe(getViewLifecycleOwner(), new Observer<List<MEDICAMENTS>>() {
+
+                @Override
+                public void onChanged(List<MEDICAMENTS> medicaments) {
+                    adapter.setMedicament(medicaments);
+                }
+            });
+        }
         new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(0,
                 ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT) {
             @Override
