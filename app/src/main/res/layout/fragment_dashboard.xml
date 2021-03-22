@@ -210,9 +210,14 @@
 
             <Button
                 android:id="@+id/ajout"
-                android:layout_width="match_parent"
+                android:layout_width="170dp"
                 android:layout_height="wrap_content"
-                android:shadowColor="#FFFFFF"
+                android:background="@drawable/button"
+                android:shadowColor="@android:color/holo_orange_dark"
+                android:shadowDx="0"
+                android:shadowDy="0"
+                android:shadowRadius="5"
+                android:layout_marginLeft="50dp"
                 android:text="Ajouter"
                 android:textColor="#FFFFFF" />
 

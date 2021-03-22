@@ -18,8 +18,10 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.lifecycle.ViewModelProviders;
 
+import com.example.myapplication.Connection.NetworkConnection;
 import com.example.myapplication.R;
 import com.example.myapplication.models.MEDICAMENTS;
 import com.example.myapplication.viewModel.MedicamentsViewModel;
@@ -79,7 +81,7 @@ public class DashboardFragment extends Fragment implements View.OnClickListener,
 
         boui = (RadioButton) root.findViewById(R.id.inputOui);
         bnon = (RadioButton) root.findViewById(R.id.inputNon);
-
+       // String forme = form.getSelectedItem().toString();
         ArrayAdapter<CharSequence> adap = ArrayAdapter.createFromResource(getContext(),
                 R.array.numbers, android.R.layout.simple_spinner_item);
         adap.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -133,13 +135,13 @@ public class DashboardFragment extends Fragment implements View.OnClickListener,
 
 
     private void updateLabelP() {
-        String myFormat = "dd-MM-yy";
+        String myFormat = "yyyy-MM-dd";
         SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
 
         dateP.setText(sdf.format(myCalendar.getTime()));
     }
     private void updateLabelF() {
-        String myFormat = "dd-MM-yy";
+        String myFormat = "yyyy-MM-dd";
         SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
 
         dateF.setText(sdf.format(myCalendar.getTime()));
@@ -153,7 +155,7 @@ public class DashboardFragment extends Fragment implements View.OnClickListener,
         String laboratoire = labo.getText().toString();
         String denomination = denom.getText().toString();
         String lots = lot.getText().toString();
-        String formePharmaceutique = form.toString();
+        String forme=form.getSelectedItem().toString();
         String dureee = duree.getText().toString();
         String dateFab = dateF.getText().toString();
         String datePer = dateP.getText().toString();
@@ -164,16 +166,26 @@ public class DashboardFragment extends Fragment implements View.OnClickListener,
         if (boui.isChecked()) remboursable = "1";
         if (bnon.isChecked()) remboursable = "0";
 
-        if (NomCommercial.trim().isEmpty() || description.trim().isEmpty() || classTH.trim().isEmpty() || laboratoire.trim().isEmpty() || lots.trim().isEmpty() || denomination.trim().isEmpty() || formePharmaceutique.trim().isEmpty() || dureee.trim().isEmpty() || dateFab.trim().isEmpty() || datePer.trim().isEmpty() || price.trim().isEmpty() || quantite.trim().isEmpty() || codeBarre.trim().isEmpty()) {
+        if (NomCommercial.trim().isEmpty() || description.trim().isEmpty() || classTH.trim().isEmpty() || laboratoire.trim().isEmpty() || lots.trim().isEmpty() || denomination.trim().isEmpty() || forme.trim().isEmpty() || dureee.trim().isEmpty() || dateFab.trim().isEmpty() || datePer.trim().isEmpty() || price.trim().isEmpty() || quantite.trim().isEmpty() || codeBarre.trim().isEmpty()) {
 
             Toast.makeText(getContext(), "Entrez tous les champs", Toast.LENGTH_SHORT).show();
 
             return;
         }
-        MEDICAMENTS medicaments = new MEDICAMENTS(classTH, NomCommercial, laboratoire, denomination, formePharmaceutique, dureee, remboursable, lots, dateFab, datePer, description, price, quantite, codeBarre);
-        //  MEDICAMENTS medicaments = new MEDICAMENTS(classTH, NomCommercial, laboratoire, denomination, formePharmaceutique, dureee, lots, dateFab, datePer, description, price, quantite,codeBarre);
-        medicamentSviewModel = ViewModelProviders.of(getActivity()).get(MedicamentsViewModel.class);
-        medicamentSviewModel.insert(medicaments);
+        medicamentSviewModel = new ViewModelProvider(getActivity()).get(MedicamentsViewModel.class);
+        MEDICAMENTS medicaments = new MEDICAMENTS(classTH, NomCommercial, laboratoire, denomination, forme, dureee,  remboursable, lots ,dateFab, datePer, description, price, quantite,codeBarre);
+
+        NetworkConnection network = new NetworkConnection(getContext(),medicamentSviewModel);
+
+        // Check network connection
+        if (network.isConnected()){
+            Toast.makeText(getContext(), "Network connection is available", Toast.LENGTH_SHORT).show();
+            medicamentSviewModel.insertWS(medicaments);
+        }else{
+            Toast.makeText(getContext(), "Network connection is not available", Toast.LENGTH_SHORT).show();
+            medicamentSviewModel.insert(medicaments);
+            Toast.makeText(getContext(), "medicament saved", Toast.LENGTH_SHORT).show();
+        }
 
 
         Toast.makeText(getContext(), "medicament saved", Toast.LENGTH_SHORT).show();
@@ -210,7 +222,7 @@ public class DashboardFragment extends Fragment implements View.OnClickListener,
 
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-        String formePh = form.getItemAtPosition(position).toString();
+        //String formePh = form.getItemAtPosition(position).toString();
 
     }
 
@@ -219,3 +231,4 @@ public class DashboardFragment extends Fragment implements View.OnClickListener,
 
     }
 }
+
