@@ -8,13 +8,14 @@ import android.os.StrictMode;
 import com.example.myapplication.viewModel.MedicamentsViewModel;
 
 public class NetworkConnection {
-    private Context context;
-    private MedicamentsViewModel medicamentSviewModel;
+    private final Context context;
+    private final MedicamentsViewModel medicamentSviewModel;
 
-    public NetworkConnection(Context context , MedicamentsViewModel medicamentSviewModel) {
+    public NetworkConnection(Context context, MedicamentsViewModel medicamentSviewModel) {
         this.context = context;
-        this.medicamentSviewModel=medicamentSviewModel;
+        this.medicamentSviewModel = medicamentSviewModel;
     }
+
     public boolean isConnected() {
         boolean status = false;
         PullData a = new PullData();
@@ -23,16 +24,20 @@ public class NetworkConnection {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             if (cm != null && cm.getActiveNetwork() != null && cm.getNetworkCapabilities(cm.getActiveNetwork()) != null) {
                 // connected to the internet
-               //a.send(medicamentSviewModel);
+
+                //a.send(medicamentSviewModel);
+
                 StrictMode.ThreadPolicy policy = new
-                StrictMode.ThreadPolicy.Builder().permitAll().build();
+                        StrictMode.ThreadPolicy.Builder().permitAll().build();
                 StrictMode.setThreadPolicy(policy);
                 status = true;
             }
         } else {
             if (cm != null && cm.getActiveNetworkInfo() != null && cm.getActiveNetworkInfo().isConnectedOrConnecting()) {
                 // connected to the internet
-                //a.send(medicamentSviewModel);
+
+                // a.send(medicamentSviewModel);
+
                 status = true;
             }
         }

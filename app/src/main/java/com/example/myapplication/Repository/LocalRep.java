@@ -13,12 +13,12 @@ import com.example.myapplication.models.MEDICAMENTS;
 import java.util.List;
 
 public class LocalRep implements GlobaleRepository {
-    private MedicamentDAO medicamentDao;
-    private LiveData<List<MEDICAMENTS>> allMedicaments;
-    private LiveData<List<MEDICAMENTS>> allMedicamentslaboratoires;
-    private LiveData<List<MEDICAMENTS>> allMedicamentsExpire;
-    private LiveData<List<MEDICAMENTS>> SearchMedicaments;
-    private int count ;
+    private final MedicamentDAO medicamentDao;
+    private final LiveData<List<MEDICAMENTS>> allMedicaments;
+    private final LiveData<List<MEDICAMENTS>> allMedicamentslaboratoires;
+    private final LiveData<List<MEDICAMENTS>> allMedicamentsExpire;
+    private final LiveData<List<MEDICAMENTS>> SearchMedicaments;
+    private final LiveData<Integer> count;
     private String search;
 
     public LocalRep(Application application) {
@@ -30,7 +30,7 @@ public class LocalRep implements GlobaleRepository {
         allMedicamentsExpire = medicamentDao.getAllExpire();
         SearchMedicaments = medicamentDao.SearchMedicamemts(search);
 
-        //count = medicamentDao.getDataCount();
+        count = medicamentDao.getDataCount();
 
     }
 
@@ -55,7 +55,6 @@ public class LocalRep implements GlobaleRepository {
 
         new LocalRep.DeleteAllMedicamentsAsyncTask(medicamentDao).execute();
     }
-
 
 
     @Override
@@ -84,10 +83,9 @@ public class LocalRep implements GlobaleRepository {
     }
 
 
-
-    /*public int  getCount() {
-        return medicamentDao.getDataCount();
-    }*/
+    public LiveData<Integer> getCount() {
+        return count;
+    }
 
     private static class InsertMedicamentAsyncTask extends AsyncTask<MEDICAMENTS, Void, Void> {
         private final MedicamentDAO medicamentDao;

@@ -26,10 +26,11 @@ public class MedicamentsViewModel extends AndroidViewModel {
     //SQLITE
     public LocalRep repository;
     public LiveData<List<MEDICAMENTS>> SearchMedicaments;
+    public LiveData<Integer> count;
     //WEBSERVICE
     public WebServiceRep rep;
     public MutableLiveData<List<MEDICAMENTS>> SearchMedicamentsWS;
-    int count;
+
 
     public MedicamentsViewModel(@NonNull Application application) {
         super(application);
@@ -38,9 +39,8 @@ public class MedicamentsViewModel extends AndroidViewModel {
         allMedicaments = repository.getAllMedicaments();
         allMedicamentslaboratoires = repository.getAllaboratoires();
         allMedicamentsExpire = repository.getAllExpire();
-        //count = repository.getCount();
         //SearchMedicaments = repository.getSearchMedicamemts(search);
-
+        count = repository.getCount();
         //WEBSERVICE
         rep = new WebServiceRep(application);
         allMedicamentsWS = rep.getAllMedicaments();
@@ -99,7 +99,7 @@ public class MedicamentsViewModel extends AndroidViewModel {
         return repository.getSearchMedicamemts(search);
     }
 
-    public int count() {
+    public LiveData<Integer> getCount() {
         return count;
     }
 
