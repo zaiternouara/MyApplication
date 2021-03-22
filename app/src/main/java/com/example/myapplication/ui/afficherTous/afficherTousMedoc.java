@@ -4,13 +4,12 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModelProviders;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -20,6 +19,8 @@ import com.example.myapplication.Connection.NetworkConnection;
 import com.example.myapplication.R;
 import com.example.myapplication.models.MEDICAMENTS;
 import com.example.myapplication.viewModel.MedicamentsViewModel;
+
+import org.json.JSONException;
 
 import java.util.List;
 
@@ -54,11 +55,16 @@ public class afficherTousMedoc extends Fragment {
         recyclerView.setAdapter(adapter);
 
 
-        medicamentSviewModel = ViewModelProviders.of(this).get(MedicamentsViewModel.class);
+       // medicamentSviewModel = ViewModelProviders.of(this).get(MedicamentsViewModel.class);
+        //medicamentSviewModel = new ViewModelProvider(getActivity()).get(MedicamentsViewModel.class);
+        //medicamentSviewModel = new ViewModelProvider(this, ViewModelProvider.AndroidViewModelFactory.getInstance((Application) getContext())).get(MedicamentsViewModel.class);
         //medicamentSviewModel.insert(new MEDICAMENTS("ju","paralgan","bayer","jp","comprimé","3mois","23","21/09/2019","2019/09/06","bienn","12euros","89"));
+        medicamentSviewModel = new ViewModelProvider(this).get(MedicamentsViewModel.class);
+        NetworkConnection network = new NetworkConnection(getContext(), medicamentSviewModel);
 
-        NetworkConnection network = new NetworkConnection(getContext());
-        if (network.isConnected()){
+        if (network.isConnected()) {
+
+
             Toast.makeText(getContext(), "Network connection is available", Toast.LENGTH_SHORT).show();
             medicamentSviewModel.getAllMedicamentsWS().observe(getViewLifecycleOwner(), new Observer<List<MEDICAMENTS>>() {
 
@@ -67,7 +73,9 @@ public class afficherTousMedoc extends Fragment {
                     adapter.setMedicament(medicaments);
                 }
             });
-        }else{
+
+        } else {
+            //medicamentSviewModel = new ViewModelProvider(this).get(MedicamentsViewModel.class);
             Toast.makeText(getContext(), "Network connection not is available", Toast.LENGTH_SHORT).show();
             medicamentSviewModel.getAllMedicaments().observe(getViewLifecycleOwner(), new Observer<List<MEDICAMENTS>>() {
 
@@ -87,7 +95,15 @@ public class afficherTousMedoc extends Fragment {
 
             @Override
             public void onSwiped(RecyclerView.ViewHolder viewHolder, int direction) {
-                medicamentSviewModel.delete(adapter.getMedicamentAt(viewHolder.getAdapterPosition()));
+
+                if (network.isConnected()) {
+
+                        medicamentSviewModel.deleteWS(adapter.getMedicamentAt(viewHolder.getAdapterPosition()));
+
+                    } else {
+
+                    medicamentSviewModel.delete(adapter.getMedicamentAt(viewHolder.getAdapterPosition()));
+                }
                 Toast.makeText(getContext(), "Medicament deleted", Toast.LENGTH_SHORT).show();
 
             }
@@ -110,15 +126,15 @@ public class afficherTousMedoc extends Fragment {
                 String quant = medicaments.getQuantite_En_Stock();
                 String desc = medicaments.getDescription_De_Composant();
                 String labo = medicaments.getLaboratoire();
-                String codeB =medicaments.getCodeB();
-                String rembou =medicaments.getRemboursable();
-                String remboursable="remboursble";
+                String codeB = medicaments.getCodeB();
+                String rembou = medicaments.getRemboursable();
+                String remboursable = "remboursble";
 
-                if(rembou=="1"){
-                     remboursable="remboursable";
+                if (rembou == "1") {
+                    remboursable = "remboursable";
 
-                }else{
-                    remboursable="non remboursable";
+                } else {
+                    remboursable = "non remboursable";
                 }
 
 

@@ -19,16 +19,17 @@ public class MedicamentsViewModel extends AndroidViewModel {
     public String search;
     public LiveData<List<MEDICAMENTS>> allMedicaments;
     public LiveData<List<MEDICAMENTS>> allMedicamentslaboratoires;
-    public LiveData<List<MEDICAMENTS>> allMedicamentsPeremptions;
+    public LiveData<List<MEDICAMENTS>> allMedicamentsExpire;
     public MutableLiveData<List<MEDICAMENTS>> allMedicamentsWS;
     public MutableLiveData<List<MEDICAMENTS>> allMedicamentslaboratoiresWS;
+    public MutableLiveData<List<MEDICAMENTS>> allMedicamentsExpireWS;
     //SQLITE
     public LocalRep repository;
     public LiveData<List<MEDICAMENTS>> SearchMedicaments;
     //WEBSERVICE
     public WebServiceRep rep;
     public MutableLiveData<List<MEDICAMENTS>> SearchMedicamentsWS;
-    int count ;
+    int count;
 
     public MedicamentsViewModel(@NonNull Application application) {
         super(application);
@@ -36,18 +37,17 @@ public class MedicamentsViewModel extends AndroidViewModel {
         repository = new LocalRep(application);
         allMedicaments = repository.getAllMedicaments();
         allMedicamentslaboratoires = repository.getAllaboratoires();
-        allMedicamentsPeremptions = repository.getAllMedicamentsPeremptions();
-        count = repository.getCount();
+        allMedicamentsExpire = repository.getAllExpire();
+        //count = repository.getCount();
         //SearchMedicaments = repository.getSearchMedicamemts(search);
 
         //WEBSERVICE
         rep = new WebServiceRep(application);
         allMedicamentsWS = rep.getAllMedicaments();
         allMedicamentslaboratoiresWS = rep.getAllaboratoires();
-
-        //SearchMedicamentsWS = rep.getSearchMedicamemts(search);
+        allMedicamentsExpireWS = rep.getAllExpire();
+        SearchMedicamentsWS = rep.getSearchMedicamemts(search);
     }
-
 
 
     //SQLITE
@@ -74,11 +74,11 @@ public class MedicamentsViewModel extends AndroidViewModel {
         rep.insert(medicaments);
 
     }
+
     public void deleteWS(MEDICAMENTS medicaments) {
 
         rep.delete(medicaments);
     }
-
 
 
     //SQLITE
@@ -90,8 +90,8 @@ public class MedicamentsViewModel extends AndroidViewModel {
         return allMedicamentslaboratoires;
     }
 
-    public LiveData<List<MEDICAMENTS>> getAllPeremptions() {
-        return allMedicamentsPeremptions;
+    public LiveData<List<MEDICAMENTS>> getAllExpire() {
+        return allMedicamentsExpire;
     }
 
     public LiveData<List<MEDICAMENTS>> getSearchMedicaments(String search) {
@@ -113,9 +113,14 @@ public class MedicamentsViewModel extends AndroidViewModel {
         return allMedicamentslaboratoiresWS;
     }
 
+    public LiveData<List<MEDICAMENTS>> getAllExpireWS() {
+        return allMedicamentsExpireWS;
+    }
+
     public MutableLiveData<List<MEDICAMENTS>> getSearchMedicamentsWS(String search) {
         return rep.getSearchMedicamemts(getApplication(), search);
     }
+
 
 }
 

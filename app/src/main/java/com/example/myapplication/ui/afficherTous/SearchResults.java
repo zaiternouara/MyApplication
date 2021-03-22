@@ -9,7 +9,7 @@ import android.widget.Toast;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModelProviders;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -19,6 +19,8 @@ import com.example.myapplication.Connection.NetworkConnection;
 import com.example.myapplication.R;
 import com.example.myapplication.models.MEDICAMENTS;
 import com.example.myapplication.viewModel.MedicamentsViewModel;
+
+import org.json.JSONException;
 
 import java.util.List;
 
@@ -59,12 +61,12 @@ public class SearchResults extends Fragment {
         recyclerView.setAdapter(adapter);
 
 
-        medicamentSviewModel = ViewModelProviders.of(this).get(MedicamentsViewModel.class);
+        medicamentSviewModel = new ViewModelProvider(this).get(MedicamentsViewModel.class);
 
-        NetworkConnection network = new NetworkConnection(getContext());
+        NetworkConnection network = new NetworkConnection(getContext(), medicamentSviewModel);
 
         // Check network connection
-        if (network.isConnected()){
+        if (network.isConnected()) {
             Toast.makeText(getContext(), "Network connection is available", Toast.LENGTH_SHORT).show();
             medicamentSviewModel.getSearchMedicamentsWS(result).observe(getViewLifecycleOwner(), new Observer<List<MEDICAMENTS>>() {
 
@@ -73,7 +75,7 @@ public class SearchResults extends Fragment {
                     adapter.setMedicament(medicaments);
                 }
             });
-        }else{
+        } else {
             Toast.makeText(getContext(), "Network connection is not available", Toast.LENGTH_SHORT).show();
             medicamentSviewModel.getSearchMedicaments(result).observe(getViewLifecycleOwner(), new Observer<List<MEDICAMENTS>>() {
 
@@ -85,7 +87,6 @@ public class SearchResults extends Fragment {
         }
 
 
-
         new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(0,
                 ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT) {
             @Override
@@ -95,14 +96,17 @@ public class SearchResults extends Fragment {
 
             @Override
             public void onSwiped(RecyclerView.ViewHolder viewHolder, int direction) {
-                if (network.isConnected()){
+                if (network.isConnected()) {
 
-                    medicamentSviewModel.deleteWS(adapter.getMedicamentAt(viewHolder.getAdapterPosition()));
-                }else{
+                        medicamentSviewModel.deleteWS(adapter.getMedicamentAt(viewHolder.getAdapterPosition()));
+
+
+
+                } else {
                     medicamentSviewModel.delete(adapter.getMedicamentAt(viewHolder.getAdapterPosition()));
+                }
                 Toast.makeText(getContext(), "Medicament deleted", Toast.LENGTH_SHORT).show();
-
-            }}
+            }
         }).attachToRecyclerView(recyclerView);
         adapter.setOnItemClickListener(new MedicamentAdapter.OnItemClickListener() {
             @Override
