@@ -11,6 +11,8 @@ import com.example.myapplication.Repository.LocalRep;
 import com.example.myapplication.Repository.WebServiceRep;
 import com.example.myapplication.models.MEDICAMENTS;
 
+import org.json.JSONException;
+
 import java.util.List;
 
 //import com.example.myapplication.Repository.WebServiceRep;
@@ -74,7 +76,7 @@ public class MedicamentsViewModel extends AndroidViewModel {
 
     }
 
-    public void deleteWS(MEDICAMENTS medicaments) {
+    public void deleteWS(MEDICAMENTS medicaments){
 
         rep.delete(medicaments);
     }

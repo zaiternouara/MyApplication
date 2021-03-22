@@ -7,6 +7,8 @@ import androidx.lifecycle.MutableLiveData;
 
 import com.example.myapplication.models.MEDICAMENTS;
 
+import org.json.JSONException;
+
 import java.util.List;
 
 public interface GlobaleRepository {
@@ -14,7 +16,7 @@ public interface GlobaleRepository {
 
     void update(MEDICAMENTS medicament);
 
-    void delete(MEDICAMENTS medicament);
+    void delete(MEDICAMENTS medicament) throws JSONException;
 
     void deleteAllMedicaments();
 

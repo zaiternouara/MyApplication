@@ -13,7 +13,6 @@ import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
-import com.android.volley.toolbox.StringRequest;
 import com.example.myapplication.models.MEDICAMENTS;
 
 import org.json.JSONArray;
@@ -56,7 +55,7 @@ public class WebServiceRep implements GlobaleRepository {
 
     @Override
     public void delete(MEDICAMENTS medicament) {
-        deleteMe(medicament);
+        deleteMe(application, medicament);
 
     }
 
@@ -93,7 +92,7 @@ public class WebServiceRep implements GlobaleRepository {
 
 
     private void getListFromServer(Application application) {
-        String url = "http://192.168.1.3/WebService/public/GetAllMedicaments";
+        String url = "http://192.168.1.5/WebService/public/GetAllMedicaments";
 
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
             @Override
@@ -158,7 +157,7 @@ public class WebServiceRep implements GlobaleRepository {
     }
 
     private void getListLaboratoireFromServer(Application application) {
-        String url = "http://192.168.1.3/WebService/public/GetAllLaboratoire";
+        String url = "http://192.168.1.5/WebService/public/GetAllLaboratoire";
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
@@ -218,10 +217,8 @@ public class WebServiceRep implements GlobaleRepository {
     }
 
     private MutableLiveData<List<MEDICAMENTS>> getListOfSearchFromServer(Application application, String search) {
-        String url = "http://192.168.1.3/WebService/public/Search";
-        /*HashMap<String, String> params = new HashMap<String, String>();
-        params.put("a",search);
-        JSONObject jsonObject = new JSONObject(params);*/
+        String url = "http://192.168.1.5/WebService/public/Search";
+
         JSONObject jsonObject = new JSONObject();
         try {
             jsonObject.put("a", search);
@@ -286,18 +283,7 @@ public class WebServiceRep implements GlobaleRepository {
                 //cree l erreur
 
             }
-        }) {
-
-            @Override
-            protected Map<String, String> getParams() throws AuthFailureError {
-                // Posting parameters to login url
-                Map<String, String> params = new HashMap<String, String>();
-                params.put("a", search);
-
-                return params;
-            }
-
-        };
+        });
 
         MyfileRequeteSingleton.getInstance(application).addToRequestQueue(jsonObjectRequest);
 
@@ -305,10 +291,38 @@ public class WebServiceRep implements GlobaleRepository {
     }
 
     public void AddMedicament(MEDICAMENTS medicaments) {
-        String url = "http://192.168.1.3/createmedicament";
-        StringRequest request = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
+        String url = "http://192.168.1.5/WebService/public/createmedicament";
+        JSONObject jsonObject = new JSONObject();
+        try {
+            jsonObject.put("Classe_Therapeutique", medicaments.getClasse_Therapeutique());
+            jsonObject.put("Nom_Commercial", medicaments.getNom_Commercial());
+            jsonObject.put("Laboratoire", medicaments.getLaboratoire());
+            jsonObject.put("Denominateur_De_Medicament", medicaments.getDenominateur_De_Medicament());
+            jsonObject.put("Forme_Pharmaceutique", medicaments.getForme_Pharmaceutique());
+            jsonObject.put("Duree_De_Conservation", medicaments.getDuree_De_Conservation());
+            jsonObject.put("Remborsable", medicaments.getRemboursable());
+            jsonObject.put("Lot", medicaments.getLot());
+            jsonObject.put("Date_De_Fabrication", medicaments.getDate_De_Fabrication());
+            jsonObject.put("Date_Peremption", medicaments.getDate_Peremption());
+            jsonObject.put("Description_De_Composant", medicaments.getDescription_De_Composant());
+            jsonObject.put("Prix", medicaments.getPrix());
+            jsonObject.put("Quantite_En_Stock", medicaments.getQuantite_En_Stock());
+            jsonObject.put("Code_a_Bare", medicaments.getCodeB());
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, url, jsonObject, new Response.Listener<JSONObject>() {
             @Override
-            public void onResponse(String response) {
+            public void onResponse(JSONObject response) {
+                try {
+
+                    String message = response.getString("message");
+                    Toast.makeText(application, message, Toast.LENGTH_SHORT).show();
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
 
             }
         }, new Response.ErrorListener() {
@@ -316,52 +330,44 @@ public class WebServiceRep implements GlobaleRepository {
             public void onErrorResponse(VolleyError error) {
 
             }
-        }) {
-            @Override
-            protected Map<String, String> getParams() throws AuthFailureError {
-                Map medico = new HashMap();
-                medico.put("Classe_Therapeutique", medicaments.getClasse_Therapeutique());
-                medico.put("Nom_Commercial", medicaments.getNom_Commercial());
-                medico.put("Laboratoire", medicaments.getLaboratoire());
-                medico.put("Denominateur_De_Medicament", medicaments.getDenominateur_De_Medicament());
-                medico.put("Forme_Pharmaceutique", medicaments.getForme_Pharmaceutique());
-                medico.put("Duree_De_Conservation", medicaments.getDuree_De_Conservation());
-                //medico.put("Remborsable",medicaments.get);
-                medico.put("Lot", medicaments.getLot());
-                medico.put("Date_De_Fabrication", medicaments.getDate_De_Fabrication());
-                medico.put("Date_Peremption", medicaments.getDate_Peremption());
-                medico.put("Description_De_Composant", medicaments.getDescription_De_Composant());
-                medico.put("Prix", medicaments.getPrix());
-                medico.put("Quantite_En_Stock", medicaments.getQuantite_En_Stock());
-                //medico.put("Code_a_Bare", medicaments.getCode_a_Bare());
-
-                return super.getParams();
-            }
-        };
+        });
+        MyfileRequeteSingleton.getInstance(application).addToRequestQueue(jsonObjectRequest);
 
     }
 
-    public void deleteMe(MEDICAMENTS medicaments) {
-        String url = "http://192.168.43.80//deletMedicament//{medicaments.getNom_Commercial()}";
-        StringRequest request = new StringRequest(Request.Method.DELETE, url, new Response.Listener<String>() {
-            @Override
-            public void onResponse(String response) {
+    public void deleteMe(Application application, MEDICAMENTS medicaments) {
+        JSONObject jsonObject = new JSONObject();
+        try {
+            jsonObject.put("Nom_Commercial", medicaments.getNom_Commercial());
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
 
-            }
-        }, new Response.ErrorListener() {
+        String url = "http://192.168.1.5/WebService/public/deletMedicament";
+        JsonObjectRequest request = new JsonObjectRequest(Request.Method.POST,
+                url,
+                jsonObject,
+                new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        try {
+
+                            String message = response.getString("message");
+                            Toast.makeText(application, message, Toast.LENGTH_SHORT).show();
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+
+
+                    }
+                }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
 
             }
-        }) {
-            @Override
-            protected Map<String, String> getParams() throws AuthFailureError {
-                Map medico = new HashMap();
-                medico.put("Nom_Commercial", medicaments.getNom_Commercial());
-
-                return super.getParams();
-            }
-        };
+        });
+        MyfileRequeteSingleton.getInstance(application).addToRequestQueue(request);
 
     }
 

@@ -348,7 +348,7 @@ public class DashboardFragment extends Fragment implements View.OnClickListener,
     }
 
     private void updateLabel() {
-        String myFormat = "dd-MM-yy"; //In which you need put here
+        String myFormat = "yy-MM-dd"; //In which you need put here
         SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
         dateP.setText(sdf.format(myCalendar.getTime()));
         dateF.setText(sdf.format(myCalendar.getTime()));
@@ -380,7 +380,7 @@ public class DashboardFragment extends Fragment implements View.OnClickListener,
             return;
         }
      medicamentSviewModel = new ViewModelProvider(getActivity()).get(MedicamentsViewModel.class);
-     MEDICAMENTS medicaments = new MEDICAMENTS(classTH, NomCommercial, laboratoire, denomination, formePharmaceutique, dureee, lots, remboursable ,dateFab, datePer, description, price, quantite,codeBarre);
+     MEDICAMENTS medicaments = new MEDICAMENTS(classTH, NomCommercial, laboratoire, denomination, formePharmaceutique, dureee,  remboursable, lots ,dateFab, datePer, description, price, quantite,codeBarre);
 
         NetworkConnection network = new NetworkConnection(getContext(),medicamentSviewModel);
 

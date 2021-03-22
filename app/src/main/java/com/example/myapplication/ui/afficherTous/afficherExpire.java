@@ -20,6 +20,8 @@ import com.example.myapplication.R;
 import com.example.myapplication.models.MEDICAMENTS;
 import com.example.myapplication.viewModel.MedicamentsViewModel;
 
+import org.json.JSONException;
+
 import java.util.List;
 
 public class afficherExpire extends Fragment {
@@ -71,7 +73,9 @@ public class afficherExpire extends Fragment {
             @Override
             public void onSwiped(RecyclerView.ViewHolder viewHolder, int direction) {
                 if (network.isConnected()){
-                    medicamentSviewModel.deleteWS(adapter.getMedicamentAt(viewHolder.getAdapterPosition()));
+
+                        medicamentSviewModel.deleteWS(adapter.getMedicamentAt(viewHolder.getAdapterPosition()));
+
                 }else{
                     medicamentSviewModel.delete(adapter.getMedicamentAt(viewHolder.getAdapterPosition()));
                     Toast.makeText(getContext(), "Medicament deleted", Toast.LENGTH_SHORT).show();
