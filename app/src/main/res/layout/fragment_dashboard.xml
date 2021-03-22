@@ -72,15 +72,12 @@
                 android:ems="20"
                 android:hint="Nom Commercial"
                 android:inputType="textPersonName" />
-            <Spinner
+            <EditText
                 android:id="@+id/inputLabo"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Laboratoire"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                />
 
 
             <EditText
@@ -91,13 +88,16 @@
                 android:hint="Dénomination du médicament"
                 android:inputType="textPersonName" />
 
-            <EditText
+            <Spinner
                 android:id="@+id/inputForm"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="20"
                 android:hint="Forme Pharmaceutique"
-                android:inputType="textPersonName" />
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
             <EditText
                 android:id="@+id/inputDuree"
@@ -146,7 +146,7 @@
                 android:layout_height="wrap_content"
                 android:ems="20"
                 android:hint="Lot"
-                android:inputType="textPersonName" />
+                android:inputType="number" />
 
             <EditText
                 android:id="@+id/inputDateF"

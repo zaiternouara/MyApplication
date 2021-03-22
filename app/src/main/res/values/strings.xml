@@ -9,10 +9,10 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="labo">Spinner Example</string>
     <string-array name="numbers">
-        <item>One</item>
-        <item>Two</item>
-        <item>Three</item>
-        <item>Four</item>
+        <item>Comprime</item>
+        <item>Gelule</item>
+        <item>Sirop</item>
+        <item>Sachet</item>
         <item>Five</item>
     </string-array>
 
