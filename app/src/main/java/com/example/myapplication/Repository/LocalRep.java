@@ -2,6 +2,7 @@ package com.example.myapplication.Repository;
 
 import android.app.Application;
 import android.os.AsyncTask;
+import android.widget.Toast;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
@@ -20,6 +21,7 @@ public class LocalRep implements GlobaleRepository {
     private final LiveData<List<MEDICAMENTS>> SearchMedicaments;
     private final LiveData<Integer> count;
     private String search;
+    List<MEDICAMENTS> all;
 
     public LocalRep(Application application) {
         MEDICAMENTSDataBase database = MEDICAMENTSDataBase.getInstance(application);
@@ -31,6 +33,7 @@ public class LocalRep implements GlobaleRepository {
         SearchMedicaments = medicamentDao.SearchMedicamemts(search);
 
         count = medicamentDao.getDataCount();
+
 
     }
 
@@ -81,6 +84,7 @@ public class LocalRep implements GlobaleRepository {
     public MutableLiveData<List<MEDICAMENTS>> getSearchMedicamemts(Application application, String search) {
         return null;
     }
+
 
 
     public LiveData<Integer> getCount() {

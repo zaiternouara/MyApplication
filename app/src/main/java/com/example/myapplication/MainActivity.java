@@ -2,15 +2,18 @@ package com.example.myapplication;
 
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
+import com.example.myapplication.Connection.NetworkConnection;
 import com.example.myapplication.ui.afficher.NotificationsFragment;
 import com.example.myapplication.ui.ajouter.DashboardFragment;
 import com.example.myapplication.ui.home.HomeFragment;
 import com.example.myapplication.ui.modifier.ModifierFragment;
+import com.example.myapplication.viewModel.MedicamentsViewModel;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class MainActivity extends AppCompatActivity {
@@ -46,14 +49,20 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
+        NetworkConnection network = new NetworkConnection(getApplicationContext());
 
         BottomNavigationView navView = findViewById(R.id.nav_view);
         navView.setOnNavigationItemSelectedListener(bottomNavMethod);
         getSupportFragmentManager().beginTransaction().replace(R.id.nav_host_fragment, new HomeFragment()).commit();
+        MedicamentsViewModel k = new MedicamentsViewModel(getApplication());
+        if (network.isConnected()) {
 
-
+            Toast.makeText(getApplicationContext(), "Is Connected", Toast.LENGTH_SHORT).show();
+        } else {
+            Toast.makeText(getApplicationContext(), "Is not connected", Toast.LENGTH_SHORT).show();
+        }
     }
+
 
 }
 

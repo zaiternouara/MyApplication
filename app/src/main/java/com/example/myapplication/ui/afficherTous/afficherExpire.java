@@ -55,13 +55,7 @@ public class afficherExpire extends Fragment {
         recyclerView.setAdapter(adapter);
 
         medicamentSviewModel = new ViewModelProvider(this).get(MedicamentsViewModel.class);
-        NetworkConnection network = new NetworkConnection(getContext(), medicamentSviewModel);
-
-        if (network.isConnected()) {
-
-
-            Toast.makeText(getContext(), "Network connection is available", Toast.LENGTH_SHORT).show();
-            medicamentSviewModel.getAllExpireWS().observe(getViewLifecycleOwner(), new Observer<List<MEDICAMENTS>>() {
+        medicamentSviewModel.getAllExpireChoose().observe(getViewLifecycleOwner(), new Observer<List<MEDICAMENTS>>() {
 
                 @Override
                 public void onChanged(List<MEDICAMENTS> medicaments) {
@@ -69,17 +63,7 @@ public class afficherExpire extends Fragment {
                 }
             });
 
-        } else {
-            //medicamentSviewModel = new ViewModelProvider(this).get(MedicamentsViewModel.class);
-            Toast.makeText(getContext(), "Network connection not is available", Toast.LENGTH_SHORT).show();
-            medicamentSviewModel.getAllExpire().observe(getViewLifecycleOwner(), new Observer<List<MEDICAMENTS>>() {
 
-                @Override
-                public void onChanged(List<MEDICAMENTS> medicaments) {
-                    adapter.setMedicament(medicaments);
-                }
-            });
-        }
         new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(0,
                 ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT) {
             @Override
@@ -89,15 +73,9 @@ public class afficherExpire extends Fragment {
 
             @Override
             public void onSwiped(RecyclerView.ViewHolder viewHolder, int direction) {
-                if (network.isConnected()){
-
-                        medicamentSviewModel.deleteWS(adapter.getMedicamentAt(viewHolder.getAdapterPosition()));
-
-                }else{
-                    medicamentSviewModel.delete(adapter.getMedicamentAt(viewHolder.getAdapterPosition()));
-                    Toast.makeText(getContext(), "Medicament deleted", Toast.LENGTH_SHORT).show();
-
-                }}
+                medicamentSviewModel.deleteChoose(adapter.getMedicamentAt(viewHolder.getAdapterPosition()));
+                Toast.makeText(getContext(), "Medicament deleted", Toast.LENGTH_SHORT).show();
+            }
         }).attachToRecyclerView(recyclerView);
         adapter.setOnItemClickListener(new MedicamentAdapter.OnItemClickListener() {
             @Override
