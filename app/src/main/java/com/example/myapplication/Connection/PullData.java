@@ -1,57 +1,54 @@
-package com.example.myapplication.Connection;
+//package com.example.myapplication.Connection;
+
+/*import com.example.myapplication.models.MEDICAMENTS;
+import com.example.myapplication.viewModel.MedicamentsViewModel;
+
+import java.util.List;
 
 public class PullData {
 
     private int size;
-    //private MedicamentsViewModel medicamentSviewModel;
+    private MedicamentsViewModel medicamentSviewModel;
 
 
-    /*public void send(MedicamentsViewModel medicamentSviewModel) {
+    public void send(MedicamentsViewModel medicamentSviewModel) {
 
         //medicamentSviewModel = ViewModelProviders.of(this).get(MedicamentsViewModel.class);
 
 
-        //List<MEDICAMENTS> all = medicamentSviewModel.getAllMedicaments().getValue();
+        List<MEDICAMENTS> all = medicamentSviewModel.allMedicaments;
 
-        medicamentSviewModel.getAllMedicaments().observe(getViewLifecycleOwner(), new Observer<List<MEDICAMENTS>>() {
+        if (all.size() != 0) {
+            int i;
+            for (i = 1; i <= all.size(); i++) {
+                MEDICAMENTS medicaments = new MEDICAMENTS(
 
-            @Override
-            public void onChanged(List<MEDICAMENTS> medicaments) {
-                adapter.setMedicament(medicaments);
+                        all.get(i).getClasse_Therapeutique(),
+                        all.get(i).getNom_Commercial(),
+                        all.get(i).getLaboratoire(),
+                        all.get(i).getDenominateur_De_Medicament(),
+                        all.get(i).getForme_Pharmaceutique(),
+                        all.get(i).getDuree_De_Conservation(),
+                        all.get(i).getLot(),
+                        all.get(i).getRemboursable(),
+                        all.get(i).getDate_De_Fabrication(),
+                        all.get(i).getDate_Peremption(),
+                        all.get(i).getDescription_De_Composant(),
+                        all.get(i).getPrix(),
+                        all.get(i).getQuantite_En_Stock(),
+                        all.get(i).getCodeB());
+                System.out.println(medicaments);
+                medicamentSviewModel.insertChoose(medicaments);
+                medicamentSviewModel.deleteChoose(medicaments);
+
 
             }
-        });
-
-        medicamentSviewModel.getCount().observe(getViewLifecycleOwner(), new Observer<Integer>() {
-
-            @Override
-            public void onChanged(Integer j) {
-                if(j != 0){
-                    int i;
-                    for (i = 1; i <= j; i++) {
-                        MEDICAMENTS medicaments = new MEDICAMENTS(medicamentSviewModel.allMedicaments.getValue().get(i).getClasse_Therapeutique(), medicamentSviewModel.allMedicaments.getValue().get(i).getNom_Commercial(), medicamentSviewModel.allMedicaments.getValue().get(i).getLaboratoire(), medicamentSviewModel.allMedicaments.getValue().
-                                get(i).getDenominateur_De_Medicament(), medicamentSviewModel.allMedicaments.getValue().get(i).getForme_Pharmaceutique(),
-                                medicamentSviewModel.allMedicaments.getValue().get(i).getDuree_De_Conservation(),
-                                medicamentSviewModel.allMedicaments.getValue().get(i).getLot(),
-                                medicamentSviewModel.allMedicaments.getValue().get(i).getRemboursable(),
-                                medicamentSviewModel.allMedicaments.getValue().get(i).getDate_De_Fabrication(),
-                                medicamentSviewModel.allMedicaments.getValue().get(i).getDate_Peremption(),
-                                medicamentSviewModel.allMedicaments.getValue().get(i).getDescription_De_Composant(), medicamentSviewModel.allMedicaments.getValue().get(i).getPrix(),
-                                medicamentSviewModel.allMedicaments.getValue().get(i).getQuantite_En_Stock(),
-                                medicamentSviewModel.allMedicaments.getValue().get(i).getCodeB());
-                        System.out.println(medicaments);
-                        medicamentSviewModel.insertWS(medicaments);
-                        medicamentSviewModel.delete(medicaments);
+        }
 
 
-                    }
-                }
-            }
-        });
-
-    }*/
+    }
 
 
 }
 
-
+*/

@@ -43,4 +43,7 @@ public interface MedicamentDAO {
     @Query("SELECT COUNT(Nom_Commercial) FROM TABLE_MEDICAMENTS ORDER BY Nom_Commercial DESC")
     LiveData<Integer> getDataCount();
 
+
+
+
 }

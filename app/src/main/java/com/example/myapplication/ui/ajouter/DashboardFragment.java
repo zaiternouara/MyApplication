@@ -174,21 +174,11 @@ public class DashboardFragment extends Fragment implements View.OnClickListener,
         }
         medicamentSviewModel = new ViewModelProvider(getActivity()).get(MedicamentsViewModel.class);
         MEDICAMENTS medicaments = new MEDICAMENTS(classTH, NomCommercial, laboratoire, denomination, forme, dureee,  remboursable, lots ,dateFab, datePer, description, price, quantite,codeBarre);
-
-        NetworkConnection network = new NetworkConnection(getContext(),medicamentSviewModel);
-
-        // Check network connection
-        if (network.isConnected()){
-            Toast.makeText(getContext(), "Network connection is available", Toast.LENGTH_SHORT).show();
-            medicamentSviewModel.insertWS(medicaments);
-        }else{
-            Toast.makeText(getContext(), "Network connection is not available", Toast.LENGTH_SHORT).show();
-            medicamentSviewModel.insert(medicaments);
-            Toast.makeText(getContext(), "medicament saved", Toast.LENGTH_SHORT).show();
-        }
+         medicamentSviewModel.insertChoose(medicaments);
 
 
-        Toast.makeText(getContext(), "medicament saved", Toast.LENGTH_SHORT).show();
+
+
 
     }
 
