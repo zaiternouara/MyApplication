@@ -106,6 +106,15 @@ public class afficheTousLab extends Fragment {
                 String nomC = medicaments.getNom_Commercial();
                 String prix = medicaments.getPrix();
                 String denom = medicaments.getDenominateur_De_Medicament();
+                String rembou = medicaments.getRemboursable();
+                String remboursable = "remboursble";
+
+                if (rembou == "1") {
+                    remboursable = "remboursable";
+
+                } else {
+                    remboursable = "non remboursable";
+                }
                 String lot = medicaments.getLot();
                 String forme = medicaments.getForme_Pharmaceutique();
                 String dateF = medicaments.getDate_De_Fabrication();
@@ -122,6 +131,7 @@ public class afficheTousLab extends Fragment {
                 i.putString("Nom commercial", nomC);
                 i.putString("prix", prix);
                 i.putString("denominateur", denom);
+                i.putString("remboursable", remboursable);
                 i.putString("lot", lot);
                 i.putString("duree de conservation", duree);
                 i.putString("forme pharmaceutique", forme);

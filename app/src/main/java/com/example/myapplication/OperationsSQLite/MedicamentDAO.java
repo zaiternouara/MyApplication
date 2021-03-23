@@ -40,7 +40,7 @@ public interface MedicamentDAO {
     @Query("SELECT * FROM TABLE_MEDICAMENTS WHERE Nom_Commercial LIKE '%' || :search || '%' OR denominateur_De_Medicament LIKE '%' || :search || '%' OR classe_Therapeutique LIKE '%' || :search || '%' OR laboratoire LIKE '%' || :search || '%' ORDER BY Nom_Commercial DESC")
     LiveData<List<MEDICAMENTS>> SearchMedicamemts(String search);
 
-    @Query("SELECT COUNT(Nom_Commercial) FROM TABLE_MEDICAMENTS")
-    int getDataCount();
+    @Query("SELECT COUNT(Nom_Commercial) FROM TABLE_MEDICAMENTS ORDER BY Nom_Commercial DESC")
+    LiveData<Integer> getDataCount();
 
 }

@@ -20,8 +20,6 @@ import com.example.myapplication.R;
 import com.example.myapplication.models.MEDICAMENTS;
 import com.example.myapplication.viewModel.MedicamentsViewModel;
 
-import org.json.JSONException;
-
 import java.util.List;
 
 public class afficherTousMedoc extends Fragment {
@@ -55,12 +53,14 @@ public class afficherTousMedoc extends Fragment {
         recyclerView.setAdapter(adapter);
 
 
-       // medicamentSviewModel = ViewModelProviders.of(this).get(MedicamentsViewModel.class);
+        // medicamentSviewModel = ViewModelProviders.of(this).get(MedicamentsViewModel.class);
         //medicamentSviewModel = new ViewModelProvider(getActivity()).get(MedicamentsViewModel.class);
         //medicamentSviewModel = new ViewModelProvider(this, ViewModelProvider.AndroidViewModelFactory.getInstance((Application) getContext())).get(MedicamentsViewModel.class);
         //medicamentSviewModel.insert(new MEDICAMENTS("ju","paralgan","bayer","jp","comprimé","3mois","23","21/09/2019","2019/09/06","bienn","12euros","89"));
         medicamentSviewModel = new ViewModelProvider(this).get(MedicamentsViewModel.class);
+
         NetworkConnection network = new NetworkConnection(getContext(), medicamentSviewModel);
+
 
         if (network.isConnected()) {
 
@@ -82,6 +82,7 @@ public class afficherTousMedoc extends Fragment {
                 @Override
                 public void onChanged(List<MEDICAMENTS> medicaments) {
                     adapter.setMedicament(medicaments);
+
                 }
             });
         }
@@ -98,9 +99,9 @@ public class afficherTousMedoc extends Fragment {
 
                 if (network.isConnected()) {
 
-                        medicamentSviewModel.deleteWS(adapter.getMedicamentAt(viewHolder.getAdapterPosition()));
+                    medicamentSviewModel.deleteWS(adapter.getMedicamentAt(viewHolder.getAdapterPosition()));
 
-                    } else {
+                } else {
 
                     medicamentSviewModel.delete(adapter.getMedicamentAt(viewHolder.getAdapterPosition()));
                 }
@@ -143,6 +144,7 @@ public class afficherTousMedoc extends Fragment {
                 i.putString("Nom commercial", nomC);
                 i.putString("prix", prix);
                 i.putString("denominateur", denom);
+                i.putString("remboursable", remboursable);
                 i.putString("lot", lot);
                 i.putString("duree de conservation", duree);
                 i.putString("forme pharmaceutique", forme);
@@ -152,7 +154,7 @@ public class afficherTousMedoc extends Fragment {
                 i.putString("description", desc);
                 i.putString("laboratoire", labo);
                 i.putString("code barre", codeB);
-                i.putString("remboursable", remboursable);
+
 
                 fragment.setArguments(i);
                 System.out.println(fragment);
