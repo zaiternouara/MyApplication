@@ -39,7 +39,7 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="180dp"
+        android:layout_marginTop="200dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -52,9 +52,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="15dp"
-            android:layout_marginLeft="15dp"
-            android:layout_marginEnd="100dp"
-            android:layout_marginRight="100dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginEnd="40dp"
+            android:layout_marginRight="40dp"
             android:orientation="vertical">
 
             <EditText
@@ -62,8 +62,11 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="20"
+                android:layout_marginLeft="30dp"
+                android:background="@drawable/edit"
                 android:hint="Classe Thérapeutique"
-                android:inputType="textPersonName" />
+                android:textAlignment="center"
+                android:gravity="center_horizontal" />
 
             <EditText
                 android:id="@+id/inputNom"
@@ -71,11 +74,15 @@
                 android:layout_height="wrap_content"
                 android:ems="20"
                 android:hint="Nom Commercial"
+                android:textAlignment="center"
+                android:gravity="center_horizontal"
                 android:inputType="textPersonName" />
             <EditText
                 android:id="@+id/inputLabo"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:textAlignment="center"
+                android:gravity="center_horizontal"
                 android:hint="Laboratoire"
                 />
 
@@ -85,6 +92,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="20"
+
                 android:hint="Dénomination du médicament"
                 android:inputType="textPersonName" />
 
@@ -93,6 +101,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="20"
+                android:textAlignment="center"
+                android:gravity="center_horizontal"
                 android:hint="Forme Pharmaceutique"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintLeft_toLeftOf="parent"
@@ -104,6 +114,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="20"
+                android:textAlignment="center"
+                android:gravity="center_horizontal"
                 android:hint="Durée de conservation"
                 android:inputType="number" />
 
@@ -116,6 +128,8 @@
                     android:id="@+id/question"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:textAlignment="center"
+                    android:gravity="center_horizontal"
                     android:text="Est-il remboursable ?" />
 
                 <LinearLayout
@@ -146,6 +160,8 @@
                 android:layout_height="wrap_content"
                 android:ems="20"
                 android:hint="Lot"
+                android:textAlignment="center"
+                android:gravity="center_horizontal"
                 android:inputType="number" />
 
             <EditText
@@ -154,6 +170,8 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentStart="true"
                 android:layout_alignParentLeft="true"
+                android:textAlignment="center"
+                android:gravity="center_horizontal"
                 android:clickable="false"
                 android:cursorVisible="false"
                 android:focusable="false"
@@ -169,6 +187,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:clickable="false"
+                android:textAlignment="center"
+                android:gravity="center_horizontal"
                 android:cursorVisible="false"
                 android:focusable="false"
                 android:focusableInTouchMode="false"
@@ -180,6 +200,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="20"
+
                 android:hint="Description du composant"
                 android:inputType="textPersonName" />
 
@@ -188,6 +209,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="20"
+                android:textAlignment="center"
+                android:gravity="center_horizontal"
                 android:hint="Prix du Médicament"
                 android:inputType="number" />
 
@@ -196,6 +219,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
+                android:textAlignment="center"
+                android:gravity="center_horizontal"
                 android:hint="Quantité en stock"
                 android:inputType="number" />
 
@@ -204,6 +229,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
+                android:textAlignment="center"
+                android:gravity="center_horizontal"
                 android:hint="Code à barre"
                 android:inputType="number" />
 
