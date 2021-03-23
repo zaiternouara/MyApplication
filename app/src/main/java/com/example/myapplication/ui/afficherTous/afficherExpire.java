@@ -96,14 +96,7 @@ public class afficherExpire extends Fragment {
                 String labo = medicaments.getLaboratoire();
                 String codeB = medicaments.getCodeB();
                 String rembou = medicaments.getRemboursable();
-                String remboursable = "remboursble";
 
-                if (rembou == "1") {
-                    remboursable = "remboursable";
-
-                } else {
-                    remboursable = "non remboursable";
-                }
 
 
 
@@ -112,7 +105,7 @@ public class afficherExpire extends Fragment {
                 i.putString("Nom commercial", nomC);
                 i.putString("prix", prix);
                 i.putString("denominateur", denom);
-                i.putString("remboursable", remboursable);
+                i.putString("remboursable", rembou);
                 i.putString("lot", lot);
                 i.putString("duree de conservation", duree);
                 i.putString("forme pharmaceutique", forme);
