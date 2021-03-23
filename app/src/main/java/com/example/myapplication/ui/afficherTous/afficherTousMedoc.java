@@ -15,8 +15,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.myapplication.Adapter.MedicamentAdapter;
-import com.example.myapplication.Connection.NetworkConnection;
-import com.example.myapplication.R;
+ import com.example.myapplication.R;
 import com.example.myapplication.models.MEDICAMENTS;
 import com.example.myapplication.viewModel.MedicamentsViewModel;
 
@@ -53,39 +52,15 @@ public class afficherTousMedoc extends Fragment {
         recyclerView.setAdapter(adapter);
 
 
-        // medicamentSviewModel = ViewModelProviders.of(this).get(MedicamentsViewModel.class);
-        //medicamentSviewModel = new ViewModelProvider(getActivity()).get(MedicamentsViewModel.class);
-        //medicamentSviewModel = new ViewModelProvider(this, ViewModelProvider.AndroidViewModelFactory.getInstance((Application) getContext())).get(MedicamentsViewModel.class);
-        //medicamentSviewModel.insert(new MEDICAMENTS("ju","paralgan","bayer","jp","comprimé","3mois","23","21/09/2019","2019/09/06","bienn","12euros","89"));
         medicamentSviewModel = new ViewModelProvider(this).get(MedicamentsViewModel.class);
 
-        NetworkConnection network = new NetworkConnection(getContext(), medicamentSviewModel);
+        medicamentSviewModel.getAllMedicamentsChoose().observe(getViewLifecycleOwner(), new Observer<List<MEDICAMENTS>>() {
 
-
-        if (network.isConnected()) {
-
-
-            Toast.makeText(getContext(), "Network connection is available", Toast.LENGTH_SHORT).show();
-            medicamentSviewModel.getAllMedicamentsWS().observe(getViewLifecycleOwner(), new Observer<List<MEDICAMENTS>>() {
-
-                @Override
-                public void onChanged(List<MEDICAMENTS> medicaments) {
-                    adapter.setMedicament(medicaments);
-                }
-            });
-
-        } else {
-            //medicamentSviewModel = new ViewModelProvider(this).get(MedicamentsViewModel.class);
-            Toast.makeText(getContext(), "Network connection not is available", Toast.LENGTH_SHORT).show();
-            medicamentSviewModel.getAllMedicaments().observe(getViewLifecycleOwner(), new Observer<List<MEDICAMENTS>>() {
-
-                @Override
-                public void onChanged(List<MEDICAMENTS> medicaments) {
-                    adapter.setMedicament(medicaments);
-
-                }
-            });
-        }
+            @Override
+            public void onChanged(List<MEDICAMENTS> medicaments) {
+                adapter.setMedicament(medicaments);
+            }
+        });
 
         new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(0,
                 ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT) {
@@ -97,16 +72,8 @@ public class afficherTousMedoc extends Fragment {
             @Override
             public void onSwiped(RecyclerView.ViewHolder viewHolder, int direction) {
 
-                if (network.isConnected()) {
-
-                    medicamentSviewModel.deleteWS(adapter.getMedicamentAt(viewHolder.getAdapterPosition()));
-
-                } else {
-
-                    medicamentSviewModel.delete(adapter.getMedicamentAt(viewHolder.getAdapterPosition()));
-                }
+                medicamentSviewModel.deleteChoose(adapter.getMedicamentAt(viewHolder.getAdapterPosition()));
                 Toast.makeText(getContext(), "Medicament deleted", Toast.LENGTH_SHORT).show();
-
             }
         }).attachToRecyclerView(recyclerView);
         adapter.setOnItemClickListener(new MedicamentAdapter.OnItemClickListener() {
