@@ -81,8 +81,6 @@ public class NotificationsFragment extends Fragment implements View.OnClickListe
                 fragment = new SearchResults();
 
                 String rechercher = recherche.getText().toString();
-                //String oui = boui.getText().toString();
-                //String non = bnon.getText().toString();
                 if (rechercher.trim().isEmpty()) {
 
                     Toast.makeText(getContext(), "Entrez le champs", Toast.LENGTH_SHORT).show();

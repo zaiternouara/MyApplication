@@ -35,7 +35,7 @@ public class MEDICAMENTS {
 
 
 
-    public MEDICAMENTS(String classe_Therapeutique, String nom_Commercial, String laboratoire, String denominateur_De_Medicament, String forme_Pharmaceutique, String duree_De_Conservation,String remboursable, String lot, String date_De_Fabrication, String date_Peremption, String description_De_Composant, String prix, String quantite_En_Stock, String codeB) {
+    public MEDICAMENTS(String classe_Therapeutique, String nom_Commercial, String laboratoire, String denominateur_De_Medicament, String forme_Pharmaceutique, String duree_De_Conservation,String remboursable,String lot, String date_De_Fabrication, String date_Peremption, String description_De_Composant, String prix, String quantite_En_Stock, String codeB) {
         this.classe_Therapeutique = classe_Therapeutique;
         this.nom_Commercial = nom_Commercial;
         this.laboratoire = laboratoire;
