@@ -140,7 +140,7 @@ public class afficherTousMedoc extends Fragment {
                 i.putString("denominateur", denom);
                 if (rembou == "1"){
                 i.putString("remboursable",r);}
-                if (rembou == "0"){
+                else if (rembou == "0"){
                     i.putString("remboursable",n);}
                 i.putString("lot", medicaments.getLot());
                 i.putString("duree de conservation", duree);
