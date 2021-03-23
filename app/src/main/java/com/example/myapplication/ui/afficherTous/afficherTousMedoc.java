@@ -144,6 +144,7 @@ public class afficherTousMedoc extends Fragment {
                 i.putString("Nom commercial", nomC);
                 i.putString("prix", prix);
                 i.putString("denominateur", denom);
+                i.putString("remboursable", remboursable);
                 i.putString("lot", lot);
                 i.putString("duree de conservation", duree);
                 i.putString("forme pharmaceutique", forme);
@@ -153,7 +154,7 @@ public class afficherTousMedoc extends Fragment {
                 i.putString("description", desc);
                 i.putString("laboratoire", labo);
                 i.putString("code barre", codeB);
-                i.putString("remboursable", remboursable);
+
 
                 fragment.setArguments(i);
                 System.out.println(fragment);

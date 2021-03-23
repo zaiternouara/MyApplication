@@ -53,6 +53,9 @@ public class afficher_details extends Fragment {
         String nom = getArguments().getString("Nom commercial");
         nomC.setText(nom);
 
+        String remb = getArguments().getString("remboursable");
+        rembou.setText(remb);
+
         String price = getArguments().getString("prix");
         prix.setText(price);
 
@@ -83,8 +86,7 @@ public class afficher_details extends Fragment {
         String codeBarre = getArguments().getString("code barre");
         codeB.setText(codeBarre);
 
-        String remb = getArguments().getString("remboursable");
-        rembou.setText(remb);
+
 
         return root;
     }
