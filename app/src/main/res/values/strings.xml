@@ -16,4 +16,8 @@
         <item>Five</item>
     </string-array>
 
+    <string name="remboursable">remboursable</string>
+    <string name="nonremboursable">non remboursable</string>
+
+
 </resources>

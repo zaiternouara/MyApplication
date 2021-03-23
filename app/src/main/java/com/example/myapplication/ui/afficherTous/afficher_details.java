@@ -54,7 +54,17 @@ public class afficher_details extends Fragment {
         nomC.setText(nom);
 
         String remb = getArguments().getString("remboursable");
-        rembou.setText(remb);
+
+        switch(remb) {
+            case "1":
+                rembou.setText(getResources().getString(R.string.remboursable));
+                break;
+            case "0":
+                rembou.setText(getResources().getString(R.string.nonremboursable));
+                break;
+            default:
+
+        }
 
         String price = getArguments().getString("prix");
         prix.setText(price);
