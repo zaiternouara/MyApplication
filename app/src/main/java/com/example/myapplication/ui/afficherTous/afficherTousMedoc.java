@@ -61,7 +61,6 @@ public class afficherTousMedoc extends Fragment {
                 adapter.setMedicament(medicaments);
             }
         });
-        System.out.println("hey smile --> " + medicamentSviewModel.pull());
 
 
         new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(0,
@@ -100,6 +99,7 @@ public class afficherTousMedoc extends Fragment {
                 String codeB = medicaments.getCodeB();
 
                 String remboursable = "remboursble";
+                System.out.println("affichage remb ---> " +rembou);
                 if (rembou == "1") {
                     remboursable = "remboursable";
 

@@ -8,6 +8,7 @@ import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
 
 import com.example.myapplication.Connection.NetworkConnection;
 import com.example.myapplication.Repository.LocalRep;
@@ -145,9 +146,10 @@ public class MedicamentsViewModel extends AndroidViewModel {
 
 
     public  boolean pull () {
+
         boolean done=false;
         LiveData<List<MEDICAMENTS>> all =  getAllMedicamentsChoose() ;
-        System.out.println(all.hasObservers());
+        System.out.println(all);
 
          /*if (!all.isEmpty()){
              int i ;
