@@ -15,7 +15,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.myapplication.Adapter.MedicamentAdapter;
-import com.example.myapplication.R;
+ import com.example.myapplication.R;
 import com.example.myapplication.models.MEDICAMENTS;
 import com.example.myapplication.viewModel.MedicamentsViewModel;
 
@@ -62,7 +62,6 @@ public class afficherTousMedoc extends Fragment {
             }
         });
 
-
         new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(0,
                 ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT) {
             @Override
@@ -87,8 +86,7 @@ public class afficherTousMedoc extends Fragment {
                 String nomC = medicaments.getNom_Commercial();
                 String prix = medicaments.getPrix();
                 String denom = medicaments.getDenominateur_De_Medicament();
-                String rembou = medicaments.getRemboursable();
-                String lot = medicaments.getLot();
+              //  String lot = medicaments.getLot();
                 String forme = medicaments.getForme_Pharmaceutique();
                 String dateF = medicaments.getDate_De_Fabrication();
                 String dateP = medicaments.getDate_Peremption();
@@ -97,15 +95,9 @@ public class afficherTousMedoc extends Fragment {
                 String desc = medicaments.getDescription_De_Composant();
                 String labo = medicaments.getLaboratoire();
                 String codeB = medicaments.getCodeB();
-
-                String remboursable = "remboursble";
-                System.out.println("affichage remb ---> " +rembou);
-                if (rembou == "1") {
-                    remboursable = "remboursable";
-
-                } else {
-                    remboursable = "non remboursable";
-                }
+                String rembou = medicaments.getRemboursable();
+                String r="remboursable";
+                String n="non remboursable";
 
 
                 Bundle i = new Bundle();
@@ -113,8 +105,11 @@ public class afficherTousMedoc extends Fragment {
                 i.putString("Nom commercial", nomC);
                 i.putString("prix", prix);
                 i.putString("denominateur", denom);
-                i.putString("remboursable", remboursable);
-                i.putString("lot", lot);
+                if (rembou == "1"){
+                i.putString("remboursable",r);}
+                if (rembou == "0"){
+                    i.putString("remboursable",n);}
+                i.putString("lot", medicaments.getLot());
                 i.putString("duree de conservation", duree);
                 i.putString("forme pharmaceutique", forme);
                 i.putString("date de fabrication", dateF);

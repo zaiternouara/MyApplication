@@ -164,7 +164,8 @@ public class DashboardFragment extends Fragment implements View.OnClickListener,
         String codeBarre = codeB.getText().toString();
         String remboursable = "1";
         if (boui.isChecked()) remboursable = "1";
-        if (bnon.isChecked()) remboursable = "0";
+                else {
+        if (bnon.isChecked()) remboursable = "0";}
 
         if (NomCommercial.trim().isEmpty() || description.trim().isEmpty() || classTH.trim().isEmpty() || laboratoire.trim().isEmpty() || lots.trim().isEmpty() || denomination.trim().isEmpty() || forme.trim().isEmpty() || dureee.trim().isEmpty() || dateFab.trim().isEmpty() || datePer.trim().isEmpty() || price.trim().isEmpty() || quantite.trim().isEmpty() || codeBarre.trim().isEmpty()) {
 
