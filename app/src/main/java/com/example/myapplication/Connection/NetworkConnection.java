@@ -13,8 +13,7 @@ public class NetworkConnection   {
     private final Context context;
 
     public NetworkConnection(Context context) {
-        super();
-        this.context = context;
+         this.context = context;
     }
      public boolean isConnected() {
 

@@ -4,9 +4,10 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.util.Log;
+import android.widget.Toast;
 
 public class BroadcastReceiverNetwork extends BroadcastReceiver {
-    BroadcastReceiverNetwork(){
+    public BroadcastReceiverNetwork(){
         super();
     }
     @Override
@@ -15,9 +16,9 @@ public class BroadcastReceiverNetwork extends BroadcastReceiver {
         if(intent != null) {
             boolean status = connection.isConnected();
             if (status == true) {
-                Log.d("Network", "Internet is available ");
+                 Toast.makeText(context, "Internet is available ", Toast.LENGTH_SHORT).show();
             } else {
-                Log.d("Network", "Internet is not available ");
+                 Toast.makeText(context, "Internet is not available", Toast.LENGTH_SHORT).show();
             }
         }
     }
