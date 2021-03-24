@@ -130,7 +130,7 @@ public class SearchResults extends Fragment {
                 System.out.println(fragment);
                 FragmentManager fragmentManager = getFragmentManager();
                 fragmentManager.beginTransaction()
-                        .replace(R.id.affichertous
+                        .replace(R.id.afficher
                                 , fragment)
                         .addToBackStack(null)
                         .commit();
