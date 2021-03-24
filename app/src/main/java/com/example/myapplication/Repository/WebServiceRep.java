@@ -93,7 +93,7 @@ public class WebServiceRep implements GlobaleRepository {
 
 
     private void getListFromServer(Application application) {
-        String url = "http://192.168.1.3/WebService/public/GetAllMedicaments";
+        String url = "http://192.168.1.5/WebService/public/GetAllMedicaments";
 
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
             @Override
@@ -130,12 +130,12 @@ public class WebServiceRep implements GlobaleRepository {
                                 //Log.d("Success", response.toString());
 
                             } catch (JSONException e) {
-                                e.printStackTrace();
+                                //e.printStackTrace();
                             }
                         }
                     }
                 } catch (JSONException e) {
-                    e.printStackTrace();
+                    //e.printStackTrace();
                 }
 
                 myList.setValue(medicamentslist);
@@ -144,8 +144,8 @@ public class WebServiceRep implements GlobaleRepository {
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Log.d("Error", error.toString());
-                Toast.makeText(application, error.getMessage(), Toast.LENGTH_SHORT).show();
+                //Log.d("Error", error.toString());
+                //Toast.makeText(application, error.getMessage(), Toast.LENGTH_SHORT).show();
 
             }
         });
@@ -158,7 +158,7 @@ public class WebServiceRep implements GlobaleRepository {
     }
 
     private void getListLaboratoireFromServer(Application application) {
-        String url = "http://192.168.1.3/WebService/public/GetAllLaboratoire";
+        String url = "http://192.168.1.5/WebService/public/GetAllLaboratoire";
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
@@ -196,12 +196,12 @@ public class WebServiceRep implements GlobaleRepository {
                                 //Log.d("Success", response.toString());
 
                             } catch (JSONException e) {
-                                e.printStackTrace();
+                                //e.printStackTrace();
                             }
                         }
                     }
                 } catch (JSONException e) {
-                    e.printStackTrace();
+                    //e.printStackTrace();
                 }
                 myListLaboratoire.setValue(medicamentslist);
 
@@ -218,7 +218,7 @@ public class WebServiceRep implements GlobaleRepository {
     }
 
     private void getListOfExpireFromServer(Application application) {
-        String url = "http://192.168.1.3/WebService/public/GetAllExpire";
+        String url = "http://192.168.1.5/WebService/public/GetAllExpire";
 
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
             @Override
@@ -255,12 +255,12 @@ public class WebServiceRep implements GlobaleRepository {
                                 //Log.d("Success", response.toString());
 
                             } catch (JSONException e) {
-                                e.printStackTrace();
+                                //e.printStackTrace();
                             }
                         }
                     }
                 } catch (JSONException e) {
-                    e.printStackTrace();
+                    //e.printStackTrace();
                 }
 
                 myListExpire.setValue(medicamentslist);
@@ -269,8 +269,8 @@ public class WebServiceRep implements GlobaleRepository {
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Log.d("Error", error.toString());
-                Toast.makeText(application, error.getMessage(), Toast.LENGTH_SHORT).show();
+                //Log.d("Error", error.toString());
+                //Toast.makeText(application, error.getMessage(), Toast.LENGTH_SHORT).show();
 
             }
         });
@@ -283,14 +283,14 @@ public class WebServiceRep implements GlobaleRepository {
     }
 
     private MutableLiveData<List<MEDICAMENTS>> getListOfSearchFromServer(Application application, String search) {
-        String url = "http://192.168.1.3/WebService/public/Search";
+        String url = "http://192.168.1.5/WebService/public/Search";
 
         JSONObject jsonObject = new JSONObject();
         try {
             jsonObject.put("a", search);
 
         } catch (JSONException e) {
-            e.printStackTrace();
+            //e.printStackTrace();
         }
 
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, url, jsonObject, new Response.Listener<JSONObject>() {
@@ -331,13 +331,13 @@ public class WebServiceRep implements GlobaleRepository {
                                 //Log.d("Success", response.toString());
 
                             } catch (JSONException e) {
-                                e.printStackTrace();
+                                //e.printStackTrace();
                             }
                         }
                     }
 
                 } catch (JSONException e) {
-                    e.printStackTrace();
+                    //e.printStackTrace();
                 }
                 myListSearch.setValue(medicamentslist);
 
@@ -346,7 +346,7 @@ public class WebServiceRep implements GlobaleRepository {
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                //cree l erreur
+
 
             }
         });
@@ -357,7 +357,7 @@ public class WebServiceRep implements GlobaleRepository {
     }
 
     public void AddMedicament(MEDICAMENTS medicaments) {
-        String url = "http://192.168.1.3/WebService/public/createmedicament";
+        String url = "http://192.168.1.5/WebService/public/createmedicament";
         JSONObject jsonObject = new JSONObject();
         try {
             jsonObject.put("Classe_Therapeutique", medicaments.getClasse_Therapeutique());
@@ -376,7 +376,7 @@ public class WebServiceRep implements GlobaleRepository {
             jsonObject.put("Code_a_Bare", medicaments.getCodeB());
 
         } catch (JSONException e) {
-            e.printStackTrace();
+            //e.printStackTrace();
         }
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, url, jsonObject, new Response.Listener<JSONObject>() {
             @Override
@@ -387,7 +387,7 @@ public class WebServiceRep implements GlobaleRepository {
                     Toast.makeText(application, message, Toast.LENGTH_SHORT).show();
 
                 } catch (JSONException e) {
-                    e.printStackTrace();
+                    //e.printStackTrace();
                 }
 
             }
@@ -406,10 +406,10 @@ public class WebServiceRep implements GlobaleRepository {
         try {
             jsonObject.put("Nom_Commercial", medicaments.getNom_Commercial());
         } catch (JSONException e) {
-            e.printStackTrace();
+            //e.printStackTrace();
         }
 
-        String url = "http://192.168.1.3/WebService/public/deletMedicament";
+        String url = "http://192.168.1.5/WebService/public/deletMedicament";
         JsonObjectRequest request = new JsonObjectRequest(Request.Method.POST,
                 url,
                 jsonObject,
@@ -422,7 +422,7 @@ public class WebServiceRep implements GlobaleRepository {
                             Toast.makeText(application, message, Toast.LENGTH_SHORT).show();
 
                         } catch (JSONException e) {
-                            e.printStackTrace();
+                            //e.printStackTrace();
                         }
 
 

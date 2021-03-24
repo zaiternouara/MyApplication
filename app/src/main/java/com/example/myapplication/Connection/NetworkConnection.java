@@ -1,22 +1,22 @@
 package com.example.myapplication.Connection;
 
+import android.content.BroadcastReceiver;
 import android.content.Context;
+import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkCapabilities;
 import android.net.NetworkInfo;
 import android.os.Build;
+import android.util.Log;
 
-import com.example.myapplication.viewModel.MedicamentsViewModel;
-
-public class NetworkConnection {
+public class NetworkConnection   {
     private final Context context;
 
     public NetworkConnection(Context context) {
+        super();
         this.context = context;
     }
-
-
-    public boolean isConnected() {
+     public boolean isConnected() {
 
 
         boolean status = false;
@@ -43,7 +43,7 @@ public class NetworkConnection {
                     }
                 }
             }
-            }
+        }
 
         return status;
     }
