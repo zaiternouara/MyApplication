@@ -117,7 +117,6 @@ public class afficherTousMedoc extends Fragment {
 
 
                 fragment.setArguments(i);
-                System.out.println(fragment);
                 FragmentManager fragmentManager = getFragmentManager();
                 fragmentManager.beginTransaction()
                         .replace(R.id.affichertous

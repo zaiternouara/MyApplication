@@ -117,7 +117,6 @@ public class afficherExpire extends Fragment {
                 i.putString("code barre", codeB);
 
                 fragment.setArguments(i);
-                System.out.println(fragment);
                 FragmentManager fragmentManager = getFragmentManager();
                 fragmentManager.beginTransaction()
                         .replace(R.id.affichertous
