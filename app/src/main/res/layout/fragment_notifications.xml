@@ -40,24 +40,28 @@
 
     <EditText
         android:id="@+id/inputRecherche"
-        android:layout_width="280dp"
-        android:layout_height="wrap_content"
+        android:layout_width="300dp"
+        android:layout_height="40dp"
         android:layout_marginStart="20dp"
-        android:layout_marginLeft="20dp"
-        android:ems="20"
-        android:hint="Rechercher votre médicament"
+        android:layout_marginLeft="10dp"
+        android:background="@drawable/editrech"
+        android:fontFamily="sans-serif-light"
+        android:drawableRight="@drawable/ic_baseline_search_24"
+        android:paddingRight="12dp"
+        android:gravity="center"
+        android:hint="Tapez votre médicament"
         android:inputType="textPersonName"
-        app:layout_constraintBottom_toBottomOf="parent"
+
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.405"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/Nosmedoc"
-        app:layout_constraintVertical_bias="0.035" />
+        app:layout_constraintTop_toBottomOf="@+id/Nosmedoc" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintLayout"
         android:layout_width="391dp"
         android:layout_height="449dp"
+
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.242"
@@ -69,9 +73,12 @@
             android:id="@+id/button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="96dp"
-            android:layout_marginEnd="156dp"
-            android:layout_marginRight="156dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="140dp"
+            android:layout_marginRight="140dp"
+            android:fontFamily="sans-serif-light"
+            android:textColor="@color/white"
+            android:background="@drawable/editrech"
             android:text="Rechercher"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
