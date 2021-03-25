@@ -1,33 +1,22 @@
 package com.example.myapplication.viewModel;
 
 import android.app.Application;
-import android.content.Context;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LifecycleOwner;
-import androidx.lifecycle.LifecycleRegistry;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModelProvider;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.myapplication.Adapter.MedicamentAdapter;
 import com.example.myapplication.Connection.NetworkConnection;
-import com.example.myapplication.MainActivity;
-import com.example.myapplication.R;
 import com.example.myapplication.Repository.LocalRep;
 import com.example.myapplication.Repository.WebServiceRep;
 import com.example.myapplication.models.MEDICAMENTS;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
-import java.util.Objects;
 
 //import com.example.myapplication.Repository.WebServiceRep;
 
@@ -155,29 +144,30 @@ public class MedicamentsViewModel extends AndroidViewModel {
     }
 
 
-    public void pull (LifecycleOwner k ) {
+    public void pull(LifecycleOwner k) {
 
         allMedicaments.observe(k,
                 new Observer<List<MEDICAMENTS>>() {
                     @Override
-                    public void onChanged(@Nullable List<MEDICAMENTS> all){
-                        System.out.println("slm ->> "+all.isEmpty());
-                        System.out.println("slm ->> "+all.size());
+                    public void onChanged(@Nullable List<MEDICAMENTS> all) {
+                        System.out.println("slm ->> " + all.isEmpty());
+                        System.out.println("slm ->> " + all.size());
 
-                        if (!all.isEmpty()){
-                            int i ;
-                            for (i=0 ; i<all.size();i++) {
+                        if (!all.isEmpty()) {
+                            int i;
+                            for (i = 0; i < all.size(); i++) {
 
                                 rep.insert(all.get(i));
                                 repository.delete(all.get(i));
                             }
-                        } }
+                        }
+                    }
                 });
-
-
 
     }
 
-
 }
+
+
+
 

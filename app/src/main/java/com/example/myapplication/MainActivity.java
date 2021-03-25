@@ -67,7 +67,7 @@ public class MainActivity extends AppCompatActivity {
         networkReceiver  = new BroadcastReceiverNetwork();
     }
 
-    @Override
+    /*@Override
     protected void onStart() {
         super.onStart();
         NetworkConnection network = new NetworkConnection(getApplicationContext());
@@ -76,14 +76,14 @@ public class MainActivity extends AppCompatActivity {
         if (network.isConnected()) {
 
             //Toast.makeText(getApplicationContext(), "Is Connected", Toast.LENGTH_SHORT).show();
-            //MedicamentsViewModel medicamentSviewModel = new ViewModelProvider(this).get(MedicamentsViewModel.class);
-            //medicamentSviewModel.pull(this);
+             MedicamentsViewModel medicamentSviewModel = new ViewModelProvider(this).get(MedicamentsViewModel.class);
+            medicamentSviewModel.pull(this);
 
         } else {
             //Toast.makeText(getApplicationContext(), "Is not connected", Toast.LENGTH_SHORT).show();
         }
 
-    }
+    }*/
     @Override
     protected void onPause() {
         super.onPause();
