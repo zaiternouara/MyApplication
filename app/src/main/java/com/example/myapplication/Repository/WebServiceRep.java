@@ -87,6 +87,11 @@ public class WebServiceRep implements GlobaleRepository {
     }
 
     @Override
+    public LiveData<List<MEDICAMENTS>> getSearchMedicamemtsByCodeBare(String search) {
+        return null;
+    }
+
+    @Override
     public LiveData<List<MEDICAMENTS>> getSearchNomC(String searchNomC) {
         return null;
     }
@@ -99,6 +104,11 @@ public class WebServiceRep implements GlobaleRepository {
     @Override
     public MutableLiveData<List<MEDICAMENTS>> getSearchMedicamemts(Application application, String search) {
         return getListOfSearchFromServer(application, search);
+    }
+
+    @Override
+    public MutableLiveData<List<MEDICAMENTS>> getSearchMedicamemtsByCodeBare(Application application, String search) {
+        return null;
     }
 
 
