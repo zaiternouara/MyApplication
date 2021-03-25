@@ -31,6 +31,7 @@ public interface GlobaleRepository {
 
 
 
+
     MutableLiveData<List<MEDICAMENTS>> getSearchMedicamemts(Application application, String search);
 
     MutableLiveData<List<MEDICAMENTS>> getSearchMedicamemtsByCodeBare(Application application,String search);

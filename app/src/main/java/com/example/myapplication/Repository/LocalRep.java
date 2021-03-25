@@ -39,6 +39,8 @@ public class LocalRep implements GlobaleRepository {
 
     }
 
+
+
     @Override
     public void insert(MEDICAMENTS medicament) {
         new LocalRep.InsertMedicamentAsyncTask(medicamentDao).execute(medicament);
@@ -60,6 +62,7 @@ public class LocalRep implements GlobaleRepository {
 
         new LocalRep.DeleteAllMedicamentsAsyncTask(medicamentDao).execute();
     }
+
 
 
     @Override

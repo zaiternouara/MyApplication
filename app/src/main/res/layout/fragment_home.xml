@@ -34,14 +34,14 @@ tools:context=".ui.home.HomeFragment"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.136"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        />
 
 <TextView
     android:id="@+id/textView2"
     android:layout_width="131dp"
     android:layout_height="33dp"
     android:fontFamily="casual"
-    android:text="EN SAVOIR PLUS?"
     android:textColor="#FF9800"
     android:textStyle="bold"
     app:layout_constraintBottom_toBottomOf="parent"
