@@ -91,15 +91,7 @@ public class WebServiceRep implements GlobaleRepository {
         return null;
     }
 
-    @Override
-    public LiveData<List<MEDICAMENTS>> getSearchNomC(String searchNomC) {
-        return null;
-    }
 
-    @Override
-    public MutableLiveData<List<MEDICAMENTS>> getSearchNomC(Application application, String searchNomC) {
-        return null;
-    }
 
     @Override
     public MutableLiveData<List<MEDICAMENTS>> getSearchMedicamemts(Application application, String search) {
