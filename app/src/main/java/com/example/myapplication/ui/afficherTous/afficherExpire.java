@@ -10,18 +10,14 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
-import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.myapplication.Adapter.MedicamentAdapter;
-import com.example.myapplication.Connection.NetworkConnection;
 import com.example.myapplication.R;
 import com.example.myapplication.models.MEDICAMENTS;
 import com.example.myapplication.viewModel.MedicamentsViewModel;
-
-import org.json.JSONException;
 
 import java.util.List;
 
@@ -57,11 +53,11 @@ public class afficherExpire extends Fragment {
         medicamentSviewModel = new ViewModelProvider(this).get(MedicamentsViewModel.class);
         medicamentSviewModel.getAllExpireChoose().observe(getViewLifecycleOwner(), new Observer<List<MEDICAMENTS>>() {
 
-                @Override
-                public void onChanged(List<MEDICAMENTS> medicaments) {
-                    adapter.setMedicament(medicaments);
-                }
-            });
+            @Override
+            public void onChanged(List<MEDICAMENTS> medicaments) {
+                adapter.setMedicament(medicaments);
+            }
+        });
 
 
         new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(0,
@@ -96,8 +92,6 @@ public class afficherExpire extends Fragment {
                 String labo = medicaments.getLaboratoire();
                 String codeB = medicaments.getCodeB();
                 String rembou = medicaments.getRemboursable();
-
-
 
 
                 Bundle i = new Bundle();
