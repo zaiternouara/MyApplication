@@ -93,7 +93,7 @@ public class WebServiceRep implements GlobaleRepository {
 
 
     private void getListFromServer(Application application) {
-        String url = "http://192.168.1.5/WebService/public/GetAllMedicaments";
+        String url = "http://192.168.1.3/WebService/public/GetAllMedicaments";
 
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
             @Override
@@ -158,7 +158,7 @@ public class WebServiceRep implements GlobaleRepository {
     }
 
     private void getListLaboratoireFromServer(Application application) {
-        String url = "http://192.168.1.5/WebService/public/GetAllLaboratoire";
+        String url = "http://192.168.1.3/WebService/public/GetAllLaboratoire";
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
@@ -218,7 +218,7 @@ public class WebServiceRep implements GlobaleRepository {
     }
 
     private void getListOfExpireFromServer(Application application) {
-        String url = "http://192.168.1.5/WebService/public/GetAllExpire";
+        String url = "http://192.168.1.3/WebService/public/GetAllExpire";
 
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
             @Override
@@ -283,7 +283,7 @@ public class WebServiceRep implements GlobaleRepository {
     }
 
     private MutableLiveData<List<MEDICAMENTS>> getListOfSearchFromServer(Application application, String search) {
-        String url = "http://192.168.1.5/WebService/public/Search";
+        String url = "http://192.168.1.3/WebService/public/Search";
 
         JSONObject jsonObject = new JSONObject();
         try {
@@ -357,7 +357,7 @@ public class WebServiceRep implements GlobaleRepository {
     }
 
     public void AddMedicament(MEDICAMENTS medicaments) {
-        String url = "http://192.168.1.5/WebService/public/createmedicament";
+        String url = "http://192.168.1.3/WebService/public/createmedicament";
         JSONObject jsonObject = new JSONObject();
         try {
             jsonObject.put("Classe_Therapeutique", medicaments.getClasse_Therapeutique());
@@ -409,7 +409,7 @@ public class WebServiceRep implements GlobaleRepository {
             //e.printStackTrace();
         }
 
-        String url = "http://192.168.1.5/WebService/public/deletMedicament";
+        String url = "http://192.168.1.3/WebService/public/deletMedicament";
         JsonObjectRequest request = new JsonObjectRequest(Request.Method.POST,
                 url,
                 jsonObject,
