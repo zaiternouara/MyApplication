@@ -84,7 +84,7 @@ public class LocalRep implements GlobaleRepository {
 
     @Override
     public LiveData<List<MEDICAMENTS>> getSearchMedicamemtsByCodeBare(String search) {
-        return SearchMedicamentsByCodeBare;
+        return medicamentDao.SearchMedicamemtsByCodeBare(search);
     }
 
     @Override
