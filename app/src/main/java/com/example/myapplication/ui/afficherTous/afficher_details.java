@@ -55,7 +55,7 @@ public class afficher_details extends Fragment {
 
         String remb = getArguments().getString("remboursable");
 
-        switch(remb) {
+        switch (remb) {
             case "1":
                 rembou.setText(getResources().getString(R.string.remboursable));
                 break;
@@ -95,7 +95,6 @@ public class afficher_details extends Fragment {
 
         String codeBarre = getArguments().getString("code barre");
         codeB.setText(codeBarre);
-
 
 
         return root;

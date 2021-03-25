@@ -1,7 +1,9 @@
 package com.example.myapplication.ui.ajouter;
 
 import android.app.DatePickerDialog;
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -26,7 +28,6 @@ import com.example.myapplication.Connection.NetworkConnection;
 import com.example.myapplication.R;
 import com.example.myapplication.models.MEDICAMENTS;
 import com.example.myapplication.viewModel.MedicamentsViewModel;
-import com.google.android.material.snackbar.Snackbar;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -56,8 +57,6 @@ public class DashboardFragment extends Fragment implements View.OnClickListener,
     private RadioButton bnon;
     private Button ajout;
     final Calendar myCalendar = Calendar.getInstance();
-    private CoordinatorLayout coordinatorLayout;
-
 
 
     private MedicamentsViewModel medicamentSviewModel;
@@ -82,7 +81,6 @@ public class DashboardFragment extends Fragment implements View.OnClickListener,
         quant = (EditText) root.findViewById(R.id.inputQuant);
         codeB = (EditText) root.findViewById(R.id.inputCode);
         lot = (EditText) root.findViewById(R.id.inputLot);
-        coordinatorLayout = root.findViewById(R.id.coordinatorLayout);
 
         boui = (RadioButton) root.findViewById(R.id.inputOui);
         bnon = (RadioButton) root.findViewById(R.id.inputNon);
@@ -174,9 +172,7 @@ public class DashboardFragment extends Fragment implements View.OnClickListener,
 
         if (NomCommercial.trim().isEmpty() || description.trim().isEmpty() || classTH.trim().isEmpty() || laboratoire.trim().isEmpty() || lots.trim().isEmpty() || denomination.trim().isEmpty() || forme.trim().isEmpty() || dureee.trim().isEmpty() || dateFab.trim().isEmpty() || datePer.trim().isEmpty() || price.trim().isEmpty() || quantite.trim().isEmpty() || codeBarre.trim().isEmpty()) {
 
-           // Toast.makeText(getContext(), "Entrez tous les champs", Toast.LENGTH_SHORT).show();
-            Snackbar snackbar = Snackbar.make(getView(), "Entrez tous les champs", Snackbar.LENGTH_INDEFINITE);
-            snackbar.show();
+            Toast.makeText(getContext(), "Entrez tous les champs", Toast.LENGTH_SHORT).show();
 
             return;
         }
@@ -207,7 +203,6 @@ public class DashboardFragment extends Fragment implements View.OnClickListener,
             prix.setText(null);
             quant.setText(null);
             codeB.setText(null);
-
 
 
         }

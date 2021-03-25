@@ -6,15 +6,12 @@ import android.net.NetworkCapabilities;
 import android.net.NetworkInfo;
 import android.os.Build;
 
-import com.example.myapplication.viewModel.MedicamentsViewModel;
-
 public class NetworkConnection {
     private final Context context;
 
     public NetworkConnection(Context context) {
         this.context = context;
     }
-
 
     public boolean isConnected() {
 
@@ -25,8 +22,7 @@ public class NetworkConnection {
             if (connectivityManager != null) {
                 NetworkCapabilities capabilities = connectivityManager.getNetworkCapabilities(connectivityManager.getActiveNetwork());
                 if (capabilities != null) {
-                    if (capabilities.hasTransport(NetworkCapabilities.TRANSPORT_WIFI) || capabilities.hasTransport(NetworkCapabilities.TRANSPORT_CELLULAR))
-                    {
+                    if (capabilities.hasTransport(NetworkCapabilities.TRANSPORT_WIFI) || capabilities.hasTransport(NetworkCapabilities.TRANSPORT_CELLULAR)) {
                         // connected to the internet
                         status = true;
                     }
@@ -43,7 +39,7 @@ public class NetworkConnection {
                     }
                 }
             }
-            }
+        }
 
         return status;
     }

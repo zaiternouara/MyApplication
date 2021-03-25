@@ -4,21 +4,19 @@ import android.app.Application;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.lifecycle.AndroidViewModel;
+import androidx.lifecycle.LifecycleOwner;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModelProvider;
 
 import com.example.myapplication.Connection.NetworkConnection;
 import com.example.myapplication.Repository.LocalRep;
 import com.example.myapplication.Repository.WebServiceRep;
 import com.example.myapplication.models.MEDICAMENTS;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
-import java.util.Objects;
 
 //import com.example.myapplication.Repository.WebServiceRep;
 
@@ -32,12 +30,10 @@ public class MedicamentsViewModel extends AndroidViewModel {
     public MutableLiveData<List<MEDICAMENTS>> allMedicamentsExpireWS;
     //SQLITE
     public LocalRep repository;
-    public LiveData<List<MEDICAMENTS>> SearchMedicaments;
     public List<MEDICAMENTS> all;
     public LiveData<Integer> count;
     //WEBSERVICE
     public WebServiceRep rep;
-    public MutableLiveData<List<MEDICAMENTS>> SearchMedicamentsWS;
 
     NetworkConnection network = new NetworkConnection(getApplication());
 
@@ -56,7 +52,6 @@ public class MedicamentsViewModel extends AndroidViewModel {
         allMedicamentsWS = rep.getAllMedicaments();
         allMedicamentslaboratoiresWS = rep.getAllaboratoires();
         allMedicamentsExpireWS = rep.getAllExpire();
-        SearchMedicamentsWS = rep.getSearchMedicamemts(search);
 
     }
 
@@ -100,6 +95,7 @@ public class MedicamentsViewModel extends AndroidViewModel {
         if (network.isConnected()) {
 
             return allMedicamentsWS;
+
         } else {
 
             return allMedicaments;
@@ -144,42 +140,40 @@ public class MedicamentsViewModel extends AndroidViewModel {
         return count;
     }
 
+   /* public LiveData<List<MEDICAMENTS>> getSearchByCodeBareMedicamentsChoose(String search) {
 
-    public  boolean pull () {
+        if (network.isConnected()) {
 
-        boolean done=false;
-        LiveData<List<MEDICAMENTS>> all =  getAllMedicamentsChoose() ;
-        System.out.println(all);
+            return rep.getSearchMedicamemtsByCodeBare(getApplication(), search);
+        } else {
 
-         /*if (!all.isEmpty()){
-             int i ;
-             for (i=0 ; i<=all.size();i++){
-                 MEDICAMENTS medicaments = new MEDICAMENTS(
+            return repository.getSearchMedicamemtsByCodeBare(search);
+        }
+    }*/
 
-                         all.get(i).getClasse_Therapeutique(),
-                         all.get(i).getNom_Commercial(),
-                         all.get(i).getLaboratoire(),
-                         all.get(i).getDenominateur_De_Medicament(),
-                         all.get(i).getForme_Pharmaceutique(),
-                         all.get(i).getDuree_De_Conservation(),
-                         all.get(i).getLot(),
-                         all.get(i).getRemboursable(),
-                         all.get(i).getDate_De_Fabrication(),
-                         all.get(i).getDate_Peremption(),
-                         all.get(i).getDescription_De_Composant(),
-                         all.get(i).getPrix(),
-                         all.get(i).getQuantite_En_Stock(),
-                         all.get(i).getCodeB());
-                 insertChoose(medicaments);
-                 deleteChoose(medicaments);
-                 done = true ;
-               }
+    public void pull(LifecycleOwner k) {
 
-         }*/
+        allMedicaments.observe(k,
+                new Observer<List<MEDICAMENTS>>() {
+                    @Override
+                    public void onChanged(@Nullable List<MEDICAMENTS> all) {
 
-         return done;
+
+                        if (!all.isEmpty()) {
+                            int i;
+                            for (i = 0; i < all.size(); i++) {
+
+                                rep.insert(all.get(i));
+                                repository.delete(all.get(i));
+                            }
+                        }
+                    }
+                });
 
     }
 
 }
+
+
+
 

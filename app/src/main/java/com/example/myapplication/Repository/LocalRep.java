@@ -96,10 +96,19 @@ public class LocalRep implements GlobaleRepository {
     }
 
     @Override
+    public LiveData<List<MEDICAMENTS>> getSearchMedicamemtsByCodeBare(String search) {
+        return null;
+    }
+
+    @Override
     public MutableLiveData<List<MEDICAMENTS>> getSearchMedicamemts(Application application, String search) {
         return null;
     }
 
+    @Override
+    public MutableLiveData<List<MEDICAMENTS>> getSearchMedicamemtsByCodeBare(Application application, String search) {
+        return null;
+    }
 
 
     public LiveData<Integer> getCount() {

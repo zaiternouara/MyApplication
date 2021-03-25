@@ -1,13 +1,20 @@
 package com.example.myapplication;
 
+import android.content.ClipData;
+import android.content.IntentFilter;
+import android.net.ConnectivityManager;
 import android.os.Bundle;
 import android.view.MenuItem;
-import android.widget.Toast;
+import android.view.View;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Lifecycle;
+import androidx.lifecycle.LifecycleRegistry;
+import androidx.lifecycle.ViewModelProvider;
 
+import com.example.myapplication.Connection.BroadcastReceiverNetwork;
 import com.example.myapplication.Connection.NetworkConnection;
 import com.example.myapplication.ui.afficher.NotificationsFragment;
 import com.example.myapplication.ui.ajouter.DashboardFragment;
@@ -17,6 +24,8 @@ import com.example.myapplication.viewModel.MedicamentsViewModel;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class MainActivity extends AppCompatActivity {
+
+    private static LifecycleRegistry lifecycleRegistry;
     private final BottomNavigationView.OnNavigationItemSelectedListener bottomNavMethod = new
             BottomNavigationView.OnNavigationItemSelectedListener() {
                 @Override
@@ -35,8 +44,8 @@ public class MainActivity extends AppCompatActivity {
                             fragment = new NotificationsFragment();
                             break;
                         case R.id.navigation_modifier:
-                            fragment = new ModifierFragment();
-                            break;
+                           fragment = new ModifierFragment();
+                           break;
                     }
                     getSupportFragmentManager().beginTransaction()
                             .replace(R.id.nav_host_fragment, fragment).commit();
@@ -44,25 +53,81 @@ public class MainActivity extends AppCompatActivity {
                     return true;
                 }
             };
+    private BroadcastReceiverNetwork networkReceiver;
+    private NetworkConnection connection;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        NetworkConnection network = new NetworkConnection(getApplicationContext());
-
         BottomNavigationView navView = findViewById(R.id.nav_view);
         navView.setOnNavigationItemSelectedListener(bottomNavMethod);
         getSupportFragmentManager().beginTransaction().replace(R.id.nav_host_fragment, new HomeFragment()).commit();
-        MedicamentsViewModel k = new MedicamentsViewModel(getApplication());
-        if (network.isConnected()) {
+        networkReceiver = new BroadcastReceiverNetwork();
 
-            Toast.makeText(getApplicationContext(), "Is Connected", Toast.LENGTH_SHORT).show();
-        } else {
-            Toast.makeText(getApplicationContext(), "Is not connected", Toast.LENGTH_SHORT).show();
-        }
+
+        LifecycleRegistry mLifecycleRegistry = new LifecycleRegistry(this);
+        mLifecycleRegistry.markState(Lifecycle.State.CREATED);
+
     }
 
+    @Override
+    protected void onStart() {
+        super.onStart();
+        //connection = new NetworkConnection(this);
 
+        IntentFilter intentFilter = new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION);
+        registerReceiver(networkReceiver, intentFilter);
+        /*if (connection.isConnected() == true) {
+            MedicamentsViewModel medicamentSviewModel = new ViewModelProvider(this).get(MedicamentsViewModel.class);
+            medicamentSviewModel.pull(this);
+
+        }*/
+
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        if (networkReceiver != null) {
+
+            unregisterReceiver(networkReceiver);
+        }
+
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        IntentFilter intentFilter = new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION);
+        registerReceiver(networkReceiver, intentFilter);
+        /*Toast.makeText(this, "test", Toast.LENGTH_SHORT).show();
+        if (connection.isConnected() == true) {
+             MedicamentsViewModel medicamentSviewModel = new ViewModelProvider(this).get(MedicamentsViewModel.class);
+            medicamentSviewModel.pull(this);
+
+        }*/
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+
+        if (networkReceiver != null) {
+            unregisterReceiver(networkReceiver);
+
+        }
+
+    }
+
+    public void pull() {
+        connection = new NetworkConnection(this);
+        if (connection.isConnected() == true) {
+            lifecycleRegistry = new LifecycleRegistry(this);
+            lifecycleRegistry.markState(Lifecycle.State.CREATED);
+            MedicamentsViewModel medicamentSviewModel = new ViewModelProvider(this).get(MedicamentsViewModel.class);
+            medicamentSviewModel.pull(this);
+        }
+    }
 }
 
