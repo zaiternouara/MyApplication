@@ -28,7 +28,7 @@
         <receiver
             android:enabled="true"
             android:name=".Connection.BroadcastReceiverNetwork"
-            tools:ignore="Instantiatable">
+             >
             <intent-filter>
                 <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
             </intent-filter>

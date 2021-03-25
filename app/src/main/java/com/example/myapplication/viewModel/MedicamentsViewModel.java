@@ -150,8 +150,7 @@ public class MedicamentsViewModel extends AndroidViewModel {
                 new Observer<List<MEDICAMENTS>>() {
                     @Override
                     public void onChanged(@Nullable List<MEDICAMENTS> all) {
-                        System.out.println("slm ->> " + all.isEmpty());
-                        System.out.println("slm ->> " + all.size());
+
 
                         if (!all.isEmpty()) {
                             int i;

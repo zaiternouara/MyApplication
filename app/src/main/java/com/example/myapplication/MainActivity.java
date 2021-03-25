@@ -23,6 +23,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class MainActivity extends AppCompatActivity {
 
+    private static LifecycleRegistry lifecycleRegistry;
     private final BottomNavigationView.OnNavigationItemSelectedListener bottomNavMethod = new
             BottomNavigationView.OnNavigationItemSelectedListener() {
                 @Override
@@ -51,6 +52,7 @@ public class MainActivity extends AppCompatActivity {
                 }
             };
     private BroadcastReceiverNetwork networkReceiver;
+    private NetworkConnection connection;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,24 +61,24 @@ public class MainActivity extends AppCompatActivity {
         BottomNavigationView navView = findViewById(R.id.nav_view);
         navView.setOnNavigationItemSelectedListener(bottomNavMethod);
         getSupportFragmentManager().beginTransaction().replace(R.id.nav_host_fragment, new HomeFragment()).commit();
-        networkReceiver = new BroadcastReceiverNetwork();
-        LifecycleRegistry mLifecycleRegistry = new LifecycleRegistry(this);
-        mLifecycleRegistry.markState(Lifecycle.State.CREATED);
-        NetworkConnection network = new NetworkConnection(getApplicationContext());
+        networkReceiver = new BroadcastReceiverNetwork(); 
+
+        /*LifecycleRegistry mLifecycleRegistry = new LifecycleRegistry(this);
+        mLifecycleRegistry.markState(Lifecycle.State.CREATED);*/
     }
 
     @Override
     protected void onStart() {
         super.onStart();
-        super.onResume();
-        NetworkConnection network = new NetworkConnection(getApplicationContext());
+        //connection = new NetworkConnection(this);
+
         IntentFilter intentFilter = new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION);
         registerReceiver(networkReceiver, intentFilter);
-        if (network.isConnected()) {
+        /*if (connection.isConnected() == true) {
             MedicamentsViewModel medicamentSviewModel = new ViewModelProvider(this).get(MedicamentsViewModel.class);
             medicamentSviewModel.pull(this);
 
-        }
+        }*/
 
     }
 
@@ -84,6 +86,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onPause() {
         super.onPause();
         if (networkReceiver != null) {
+
             unregisterReceiver(networkReceiver);
         }
 
@@ -92,14 +95,14 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        NetworkConnection network = new NetworkConnection(getApplicationContext());
         IntentFilter intentFilter = new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION);
         registerReceiver(networkReceiver, intentFilter);
-        if (network.isConnected()) {
-            MedicamentsViewModel medicamentSviewModel = new ViewModelProvider(this).get(MedicamentsViewModel.class);
+        /*Toast.makeText(this, "test", Toast.LENGTH_SHORT).show();
+        if (connection.isConnected() == true) {
+             MedicamentsViewModel medicamentSviewModel = new ViewModelProvider(this).get(MedicamentsViewModel.class);
             medicamentSviewModel.pull(this);
 
-        }
+        }*/
     }
 
     @Override
@@ -108,8 +111,19 @@ public class MainActivity extends AppCompatActivity {
 
         if (networkReceiver != null) {
             unregisterReceiver(networkReceiver);
+
         }
 
+    }
+
+    public void pull() {
+        connection = new NetworkConnection(this);
+        if (connection.isConnected() == true) {
+            lifecycleRegistry = new LifecycleRegistry(this);
+            lifecycleRegistry.markState(Lifecycle.State.CREATED);
+            MedicamentsViewModel medicamentSviewModel = new ViewModelProvider(this).get(MedicamentsViewModel.class);
+            medicamentSviewModel.pull(this);
+        }
     }
 }
 
