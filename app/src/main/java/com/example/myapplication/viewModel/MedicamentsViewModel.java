@@ -140,7 +140,7 @@ public class MedicamentsViewModel extends AndroidViewModel {
         return count;
     }
 
-   /* public LiveData<List<MEDICAMENTS>> getSearchByCodeBareMedicamentsChoose(String search) {
+    public LiveData<List<MEDICAMENTS>> getSearchByCodeBareMedicamentsChoose(String search) {
 
         if (network.isConnected()) {
 
@@ -149,7 +149,7 @@ public class MedicamentsViewModel extends AndroidViewModel {
 
             return repository.getSearchMedicamemtsByCodeBare(search);
         }
-    }*/
+    }
 
     public void pull(LifecycleOwner k) {
 
