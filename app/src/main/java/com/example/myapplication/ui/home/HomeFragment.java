@@ -56,7 +56,7 @@ public class HomeFragment extends Fragment {
         tv = (TextView) root.findViewById(R.id.textView2);
         scanner.setOnClickListener(this);
         Fragment fragment = null;
-        scanner.setOnClickListener(new View.OnClickListener() {
+        appareil.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 scanCode();
