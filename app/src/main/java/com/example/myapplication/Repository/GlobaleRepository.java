@@ -28,6 +28,9 @@ public interface GlobaleRepository {
 
     LiveData<List<MEDICAMENTS>> getSearchMedicamemts(String search);
 
+    LiveData<List<MEDICAMENTS>> getSearchNomC(String searchNomC);
+
+    MutableLiveData<List<MEDICAMENTS>> getSearchNomC(Application application, String searchNomC);
 
 
     MutableLiveData<List<MEDICAMENTS>> getSearchMedicamemts(Application application, String search);
