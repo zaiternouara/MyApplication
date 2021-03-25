@@ -19,6 +19,7 @@ public class LocalRep implements GlobaleRepository {
     private final LiveData<List<MEDICAMENTS>> allMedicamentslaboratoires;
     private final LiveData<List<MEDICAMENTS>> allMedicamentsExpire;
     private final LiveData<List<MEDICAMENTS>> SearchMedicaments;
+    private final LiveData<List<MEDICAMENTS>> SearchMedicamentsByCodeBare;
     private final LiveData<Integer> count;
     private String search;
     List<MEDICAMENTS> all;
@@ -31,6 +32,7 @@ public class LocalRep implements GlobaleRepository {
         allMedicamentslaboratoires = medicamentDao.getAllaboratoires();
         allMedicamentsExpire = medicamentDao.getAllExpire();
         SearchMedicaments = medicamentDao.SearchMedicamemts(search);
+        SearchMedicamentsByCodeBare = medicamentDao.SearchMedicamemtsByCodeBare(search);
 
         count = medicamentDao.getDataCount();
 
@@ -81,10 +83,19 @@ public class LocalRep implements GlobaleRepository {
     }
 
     @Override
+    public LiveData<List<MEDICAMENTS>> getSearchMedicamemtsByCodeBare(String search) {
+        return SearchMedicamentsByCodeBare;
+    }
+
+    @Override
     public MutableLiveData<List<MEDICAMENTS>> getSearchMedicamemts(Application application, String search) {
         return null;
     }
 
+    @Override
+    public MutableLiveData<List<MEDICAMENTS>> getSearchMedicamemtsByCodeBare(Application application, String search) {
+        return null;
+    }
 
 
     public LiveData<Integer> getCount() {

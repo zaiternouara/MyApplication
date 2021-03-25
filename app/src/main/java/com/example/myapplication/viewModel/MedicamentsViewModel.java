@@ -30,12 +30,10 @@ public class MedicamentsViewModel extends AndroidViewModel {
     public MutableLiveData<List<MEDICAMENTS>> allMedicamentsExpireWS;
     //SQLITE
     public LocalRep repository;
-    public LiveData<List<MEDICAMENTS>> SearchMedicaments;
     public List<MEDICAMENTS> all;
     public LiveData<Integer> count;
     //WEBSERVICE
     public WebServiceRep rep;
-    public MutableLiveData<List<MEDICAMENTS>> SearchMedicamentsWS;
 
     NetworkConnection network = new NetworkConnection(getApplication());
 
@@ -54,7 +52,6 @@ public class MedicamentsViewModel extends AndroidViewModel {
         allMedicamentsWS = rep.getAllMedicaments();
         allMedicamentslaboratoiresWS = rep.getAllaboratoires();
         allMedicamentsExpireWS = rep.getAllExpire();
-        SearchMedicamentsWS = rep.getSearchMedicamemts(search);
 
     }
 
@@ -143,6 +140,16 @@ public class MedicamentsViewModel extends AndroidViewModel {
         return count;
     }
 
+    public LiveData<List<MEDICAMENTS>> getSearchByCodeBareMedicamentsChoose(String search) {
+
+        if (network.isConnected()) {
+
+            return rep.getSearchMedicamemtsByCodeBare(getApplication(), search);
+        } else {
+
+            return repository.getSearchMedicamemtsByCodeBare(search);
+        }
+    }
 
     public void pull(LifecycleOwner k) {
 

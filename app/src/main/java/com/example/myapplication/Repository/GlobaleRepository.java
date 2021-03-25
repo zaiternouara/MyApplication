@@ -27,11 +27,11 @@ public interface GlobaleRepository {
     LiveData<List<MEDICAMENTS>> getAllExpire();
 
     LiveData<List<MEDICAMENTS>> getSearchMedicamemts(String search);
+    LiveData<List<MEDICAMENTS>> getSearchMedicamemtsByCodeBare(String search);
 
 
 
     MutableLiveData<List<MEDICAMENTS>> getSearchMedicamemts(Application application, String search);
 
-
-
+    MutableLiveData<List<MEDICAMENTS>> getSearchMedicamemtsByCodeBare(Application application,String search);
 }

@@ -1,9 +1,11 @@
 package com.example.myapplication;
 
+import android.content.ClipData;
 import android.content.IntentFilter;
 import android.net.ConnectivityManager;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -42,8 +44,8 @@ public class MainActivity extends AppCompatActivity {
                             fragment = new NotificationsFragment();
                             break;
                         case R.id.navigation_modifier:
-                            fragment = new ModifierFragment();
-                            break;
+                           fragment = new ModifierFragment();
+                           break;
                     }
                     getSupportFragmentManager().beginTransaction()
                             .replace(R.id.nav_host_fragment, fragment).commit();
@@ -61,10 +63,12 @@ public class MainActivity extends AppCompatActivity {
         BottomNavigationView navView = findViewById(R.id.nav_view);
         navView.setOnNavigationItemSelectedListener(bottomNavMethod);
         getSupportFragmentManager().beginTransaction().replace(R.id.nav_host_fragment, new HomeFragment()).commit();
-        networkReceiver = new BroadcastReceiverNetwork(); 
+        networkReceiver = new BroadcastReceiverNetwork();
 
-        /*LifecycleRegistry mLifecycleRegistry = new LifecycleRegistry(this);
-        mLifecycleRegistry.markState(Lifecycle.State.CREATED);*/
+
+        LifecycleRegistry mLifecycleRegistry = new LifecycleRegistry(this);
+        mLifecycleRegistry.markState(Lifecycle.State.CREATED);
+
     }
 
     @Override
