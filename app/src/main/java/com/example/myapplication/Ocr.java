@@ -72,14 +72,14 @@ public class Ocr extends AppCompatActivity implements View.OnClickListener {
         Task<Text> reslt=analyzer.process(inputImage).addOnSuccessListener(new OnSuccessListener<Text>() {
             @Override
             public void onSuccess(Text text) {
-                Fragment fragment = new SearchResults();
+               /* Fragment fragment = new SearchResults();
                 String rechercher = text.getText();
                 Bundle i = new Bundle();
                 i.putString("result", rechercher);
                 fragment.setArguments(i);
                 getSupportFragmentManager().beginTransaction()
                         .add(R.id.con, fragment)
-                        .commit();
+                        .commit();*/
 
 
             }
