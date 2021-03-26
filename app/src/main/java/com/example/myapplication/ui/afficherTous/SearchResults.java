@@ -15,12 +15,9 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.myapplication.Adapter.MedicamentAdapter;
-import com.example.myapplication.Connection.NetworkConnection;
 import com.example.myapplication.R;
 import com.example.myapplication.models.MEDICAMENTS;
 import com.example.myapplication.viewModel.MedicamentsViewModel;
-
-import org.json.JSONException;
 
 import java.util.List;
 
@@ -65,12 +62,11 @@ public class SearchResults extends Fragment {
 
         medicamentSviewModel.getSearchMedicamentsChoose(result).observe(getViewLifecycleOwner(), new Observer<List<MEDICAMENTS>>() {
 
-                @Override
-                public void onChanged(List<MEDICAMENTS> medicaments) {
-                    adapter.setMedicament(medicaments);
-                }
-            });
-
+            @Override
+            public void onChanged(List<MEDICAMENTS> medicaments) {
+                adapter.setMedicament(medicaments);
+            }
+        });
 
 
         new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(0,
@@ -82,7 +78,7 @@ public class SearchResults extends Fragment {
 
             @Override
             public void onSwiped(RecyclerView.ViewHolder viewHolder, int direction) {
-                 medicamentSviewModel.deleteChoose(adapter.getMedicamentAt(viewHolder.getAdapterPosition()));
+                medicamentSviewModel.deleteChoose(adapter.getMedicamentAt(viewHolder.getAdapterPosition()));
                 Toast.makeText(getContext(), "Medicament deleted", Toast.LENGTH_SHORT).show();
             }
         }).attachToRecyclerView(recyclerView);
