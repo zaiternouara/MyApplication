@@ -23,6 +23,7 @@ import java.util.List;
 
 public class SearchCodeBareResults extends Fragment {
     private MedicamentsViewModel medicamentSviewModel;
+
     public SearchCodeBareResults() {
     }
 
@@ -42,7 +43,7 @@ public class SearchCodeBareResults extends Fragment {
 
 
         String result = getArguments().getString("result");
-        Toast.makeText(getContext(),result, Toast.LENGTH_LONG).show();
+        Toast.makeText(getContext(), result, Toast.LENGTH_LONG).show();
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));//comment les infos sont afficher
         recyclerView.setHasFixedSize(true);
 
@@ -51,16 +52,16 @@ public class SearchCodeBareResults extends Fragment {
         recyclerView.setAdapter(adapter);
 
 
-         medicamentSviewModel = new ViewModelProvider(this).get(MedicamentsViewModel.class);
+        medicamentSviewModel = new ViewModelProvider(this).get(MedicamentsViewModel.class);
 
         medicamentSviewModel.getSearchByCodeBareMedicamentsChoose(result).observe(getViewLifecycleOwner(), new Observer<List<MEDICAMENTS>>() {
 
             @Override
             public void onChanged(List<MEDICAMENTS> medicaments) {
-                if(medicaments.isEmpty()) {
-                    Toast.makeText(getContext(),"Medicament not found", Toast.LENGTH_LONG).show();
-                }else{
-                    Toast.makeText(getContext(),"fuck", Toast.LENGTH_LONG).show();
+                if (medicaments.isEmpty()) {
+                    Toast.makeText(getContext(), "Medicament not found", Toast.LENGTH_LONG).show();
+                } else {
+                    Toast.makeText(getContext(), "fuck", Toast.LENGTH_LONG).show();
                     adapter.setMedicament(medicaments);
                 }
 
