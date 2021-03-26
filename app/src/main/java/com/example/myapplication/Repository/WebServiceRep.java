@@ -159,8 +159,8 @@ public class WebServiceRep implements GlobaleRepository {
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Log.d("Error", error.toString());
-                Toast.makeText(application, error.getMessage(), Toast.LENGTH_SHORT).show();
+                //Log.d("Error", error.toString());
+                //Toast.makeText(application, error.getMessage(), Toast.LENGTH_SHORT).show();
 
             }
         });
@@ -305,7 +305,7 @@ public class WebServiceRep implements GlobaleRepository {
             jsonObject.put("a", search);
 
         } catch (JSONException e) {
-            //e.printStackTrace();
+            e.printStackTrace();
         }
 
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, url, jsonObject, new Response.Listener<JSONObject>() {

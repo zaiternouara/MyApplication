@@ -43,7 +43,7 @@ public class SearchCodeBareResults extends Fragment {
 
 
         String result = getArguments().getString("result");
-        Toast.makeText(getContext(), result, Toast.LENGTH_LONG).show();
+
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));//comment les infos sont afficher
         recyclerView.setHasFixedSize(true);
 
@@ -58,15 +58,18 @@ public class SearchCodeBareResults extends Fragment {
 
             @Override
             public void onChanged(List<MEDICAMENTS> medicaments) {
-                if (medicaments.isEmpty()) {
+                if(medicaments.isEmpty()){
+
                     Toast.makeText(getContext(), "Medicament not found", Toast.LENGTH_LONG).show();
-                } else {
-                    Toast.makeText(getContext(), "fuck", Toast.LENGTH_LONG).show();
+
+                }else{
                     adapter.setMedicament(medicaments);
+                    Toast.makeText(getContext(), "hell", Toast.LENGTH_LONG).show();
                 }
 
             }
         });
+
 
 
         new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(0,
@@ -133,6 +136,7 @@ public class SearchCodeBareResults extends Fragment {
 
             }
         });
+
         return root;
     }
 }
