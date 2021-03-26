@@ -1,7 +1,9 @@
 package com.example.myapplication.ui.home;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,8 +13,10 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.example.myapplication.CodeBare.CaptureAct;
@@ -20,6 +24,16 @@ import com.example.myapplication.CodeBare.IntentIntegratorClass;
 import com.example.myapplication.Ocr;
 import com.example.myapplication.R;
 import com.example.myapplication.ui.afficherTous.SearchCodeBareResults;
+import com.example.myapplication.ui.afficherTous.SearchResults;
+import com.example.myapplication.ui.afficherTous.afficher_details;
+import com.example.myapplication.ui.afficherTous.searchByOcr;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
+import com.google.mlkit.vision.common.InputImage;
+import com.google.mlkit.vision.text.Text;
+import com.google.mlkit.vision.text.TextRecognition;
+import com.google.mlkit.vision.text.TextRecognizer;
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
 
@@ -42,7 +56,11 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         scanner = root.findViewById(R.id.button3);
         appareil = root.findViewById(R.id.button4);
         scanner.setOnClickListener(this);
-        Fragment fragment = null;
+
+
+
+    Fragment fragment =null;
+
         appareil.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -68,37 +86,142 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         integrator.setPrompt("Scanning Code");
         integrator.initiateScan();
     }
-
+/*
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        IntentResult result = IntentIntegrator.parseActivityResult(requestCode, resultCode, data);
-        if (result != null) {
-            if (result.getContents() != null) {
-                Fragment fragment = null;
-                fragment = new SearchCodeBareResults();
-                Bundle i = new Bundle();
-                i.putString("result", result.getContents());
-                fragment.setArguments(i);
-                FragmentManager fragmentManager = getFragmentManager();
-                fragmentManager.beginTransaction().replace(R.id.homeFragment, fragment)
-                        .commit();
+        if (requestCode==2){
+            IntentResult result = IntentIntegrator.parseActivityResult(2, resultCode, data);
+            if (result != null) {
+                if (result.getContents() != null) {
+                    Fragment fragment = null;
+                    fragment = new SearchCodeBareResults();
+                    Bundle i = new Bundle();
+                    i.putString("result", result.getContents());
+                    fragment.setArguments(i);
+                    FragmentManager fragmentManager = getFragmentManager();
+                    fragmentManager.beginTransaction().replace(R.id.homeFragment, fragment)
+                            .commit();
 
+
+                } else {
+                    Toast.makeText(getContext(), "Medicament not found", Toast.LENGTH_LONG).show();
+                }
 
             } else {
-                Toast.makeText(getContext(), "Medicament not found", Toast.LENGTH_LONG).show();
+                //super.onActivityResult(requestCode, resultCode, data);
             }
 
-        } else {
-            //super.onActivityResult(requestCode, resultCode, data);
         }
+        else if(requestCode==1){
+            Bundle bundle=data.getExtras();
+            Bitmap image =(Bitmap)bundle.get("data");
+
+            InputImage inputImage= InputImage.fromBitmap(image,0);
+            TextRecognizer analyzer= TextRecognition.getClient();
+            Task<Text> reslt=analyzer.process(inputImage).addOnSuccessListener(new OnSuccessListener<Text>() {
+                @Override
+                public void onSuccess(Text text) {
+               /* Fragment fragment = new SearchResults();
+                String rechercher = text.getText();
+                Bundle i = new Bundle();
+                i.putString("result", rechercher);
+                fragment.setArguments(i);
+                getSupportFragmentManager().beginTransaction()
+                        .add(R.id.con, fragment)
+                        .commit();*/
+/*
+
+                }
+            }).addOnFailureListener(new OnFailureListener() {
+                @Override
+                public void onFailure(@NonNull Exception e) {
+
+                }
+            });
+
+        }
+
+
+    }
+    */
+
+
+    public void goCamera(){
+
+        Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        startActivityForResult(intent,1);
 
     }
 
-    private void moveToNewActivity() {
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode==2){
+            IntentResult result = IntentIntegrator.parseActivityResult(2, resultCode, data);
+            if (result != null) {
+                if (result.getContents() != null) {
+                    Fragment fragment = null;
+                    fragment = new SearchCodeBareResults();
+                    Bundle i = new Bundle();
+                    i.putString("result", result.getContents());
+                    fragment.setArguments(i);
+                    FragmentManager fragmentManager = getFragmentManager();
+                    fragmentManager.beginTransaction().replace(R.id.homeFragment, fragment)
+                            .commit();
 
-        Intent i = new Intent(getActivity(), Ocr.class);
-        startActivity(i);
-        getActivity().overridePendingTransition(0, 0);
+
+                } else {
+                    Toast.makeText(getContext(), "Medicament not found", Toast.LENGTH_LONG).show();
+                }
+
+            } else {
+                //super.onActivityResult(requestCode, resultCode, data);
+            }
+
+        }
+        else if(requestCode==1){
+            Bundle bundle=data.getExtras();
+            Bitmap image =(Bitmap)bundle.get("data");
+
+            InputImage inputImage= InputImage.fromBitmap(image,0);
+            TextRecognizer analyzer= TextRecognition.getClient();
+            Task<Text> reslt=analyzer.process(inputImage).addOnSuccessListener(new OnSuccessListener<Text>() {
+                @Override
+                public void onSuccess(Text text) {
+
+                Fragment fragment = new searchByOcr();
+                String rechercher = text.getText();
+                Bundle i = new Bundle();
+                i.putString("result", rechercher);
+                fragment.setArguments(i);
+                    FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+                    FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                    fragmentTransaction.replace(R.id.homeFragment, fragment);
+                    fragmentTransaction.addToBackStack(null);
+                    fragmentTransaction.commit();
+
+
+                }
+            }).addOnFailureListener(new OnFailureListener() {
+                @Override
+                public void onFailure(@NonNull Exception e) {
+
+                }
+            });
+
+        }
+
+
+    }
+
+
+
+
+
+
+    @Override
+    public void onClick(View v) {
+        goCamera();
 
     }
 
@@ -129,9 +252,4 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         });
     }*/
 
-    @Override
-    public void onClick(View v) {
-
-        moveToNewActivity();
-    }
 }
