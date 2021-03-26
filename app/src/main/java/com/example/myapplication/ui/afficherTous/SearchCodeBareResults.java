@@ -125,7 +125,7 @@ public class SearchCodeBareResults extends Fragment {
                 fragment.setArguments(i);
                 FragmentManager fragmentManager = getFragmentManager();
                 fragmentManager.beginTransaction()
-                        .replace(R.id.searchCodeBareResults
+                        .replace(R.id.homeFragment
                                 , fragment)
                         .addToBackStack(null)
                         .commit();

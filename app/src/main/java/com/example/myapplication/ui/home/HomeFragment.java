@@ -1,6 +1,5 @@
 package com.example.myapplication.ui.home;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -9,7 +8,6 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -31,7 +29,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
     private ImageView logo;
     private FrameLayout backgr;
     private Button scanner;
-    private Button appareil; 
+    private Button appareil;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
