@@ -197,8 +197,10 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
                     i.putString("result", result.getContents());
                     fragment.setArguments(i);
                     FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
-                    fragmentManager.beginTransaction().add(R.id.homeFragment, fragment)
+
+                    fragmentManager.beginTransaction().replace(R.id.nav_host_fragment,fragment)
                             .commit();
+
 
 
                 } else {

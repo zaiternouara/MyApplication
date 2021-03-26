@@ -33,7 +33,6 @@ public class SearchCodeBareResults extends Fragment {
         super.onCreate(savedInstanceState);
 
 
-
     }
 
     @Override
@@ -51,7 +50,6 @@ public class SearchCodeBareResults extends Fragment {
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));//comment les infos sont afficher
         recyclerView.setHasFixedSize(true);
 
-
         final MedicamentAdapter adapter = new MedicamentAdapter(getContext());
         recyclerView.setAdapter(adapter);
 
@@ -61,13 +59,13 @@ public class SearchCodeBareResults extends Fragment {
         medicamentSviewModel.getSearchByCodeBareMedicamentsChoose(result).observe(getViewLifecycleOwner(), new Observer<List<MEDICAMENTS>>() {
 
             @Override
-            public void onChanged(List<MEDICAMENTS> medicaments) {
-                if (medicaments.isEmpty()) {
+            public void onChanged(List<MEDICAMENTS> medicament) {
+                if (medicament.isEmpty()) {
 
                     Toast.makeText(getContext(), "Medicament not found", Toast.LENGTH_LONG).show();
 
                 } else {
-                    adapter.setMedicament(medicaments);
+                    adapter.setMedicament(medicament);
                 }
 
             }
