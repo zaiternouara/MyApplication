@@ -33,6 +33,7 @@ public class SearchCodeBareResults extends Fragment {
         super.onCreate(savedInstanceState);
 
 
+
     }
 
     @Override
@@ -67,7 +68,6 @@ public class SearchCodeBareResults extends Fragment {
 
                 } else {
                     adapter.setMedicament(medicaments);
-                    Toast.makeText(getContext(), "hell", Toast.LENGTH_LONG).show();
                 }
 
             }
@@ -141,4 +141,5 @@ public class SearchCodeBareResults extends Fragment {
 
         return root;
     }
+
 }

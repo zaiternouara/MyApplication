@@ -21,11 +21,8 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.example.myapplication.CodeBare.CaptureAct;
 import com.example.myapplication.CodeBare.IntentIntegratorClass;
-import com.example.myapplication.Ocr;
 import com.example.myapplication.R;
 import com.example.myapplication.ui.afficherTous.SearchCodeBareResults;
-import com.example.myapplication.ui.afficherTous.SearchResults;
-import com.example.myapplication.ui.afficherTous.afficher_details;
 import com.example.myapplication.ui.afficherTous.searchByOcr;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -58,8 +55,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         scanner.setOnClickListener(this);
 
 
-
-    Fragment fragment =null;
+        Fragment fragment = null;
 
         appareil.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -146,54 +142,31 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
     */
 
 
-    public void goCamera(){
+    public void goCamera() {
 
         Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-        startActivityForResult(intent,1);
+        startActivityForResult(intent, 1);
 
     }
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode==2){
-            IntentResult result = IntentIntegrator.parseActivityResult(2, resultCode, data);
-            if (result != null) {
-                if (result.getContents() != null) {
-                    Fragment fragment = null;
-                    fragment = new SearchCodeBareResults();
-                    Bundle i = new Bundle();
-                    i.putString("result", result.getContents());
-                    fragment.setArguments(i);
-                    FragmentManager fragmentManager = getFragmentManager();
-                    fragmentManager.beginTransaction().replace(R.id.homeFragment, fragment)
-                            .commit();
+        if (requestCode == 1) {
+            Bundle bundle = data.getExtras();
+            Bitmap image = (Bitmap) bundle.get("data");
 
-
-                } else {
-                    Toast.makeText(getContext(), "Medicament not found", Toast.LENGTH_LONG).show();
-                }
-
-            } else {
-                //super.onActivityResult(requestCode, resultCode, data);
-            }
-
-        }
-        else if(requestCode==1){
-            Bundle bundle=data.getExtras();
-            Bitmap image =(Bitmap)bundle.get("data");
-
-            InputImage inputImage= InputImage.fromBitmap(image,0);
-            TextRecognizer analyzer= TextRecognition.getClient();
-            Task<Text> reslt=analyzer.process(inputImage).addOnSuccessListener(new OnSuccessListener<Text>() {
+            InputImage inputImage = InputImage.fromBitmap(image, 0);
+            TextRecognizer analyzer = TextRecognition.getClient();
+            Task<Text> reslt = analyzer.process(inputImage).addOnSuccessListener(new OnSuccessListener<Text>() {
                 @Override
                 public void onSuccess(Text text) {
 
-                Fragment fragment = new searchByOcr();
-                String rechercher = text.getText();
-                Bundle i = new Bundle();
-                i.putString("result", rechercher);
-                fragment.setArguments(i);
+                    Fragment fragment = new searchByOcr();
+                    String rechercher = text.getText();
+                    Bundle i = new Bundle();
+                    i.putString("result", rechercher);
+                    fragment.setArguments(i);
                     FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
                     FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
                     fragmentTransaction.replace(R.id.homeFragment, fragment);
@@ -209,14 +182,37 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
                 }
             });
 
+        } else {
+
+
+            IntentResult result = IntentIntegrator.parseActivityResult(requestCode, resultCode, data);
+            if (result != null) {
+
+
+                if (result.getContents() != null) {
+                    Toast.makeText(getContext(),  result.getContents(), Toast.LENGTH_LONG).show();
+                    Fragment fragment;
+                    fragment = new SearchCodeBareResults();
+                    Bundle i = new Bundle();
+                    i.putString("result", result.getContents());
+                    fragment.setArguments(i);
+                    FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+                    fragmentManager.beginTransaction().add(R.id.homeFragment, fragment)
+                            .commit();
+
+
+                } else {
+                    Toast.makeText(getContext(), "Medicament not found", Toast.LENGTH_LONG).show();
+                }
+
+            } else {
+                //super.onActivityResult(requestCode, resultCode, data);
+            }
+
         }
 
 
     }
-
-
-
-
 
 
     @Override
