@@ -32,6 +32,7 @@ public class SearchCodeBareResults extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+
     }
 
     @Override
@@ -39,6 +40,8 @@ public class SearchCodeBareResults extends Fragment {
                              Bundle savedInstanceState) {
 
         View root = inflater.inflate(R.layout.fragment_search_code_bare_results, container, false);
+
+
         RecyclerView recyclerView = root.findViewById(R.id.recycle_view);
 
 
@@ -58,18 +61,17 @@ public class SearchCodeBareResults extends Fragment {
 
             @Override
             public void onChanged(List<MEDICAMENTS> medicaments) {
-                if(medicaments.isEmpty()){
+                if (medicaments.isEmpty()) {
 
                     Toast.makeText(getContext(), "Medicament not found", Toast.LENGTH_LONG).show();
 
-                }else{
+                } else {
                     adapter.setMedicament(medicaments);
                     Toast.makeText(getContext(), "hell", Toast.LENGTH_LONG).show();
                 }
 
             }
         });
-
 
 
         new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(0,
