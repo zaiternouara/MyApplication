@@ -169,7 +169,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
                     fragment.setArguments(i);
                     FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
                     FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-                    fragmentTransaction.replace(R.id.homeFragment, fragment);
+                    fragmentTransaction.replace(R.id.nav_host_fragment, fragment);
                     fragmentTransaction.addToBackStack(null);
                     fragmentTransaction.commit();
 
