@@ -2,6 +2,8 @@ package com.example.myapplication.ui.ajouter;
 
 import android.app.DatePickerDialog;
 import android.graphics.Color;
+import android.content.Intent;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,12 +21,28 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.coordinatorlayout.widget.CoordinatorLayout;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.ViewModelProvider;
 
+import com.example.myapplication.CodeBare.CaptureAct;
+import com.example.myapplication.CodeBare.IntentIntegratorClass;
 import com.example.myapplication.R;
 import com.example.myapplication.models.MEDICAMENTS;
+import com.example.myapplication.ui.afficherTous.SearchCodeBareResults;
+import com.example.myapplication.ui.afficherTous.searchByOcr;
 import com.example.myapplication.viewModel.MedicamentsViewModel;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
+import com.google.mlkit.vision.common.InputImage;
+import com.google.mlkit.vision.text.Text;
+import com.google.mlkit.vision.text.TextRecognition;
+import com.google.mlkit.vision.text.TextRecognizer;
+import com.google.zxing.integration.android.IntentIntegrator;
+import com.google.zxing.integration.android.IntentResult;
 import com.google.android.material.snackbar.Snackbar;
 
 import java.text.SimpleDateFormat;
@@ -85,6 +103,14 @@ public class DashboardFragment extends Fragment implements View.OnClickListener,
 
         boui = (RadioButton) root.findViewById(R.id.inputOui);
         bnon = (RadioButton) root.findViewById(R.id.inputNon);
+
+        codeB.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                scanCode();
+            }
+
+        });
        // String forme = form.getSelectedItem().toString();
         ArrayAdapter<CharSequence> adap = ArrayAdapter.createFromResource(getContext(),
                 R.array.numbers, android.R.layout.simple_spinner_item);
@@ -173,7 +199,8 @@ public class DashboardFragment extends Fragment implements View.OnClickListener,
 
         if (NomCommercial.trim().isEmpty() || description.trim().isEmpty() || classTH.trim().isEmpty() || laboratoire.trim().isEmpty() || lots.trim().isEmpty() || denomination.trim().isEmpty() || forme.trim().isEmpty() || dureee.trim().isEmpty() || dateFab.trim().isEmpty() || datePer.trim().isEmpty() || price.trim().isEmpty() || quantite.trim().isEmpty() || codeBarre.trim().isEmpty()) {
 
-            showSnackbar();
+            Toast.makeText(getContext(), "Entrez tous les champs", Toast.LENGTH_SHORT).show();
+
             return;
         }
         medicamentSviewModel = new ViewModelProvider(getActivity()).get(MedicamentsViewModel.class);
@@ -234,5 +261,38 @@ public class DashboardFragment extends Fragment implements View.OnClickListener,
                     }
                 }).show();
     }
+
+    private void scanCode() {
+        IntentIntegratorClass integrator = new IntentIntegratorClass(getActivity(), this);
+        integrator.setCaptureActivity(CaptureAct.class);
+        integrator.setOrientationLocked(false);
+        integrator.setDesiredBarcodeFormats(IntentIntegrator.ALL_CODE_TYPES);
+        integrator.setPrompt("Scanning Code");
+        integrator.initiateScan();
+    }
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+         IntentResult result = IntentIntegrator.parseActivityResult(requestCode, resultCode, data);
+            if (result != null) {
+
+
+                if (result.getContents() != null) {
+                    Toast.makeText(getContext(),  result.getContents(), Toast.LENGTH_LONG).show();
+
+                    codeB.setText(result.getContents());
+
+
+                } else {
+                    Toast.makeText(getContext(), "Medicament not found", Toast.LENGTH_LONG).show();
+                }
+
+            } else {
+                //super.onActivityResult(requestCode, resultCode, data);
+            }
+
+        }
+
+
+
 }
 
