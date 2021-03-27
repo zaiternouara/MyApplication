@@ -102,7 +102,7 @@ public class searchByOcr extends Fragment {
             @Override
             public void onSwiped(RecyclerView.ViewHolder viewHolder, int direction) {
                 medicamentSviewModel.deleteChoose(adapter.getMedicamentAt(viewHolder.getAdapterPosition()));
-                Toast.makeText(getContext(), "Medicament deleted", Toast.LENGTH_SHORT).show();
+                suppSnackbar();
             }
         }).attachToRecyclerView(recyclerView);
         adapter.setOnItemClickListener(new MedicamentAdapter.OnItemClickListener() {
@@ -163,6 +163,16 @@ public class searchByOcr extends Fragment {
 
         Snackbar.make(getView(), "Médicament introuvable !", Snackbar.LENGTH_LONG)
                 .setAction("Dommage :(", new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+
+                    }
+                }).show();
+    }
+    public void suppSnackbar() {
+
+        Snackbar.make(getView(), "Médicament supprimé", Snackbar.LENGTH_LONG)
+                .setAction("D'accord", new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
 

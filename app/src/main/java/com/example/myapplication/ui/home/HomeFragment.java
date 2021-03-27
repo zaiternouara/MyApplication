@@ -73,7 +73,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         integrator.setCaptureActivity(CaptureAct.class);
         integrator.setOrientationLocked(false);
         integrator.setDesiredBarcodeFormats(IntentIntegrator.ALL_CODE_TYPES);
-        integrator.setPrompt("Scanning Code");
+        integrator.setPrompt("Le code en cours de scanne");
         integrator.initiateScan();
     }
 

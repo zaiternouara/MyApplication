@@ -199,13 +199,14 @@ public class DashboardFragment extends Fragment implements View.OnClickListener,
 
         if (NomCommercial.trim().isEmpty() || description.trim().isEmpty() || classTH.trim().isEmpty() || laboratoire.trim().isEmpty() || lots.trim().isEmpty() || denomination.trim().isEmpty() || forme.trim().isEmpty() || dureee.trim().isEmpty() || dateFab.trim().isEmpty() || datePer.trim().isEmpty() || price.trim().isEmpty() || quantite.trim().isEmpty() || codeBarre.trim().isEmpty()) {
 
-            Toast.makeText(getContext(), "Entrez tous les champs", Toast.LENGTH_SHORT).show();
-
+            showSnackbar();
             return;
         }
         medicamentSviewModel = new ViewModelProvider(getActivity()).get(MedicamentsViewModel.class);
         MEDICAMENTS medicaments = new MEDICAMENTS(classTH, NomCommercial, laboratoire, denomination, forme, dureee,  remboursable, lots ,dateFab, datePer, description, price, quantite,codeBarre);
          medicamentSviewModel.insertChoose(medicaments);
+        savedM();
+
 
 
 
@@ -267,7 +268,7 @@ public class DashboardFragment extends Fragment implements View.OnClickListener,
         integrator.setCaptureActivity(CaptureAct.class);
         integrator.setOrientationLocked(false);
         integrator.setDesiredBarcodeFormats(IntentIntegrator.ALL_CODE_TYPES);
-        integrator.setPrompt("Scanning Code");
+        integrator.setPrompt("Le code en cours de scanne");
         integrator.initiateScan();
     }
     @Override
@@ -283,7 +284,7 @@ public class DashboardFragment extends Fragment implements View.OnClickListener,
 
 
                 } else {
-                    Toast.makeText(getContext(), "Medicament not found", Toast.LENGTH_LONG).show();
+                    snackIntrouvable();
                 }
 
             } else {
@@ -291,6 +292,26 @@ public class DashboardFragment extends Fragment implements View.OnClickListener,
             }
 
         }
+    public void snackIntrouvable() {
+
+        Snackbar.make(getView(), "Médicament introuvable", Snackbar.LENGTH_LONG)
+                .setAction("Dommage ", new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+
+                    }
+                }).show();
+    }
+    public void savedM() {
+
+        Snackbar.make(getView(), "Médicament enregistré", Snackbar.LENGTH_LONG)
+                .setAction("Génial ! ", new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+
+                    }
+                }).show();
+    }
 
 
 

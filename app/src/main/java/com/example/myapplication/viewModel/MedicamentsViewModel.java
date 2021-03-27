@@ -1,6 +1,7 @@
 package com.example.myapplication.viewModel;
 
 import android.app.Application;
+import android.view.View;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -12,9 +13,11 @@ import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.Observer;
 
 import com.example.myapplication.Connection.NetworkConnection;
+import com.example.myapplication.R;
 import com.example.myapplication.Repository.LocalRep;
 import com.example.myapplication.Repository.WebServiceRep;
 import com.example.myapplication.models.MEDICAMENTS;
+import com.google.android.material.snackbar.Snackbar;
 
 import java.util.List;
 
@@ -64,7 +67,6 @@ public class MedicamentsViewModel extends AndroidViewModel {
 
         } else {
             repository.insert(medicaments);
-            Toast.makeText(getApplication(), " Medicament saved ", Toast.LENGTH_SHORT).show();
 
         }
 
@@ -84,7 +86,6 @@ public class MedicamentsViewModel extends AndroidViewModel {
         } else {
 
             repository.delete(medicaments);
-            Toast.makeText(getApplication(), " Medicament deleted", Toast.LENGTH_SHORT).show();
 
         }
     }
@@ -171,6 +172,7 @@ public class MedicamentsViewModel extends AndroidViewModel {
                 });
 
     }
+
 
 }
 
