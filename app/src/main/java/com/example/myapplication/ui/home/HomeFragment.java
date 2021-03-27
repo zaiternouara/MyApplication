@@ -27,6 +27,7 @@ import com.example.myapplication.ui.afficherTous.searchByOcr;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.snackbar.Snackbar;
 import com.google.mlkit.vision.common.InputImage;
 import com.google.mlkit.vision.text.Text;
 import com.google.mlkit.vision.text.TextRecognition;
@@ -47,7 +48,6 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         homeViewModel =
                 new ViewModelProvider(this).get(HomeViewModel.class);
         View root = inflater.inflate(R.layout.fragment_home, container, false);
-        //final TextView textView = root.findViewById(R.id.text_home);
         logo = root.findViewById(R.id.imageView);
         backgr = root.findViewById(R.id.imageView2);
         scanner = root.findViewById(R.id.button3);
@@ -65,12 +65,6 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
 
         });
 
-       /* homeViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
-            @Override
-            /*public void onChanged(@Nullable String s) {
-                textView.setText(s);
-            }
-        });*/
         return root;
     }
 
@@ -82,64 +76,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         integrator.setPrompt("Scanning Code");
         integrator.initiateScan();
     }
-/*
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (requestCode==2){
-            IntentResult result = IntentIntegrator.parseActivityResult(2, resultCode, data);
-            if (result != null) {
-                if (result.getContents() != null) {
-                    Fragment fragment = null;
-                    fragment = new SearchCodeBareResults();
-                    Bundle i = new Bundle();
-                    i.putString("result", result.getContents());
-                    fragment.setArguments(i);
-                    FragmentManager fragmentManager = getFragmentManager();
-                    fragmentManager.beginTransaction().replace(R.id.homeFragment, fragment)
-                            .commit();
 
-
-                } else {
-                    Toast.makeText(getContext(), "Medicament not found", Toast.LENGTH_LONG).show();
-                }
-
-            } else {
-                //super.onActivityResult(requestCode, resultCode, data);
-            }
-
-        }
-        else if(requestCode==1){
-            Bundle bundle=data.getExtras();
-            Bitmap image =(Bitmap)bundle.get("data");
-
-            InputImage inputImage= InputImage.fromBitmap(image,0);
-            TextRecognizer analyzer= TextRecognition.getClient();
-            Task<Text> reslt=analyzer.process(inputImage).addOnSuccessListener(new OnSuccessListener<Text>() {
-                @Override
-                public void onSuccess(Text text) {
-               /* Fragment fragment = new SearchResults();
-                String rechercher = text.getText();
-                Bundle i = new Bundle();
-                i.putString("result", rechercher);
-                fragment.setArguments(i);
-                getSupportFragmentManager().beginTransaction()
-                        .add(R.id.con, fragment)
-                        .commit();*/
-/*
-
-                }
-            }).addOnFailureListener(new OnFailureListener() {
-                @Override
-                public void onFailure(@NonNull Exception e) {
-
-                }
-            });
-
-        }
-
-
-    }
-    */
 
 
     public void goCamera() {
@@ -190,7 +127,8 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
 
 
                 if (result.getContents() != null) {
-                    Toast.makeText(getContext(),  result.getContents(), Toast.LENGTH_LONG).show();
+                    codeBarre(result.getContents());
+
                     Fragment fragment;
                     fragment = new SearchCodeBareResults();
                     Bundle i = new Bundle();
@@ -204,8 +142,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
 
 
                 } else {
-                    Toast.makeText(getContext(), "Medicament not found", Toast.LENGTH_LONG).show();
-                }
+                    nofound();                }
 
             } else {
                 //super.onActivityResult(requestCode, resultCode, data);
@@ -222,32 +159,31 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         goCamera();
 
     }
+    public void codeBarre(String S) {
 
-    /*public void goCamera(View root){
-        Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-        startActivityForResult(intent,1);
+        Snackbar.make(getView(), "Le code est "+S, Snackbar.LENGTH_LONG)
+                .setAction("Génial !", new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+
+                    }
+                }).show();
     }
 
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        Bundle bundle=data.getExtras();
-        Bitmap image =(Bitmap)bundle.get("data");
+    public void nofound() {
 
-        InputImage inputImage= InputImage.fromBitmap(image,0);
-        TextRecognizer analyzer= TextRecognition.getClient();
+        Snackbar.make(getView(),"Médicament introuvable" , Snackbar.LENGTH_LONG)
+                .setAction("Génial !", new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
 
-        Task <Text> reslt=analyzer.process(inputImage).addOnSuccessListener(new OnSuccessListener<Text>() {
-            @Override
-            public void onSuccess(Text text) {
-            tv.setText(text.getText());
-            }
-        }).addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception e) {
+                    }
+                }).show();
+    }
 
-            }
-        });
-    }*/
+
+
+
+
 
 }

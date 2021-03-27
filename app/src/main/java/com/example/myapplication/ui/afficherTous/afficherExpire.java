@@ -18,6 +18,7 @@ import com.example.myapplication.Adapter.MedicamentAdapter;
 import com.example.myapplication.R;
 import com.example.myapplication.models.MEDICAMENTS;
 import com.example.myapplication.viewModel.MedicamentsViewModel;
+import com.google.android.material.snackbar.Snackbar;
 
 import java.util.List;
 
@@ -70,8 +71,7 @@ public class afficherExpire extends Fragment {
             @Override
             public void onSwiped(RecyclerView.ViewHolder viewHolder, int direction) {
                 medicamentSviewModel.deleteChoose(adapter.getMedicamentAt(viewHolder.getAdapterPosition()));
-                Toast.makeText(getContext(), "Medicament deleted", Toast.LENGTH_SHORT).show();
-            }
+                showSnackbar();            }
         }).attachToRecyclerView(recyclerView);
         adapter.setOnItemClickListener(new MedicamentAdapter.OnItemClickListener() {
             @Override
@@ -123,5 +123,15 @@ public class afficherExpire extends Fragment {
         });
         return root;
 
+    }
+    public void showSnackbar() {
+
+        Snackbar.make(getView(), "Médicament supprimé !", Snackbar.LENGTH_LONG)
+                .setAction("D'accord", new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+
+                    }
+                }).show();
     }
 }

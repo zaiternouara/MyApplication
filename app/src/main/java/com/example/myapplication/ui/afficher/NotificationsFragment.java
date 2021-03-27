@@ -19,6 +19,7 @@ import com.example.myapplication.ui.afficherTous.SearchResults;
 import com.example.myapplication.ui.afficherTous.afficheTousLab;
 import com.example.myapplication.ui.afficherTous.afficherExpire;
 import com.example.myapplication.ui.afficherTous.afficherTousMedoc;
+import com.google.android.material.snackbar.Snackbar;
 
 public class NotificationsFragment extends Fragment implements View.OnClickListener {
     DataPassListener mCallback;
@@ -83,8 +84,7 @@ public class NotificationsFragment extends Fragment implements View.OnClickListe
                 String rechercher = recherche.getText().toString();
                 if (rechercher.trim().isEmpty()) {
 
-                    Toast.makeText(getContext(), "Entrez le champs", Toast.LENGTH_SHORT).show();
-
+                    showSnackbar();
                     return;
                 }
                 Bundle i = new Bundle();
@@ -124,5 +124,15 @@ public class NotificationsFragment extends Fragment implements View.OnClickListe
 
     public interface DataPassListener {
         void passData(String data);
+    }
+    public void showSnackbar() {
+
+        Snackbar.make(getView(), "Entrez votre recherche", Snackbar.LENGTH_LONG)
+                .setAction("D'accord", new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+
+                    }
+                }).show();
     }
 }

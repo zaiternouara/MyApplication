@@ -1,6 +1,7 @@
 package com.example.myapplication.ui.ajouter;
 
 import android.app.DatePickerDialog;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,12 +18,14 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.coordinatorlayout.widget.CoordinatorLayout;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.example.myapplication.R;
 import com.example.myapplication.models.MEDICAMENTS;
 import com.example.myapplication.viewModel.MedicamentsViewModel;
+import com.google.android.material.snackbar.Snackbar;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -32,6 +35,8 @@ public class DashboardFragment extends Fragment implements View.OnClickListener,
 
 
     public static final int ADD_NOTE_REQUEST = 1;
+    private CoordinatorLayout coordinatorLayout;
+
 
     private ImageView logo;
     private TextView textView1;
@@ -61,6 +66,7 @@ public class DashboardFragment extends Fragment implements View.OnClickListener,
 
         View root = inflater.inflate(R.layout.fragment_dashboard, container, false);
         logo = (ImageView) root.findViewById(R.id.imageView);
+        coordinatorLayout = root.findViewById(R.id.coordinatorLayout);
 
         textView1 = (TextView) root.findViewById(R.id.textView);
         classeTh = (EditText) root.findViewById(R.id.inputClass);
@@ -167,8 +173,7 @@ public class DashboardFragment extends Fragment implements View.OnClickListener,
 
         if (NomCommercial.trim().isEmpty() || description.trim().isEmpty() || classTH.trim().isEmpty() || laboratoire.trim().isEmpty() || lots.trim().isEmpty() || denomination.trim().isEmpty() || forme.trim().isEmpty() || dureee.trim().isEmpty() || dateFab.trim().isEmpty() || datePer.trim().isEmpty() || price.trim().isEmpty() || quantite.trim().isEmpty() || codeBarre.trim().isEmpty()) {
 
-            Toast.makeText(getContext(), "Entrez tous les champs", Toast.LENGTH_SHORT).show();
-
+            showSnackbar();
             return;
         }
         medicamentSviewModel = new ViewModelProvider(getActivity()).get(MedicamentsViewModel.class);
@@ -218,6 +223,16 @@ public class DashboardFragment extends Fragment implements View.OnClickListener,
     @Override
     public void onNothingSelected(AdapterView<?> parent) {
 
+    }
+    public void showSnackbar() {
+
+        Snackbar.make(getView(), "Entrez tous les champs", Snackbar.LENGTH_LONG)
+                .setAction("D'accord", new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+
+                    }
+                }).show();
     }
 }
 

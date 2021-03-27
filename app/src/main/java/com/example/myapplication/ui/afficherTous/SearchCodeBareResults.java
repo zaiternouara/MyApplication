@@ -18,6 +18,7 @@ import com.example.myapplication.Adapter.MedicamentAdapter;
 import com.example.myapplication.R;
 import com.example.myapplication.models.MEDICAMENTS;
 import com.example.myapplication.viewModel.MedicamentsViewModel;
+import com.google.android.material.snackbar.Snackbar;
 
 import java.util.List;
 
@@ -138,6 +139,16 @@ public class SearchCodeBareResults extends Fragment {
         });
 
         return root;
+    }
+    public void showSnackbar() {
+
+        Snackbar.make(getView(), "Médicament introuvable", Snackbar.LENGTH_LONG)
+                .setAction("Dommage ", new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+
+                    }
+                }).show();
     }
 
 }
