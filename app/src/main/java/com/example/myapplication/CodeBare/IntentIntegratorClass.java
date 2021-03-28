@@ -10,6 +10,7 @@ import com.google.zxing.integration.android.IntentIntegrator;
 public final class IntentIntegratorClass extends IntentIntegrator {
 
     private final Fragment fragment;
+
     public IntentIntegratorClass(Activity activity, Fragment fragment) {
         super(activity);
         this.fragment = fragment;

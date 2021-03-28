@@ -1,11 +1,7 @@
 package com.example.myapplication.models;
 
 
-import android.os.Parcel;
-
-import androidx.room.ColumnInfo;
 import androidx.room.Entity;
-import androidx.room.Ignore;
 import androidx.room.Index;
 import androidx.room.PrimaryKey;
 
@@ -33,16 +29,14 @@ public class MEDICAMENTS {
     private String codeB;
 
 
-
-
-    public MEDICAMENTS(String classe_Therapeutique, String nom_Commercial, String laboratoire, String denominateur_De_Medicament, String forme_Pharmaceutique, String duree_De_Conservation,String remboursable,String lot, String date_De_Fabrication, String date_Peremption, String description_De_Composant, String prix, String quantite_En_Stock, String codeB) {
+    public MEDICAMENTS(String classe_Therapeutique, String nom_Commercial, String laboratoire, String denominateur_De_Medicament, String forme_Pharmaceutique, String duree_De_Conservation, String remboursable, String lot, String date_De_Fabrication, String date_Peremption, String description_De_Composant, String prix, String quantite_En_Stock, String codeB) {
         this.classe_Therapeutique = classe_Therapeutique;
         this.nom_Commercial = nom_Commercial;
         this.laboratoire = laboratoire;
         this.denominateur_De_Medicament = denominateur_De_Medicament;
         this.forme_Pharmaceutique = forme_Pharmaceutique;
         this.duree_De_Conservation = duree_De_Conservation;
-        this.remboursable=remboursable;
+        this.remboursable = remboursable;
         this.lot = lot;
         this.date_De_Fabrication = date_De_Fabrication;
         this.date_Peremption = date_Peremption;
@@ -51,22 +45,23 @@ public class MEDICAMENTS {
         this.quantite_En_Stock = quantite_En_Stock;
         this.codeB = codeB;
     }
-     /*
+
+    /*
 
 public MEDICAMENTS(String classe_Therapeutique, String nom_Commercial, String laboratoire, String denominateur_De_Medicament, String forme_Pharmaceutique, String duree_De_Conservation, String lot, String date_De_Fabrication, String date_Peremption, String description_De_Composant, String prix, String quantite_En_Stock) {
-        this.classe_Therapeutique = classe_Therapeutique;
-        this.nom_Commercial = nom_Commercial;
-        this.laboratoire = laboratoire;
-        this.denominateur_De_Medicament = denominateur_De_Medicament;
-        this.forme_Pharmaceutique = forme_Pharmaceutique;
-        this.duree_De_Conservation = duree_De_Conservation;
-        this.lot = lot;
-        this.date_De_Fabrication = date_De_Fabrication;
-        this.date_Peremption = date_Peremption;
-        this.description_De_Composant = description_De_Composant;
-        this.prix = prix;
-        this.quantite_En_Stock = quantite_En_Stock;
-    }
+       this.classe_Therapeutique = classe_Therapeutique;
+       this.nom_Commercial = nom_Commercial;
+       this.laboratoire = laboratoire;
+       this.denominateur_De_Medicament = denominateur_De_Medicament;
+       this.forme_Pharmaceutique = forme_Pharmaceutique;
+       this.duree_De_Conservation = duree_De_Conservation;
+       this.lot = lot;
+       this.date_De_Fabrication = date_De_Fabrication;
+       this.date_Peremption = date_Peremption;
+       this.description_De_Composant = description_De_Composant;
+       this.prix = prix;
+       this.quantite_En_Stock = quantite_En_Stock;
+   }
 */
     public int getId() {
         return id;
