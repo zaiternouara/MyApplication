@@ -4,7 +4,6 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
@@ -15,13 +14,10 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.myapplication.Adapter.MedicamentAdapter;
-import com.example.myapplication.Connection.NetworkConnection;
 import com.example.myapplication.R;
 import com.example.myapplication.models.MEDICAMENTS;
 import com.example.myapplication.viewModel.MedicamentsViewModel;
 import com.google.android.material.snackbar.Snackbar;
-
-import org.json.JSONException;
 
 import java.util.List;
 
@@ -59,13 +55,13 @@ public class afficheTousLab extends Fragment {
 
         medicamentSviewModel = new ViewModelProvider(this).get(MedicamentsViewModel.class);
         medicamentSviewModel.getAllaboratoiresChoose().observe(getViewLifecycleOwner(),
-                    new Observer<List<MEDICAMENTS>>() {
+                new Observer<List<MEDICAMENTS>>() {
 
-                        @Override
-                        public void onChanged(List<MEDICAMENTS> medicaments) {
-                            adapter.setMedicament(medicaments);
-                        }
-                    });
+                    @Override
+                    public void onChanged(List<MEDICAMENTS> medicaments) {
+                        adapter.setMedicament(medicaments);
+                    }
+                });
 
         new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(0,
                 ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT) {
@@ -77,7 +73,8 @@ public class afficheTousLab extends Fragment {
             @Override
             public void onSwiped(RecyclerView.ViewHolder viewHolder, int direction) {
                 medicamentSviewModel.deleteChoose(adapter.getMedicamentAt(viewHolder.getAdapterPosition()));
-                showSnackbar();            }
+                showSnackbar();
+            }
         }).attachToRecyclerView(recyclerView);
         adapter.setOnItemClickListener(new MedicamentAdapter.OnItemClickListener() {
             @Override
@@ -131,6 +128,7 @@ public class afficheTousLab extends Fragment {
         return root;
 
     }
+
     public void showSnackbar() {
 
         Snackbar.make(getView(), "Médicament supprimé !", Snackbar.LENGTH_LONG)

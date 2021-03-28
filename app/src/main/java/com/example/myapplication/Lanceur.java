@@ -1,13 +1,13 @@
 package com.example.myapplication;
 
-import androidx.appcompat.app.AppCompatActivity;
-
-import android.os.Bundle;
 import android.content.Intent;
+import android.os.Bundle;
 import android.os.Handler;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 public class Lanceur extends AppCompatActivity {
-    private static int SPLASH_TIME_OUT=2300;
+    private static final int SPLASH_TIME_OUT = 2300;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -16,11 +16,11 @@ public class Lanceur extends AppCompatActivity {
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                Intent intentSplash= new Intent(Lanceur.this,MainActivity.class);
+                Intent intentSplash = new Intent(Lanceur.this, MainActivity.class);
                 startActivity(intentSplash);
                 finish();
 
             }
-        },SPLASH_TIME_OUT);
+        }, SPLASH_TIME_OUT);
     }
 }

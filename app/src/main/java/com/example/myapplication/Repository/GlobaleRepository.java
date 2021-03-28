@@ -7,8 +7,6 @@ import androidx.lifecycle.MutableLiveData;
 
 import com.example.myapplication.models.MEDICAMENTS;
 
-import org.json.JSONException;
-
 import java.util.List;
 
 public interface GlobaleRepository {
@@ -27,12 +25,11 @@ public interface GlobaleRepository {
     LiveData<List<MEDICAMENTS>> getAllExpire();
 
     LiveData<List<MEDICAMENTS>> getSearchMedicamemts(String search);
+
     LiveData<List<MEDICAMENTS>> getSearchMedicamemtsByCodeBare(String search);
-
-
 
 
     MutableLiveData<List<MEDICAMENTS>> getSearchMedicamemts(Application application, String search);
 
-    MutableLiveData<List<MEDICAMENTS>> getSearchMedicamemtsByCodeBare(Application application,String search);
+    MutableLiveData<List<MEDICAMENTS>> getSearchMedicamemtsByCodeBare(Application application, String search);
 }

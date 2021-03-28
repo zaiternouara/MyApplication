@@ -10,7 +10,6 @@ import com.android.volley.toolbox.Volley;
 public class MyfileRequeteSingleton extends Application {
     private static MyfileRequeteSingleton ourInstance;
     Application application;
-    //    Context context;
     private RequestQueue myRequestQueue;
 
     private MyfileRequeteSingleton(Application application) {

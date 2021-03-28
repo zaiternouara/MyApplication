@@ -47,6 +47,4 @@ public interface MedicamentDAO {
     LiveData<List<MEDICAMENTS>> SearchMedicamemtsByCodeBare(String search);
 
 
-
-
 }

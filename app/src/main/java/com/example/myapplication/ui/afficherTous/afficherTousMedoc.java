@@ -4,7 +4,6 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
@@ -15,7 +14,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.myapplication.Adapter.MedicamentAdapter;
- import com.example.myapplication.R;
+import com.example.myapplication.R;
 import com.example.myapplication.models.MEDICAMENTS;
 import com.example.myapplication.viewModel.MedicamentsViewModel;
 import com.google.android.material.snackbar.Snackbar;
@@ -74,7 +73,8 @@ public class afficherTousMedoc extends Fragment {
             public void onSwiped(RecyclerView.ViewHolder viewHolder, int direction) {
 
                 medicamentSviewModel.deleteChoose(adapter.getMedicamentAt(viewHolder.getAdapterPosition()));
-                showSnackbar();            }
+                showSnackbar();
+            }
         }).attachToRecyclerView(recyclerView);
         adapter.setOnItemClickListener(new MedicamentAdapter.OnItemClickListener() {
             @Override
@@ -98,13 +98,12 @@ public class afficherTousMedoc extends Fragment {
                 String rembou = medicaments.getRemboursable();
 
 
-
                 Bundle i = new Bundle();
                 i.putString("classe therapeutique", classTH);
                 i.putString("Nom commercial", nomC);
                 i.putString("prix", prix);
                 i.putString("denominateur", denom);
-                i.putString("remboursable",rembou);
+                i.putString("remboursable", rembou);
                 i.putString("lot", lot);
                 i.putString("duree de conservation", duree);
                 i.putString("forme pharmaceutique", forme);
@@ -130,6 +129,7 @@ public class afficherTousMedoc extends Fragment {
         return root;
 
     }
+
     public void showSnackbar() {
 
         Snackbar.make(getView(), "Médicament supprimé !", Snackbar.LENGTH_LONG)

@@ -1,6 +1,10 @@
 package com.example.myapplication.ui.afficherTous;
 
 import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
@@ -9,11 +13,6 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.Toast;
 
 import com.example.myapplication.Adapter.MedicamentAdapter;
 import com.example.myapplication.R;
@@ -169,6 +168,7 @@ public class searchByOcr extends Fragment {
                     }
                 }).show();
     }
+
     public void suppSnackbar() {
 
         Snackbar.make(getView(), "Médicament supprimé", Snackbar.LENGTH_LONG)
@@ -179,4 +179,4 @@ public class searchByOcr extends Fragment {
                     }
                 }).show();
     }
-    }
+}

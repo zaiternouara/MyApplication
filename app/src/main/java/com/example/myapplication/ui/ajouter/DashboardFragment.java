@@ -1,9 +1,7 @@
 package com.example.myapplication.ui.ajouter;
 
 import android.app.DatePickerDialog;
-import android.graphics.Color;
 import android.content.Intent;
-import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -20,30 +18,19 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.coordinatorlayout.widget.CoordinatorLayout;
 import androidx.annotation.Nullable;
+import androidx.coordinatorlayout.widget.CoordinatorLayout;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.example.myapplication.CodeBare.CaptureAct;
 import com.example.myapplication.CodeBare.IntentIntegratorClass;
 import com.example.myapplication.R;
 import com.example.myapplication.models.MEDICAMENTS;
-import com.example.myapplication.ui.afficherTous.SearchCodeBareResults;
-import com.example.myapplication.ui.afficherTous.searchByOcr;
 import com.example.myapplication.viewModel.MedicamentsViewModel;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.gms.tasks.Task;
-import com.google.mlkit.vision.common.InputImage;
-import com.google.mlkit.vision.text.Text;
-import com.google.mlkit.vision.text.TextRecognition;
-import com.google.mlkit.vision.text.TextRecognizer;
+import com.google.android.material.snackbar.Snackbar;
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
-import com.google.android.material.snackbar.Snackbar;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -53,9 +40,8 @@ public class DashboardFragment extends Fragment implements View.OnClickListener,
 
 
     public static final int ADD_NOTE_REQUEST = 1;
+    final Calendar myCalendar = Calendar.getInstance();
     private CoordinatorLayout coordinatorLayout;
-
-
     private ImageView logo;
     private TextView textView1;
     private EditText classeTh;
@@ -74,35 +60,32 @@ public class DashboardFragment extends Fragment implements View.OnClickListener,
     private RadioButton boui;
     private RadioButton bnon;
     private Button ajout;
-    final Calendar myCalendar = Calendar.getInstance();
-
-
     private MedicamentsViewModel medicamentSviewModel;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
 
         View root = inflater.inflate(R.layout.fragment_dashboard, container, false);
-        logo = (ImageView) root.findViewById(R.id.imageView);
+        logo = root.findViewById(R.id.imageView);
         coordinatorLayout = root.findViewById(R.id.coordinatorLayout);
 
-        textView1 = (TextView) root.findViewById(R.id.textView);
-        classeTh = (EditText) root.findViewById(R.id.inputClass);
-        nomM = (EditText) root.findViewById(R.id.inputNom);
-        labo = (EditText) root.findViewById(R.id.inputLabo);
-        denom = (EditText) root.findViewById(R.id.inputDenom);
-        form = (Spinner) root.findViewById(R.id.inputForm);
-        duree = (EditText) root.findViewById(R.id.inputDuree);
-        dateF = (EditText) root.findViewById(R.id.inputDateF);
-        dateP = (EditText) root.findViewById(R.id.inputDateP);
-        descr = (EditText) root.findViewById(R.id.inputDescr);
-        prix = (EditText) root.findViewById(R.id.inputPrix);
-        quant = (EditText) root.findViewById(R.id.inputQuant);
-        codeB = (EditText) root.findViewById(R.id.inputCode);
-        lot = (EditText) root.findViewById(R.id.inputLot);
+        textView1 = root.findViewById(R.id.textView);
+        classeTh = root.findViewById(R.id.inputClass);
+        nomM = root.findViewById(R.id.inputNom);
+        labo = root.findViewById(R.id.inputLabo);
+        denom = root.findViewById(R.id.inputDenom);
+        form = root.findViewById(R.id.inputForm);
+        duree = root.findViewById(R.id.inputDuree);
+        dateF = root.findViewById(R.id.inputDateF);
+        dateP = root.findViewById(R.id.inputDateP);
+        descr = root.findViewById(R.id.inputDescr);
+        prix = root.findViewById(R.id.inputPrix);
+        quant = root.findViewById(R.id.inputQuant);
+        codeB = root.findViewById(R.id.inputCode);
+        lot = root.findViewById(R.id.inputLot);
 
-        boui = (RadioButton) root.findViewById(R.id.inputOui);
-        bnon = (RadioButton) root.findViewById(R.id.inputNon);
+        boui = root.findViewById(R.id.inputOui);
+        bnon = root.findViewById(R.id.inputNon);
 
         codeB.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -111,13 +94,13 @@ public class DashboardFragment extends Fragment implements View.OnClickListener,
             }
 
         });
-       // String forme = form.getSelectedItem().toString();
+        // String forme = form.getSelectedItem().toString();
         ArrayAdapter<CharSequence> adap = ArrayAdapter.createFromResource(getContext(),
                 R.array.numbers, android.R.layout.simple_spinner_item);
         adap.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         form.setAdapter(adap);
         form.setOnItemSelectedListener(this);
-        DatePickerDialog.OnDateSetListener datefab =new DatePickerDialog.OnDateSetListener() {
+        DatePickerDialog.OnDateSetListener datefab = new DatePickerDialog.OnDateSetListener() {
             @Override
             public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
                 myCalendar.set(Calendar.YEAR, year);
@@ -156,7 +139,7 @@ public class DashboardFragment extends Fragment implements View.OnClickListener,
             }
         });
 
-        ajout = (Button) root.findViewById(R.id.ajout);
+        ajout = root.findViewById(R.id.ajout);
 
         ajout.setOnClickListener(this);
 
@@ -170,6 +153,7 @@ public class DashboardFragment extends Fragment implements View.OnClickListener,
 
         dateP.setText(sdf.format(myCalendar.getTime()));
     }
+
     private void updateLabelF() {
         String myFormat = "yyyy-MM-dd";
         SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
@@ -185,7 +169,7 @@ public class DashboardFragment extends Fragment implements View.OnClickListener,
         String laboratoire = labo.getText().toString();
         String denomination = denom.getText().toString();
         String lots = lot.getText().toString();
-        String forme=form.getSelectedItem().toString();
+        String forme = form.getSelectedItem().toString();
         String dureee = duree.getText().toString();
         String dateFab = dateF.getText().toString();
         String datePer = dateP.getText().toString();
@@ -194,8 +178,9 @@ public class DashboardFragment extends Fragment implements View.OnClickListener,
         String codeBarre = codeB.getText().toString();
         String remboursable = "1";
         if (boui.isChecked()) remboursable = "1";
-                else {
-        if (bnon.isChecked()) remboursable = "0";}
+        else {
+            if (bnon.isChecked()) remboursable = "0";
+        }
 
         if (NomCommercial.trim().isEmpty() || description.trim().isEmpty() || classTH.trim().isEmpty() || laboratoire.trim().isEmpty() || lots.trim().isEmpty() || denomination.trim().isEmpty() || forme.trim().isEmpty() || dureee.trim().isEmpty() || dateFab.trim().isEmpty() || datePer.trim().isEmpty() || price.trim().isEmpty() || quantite.trim().isEmpty() || codeBarre.trim().isEmpty()) {
 
@@ -203,13 +188,9 @@ public class DashboardFragment extends Fragment implements View.OnClickListener,
             return;
         }
         medicamentSviewModel = new ViewModelProvider(getActivity()).get(MedicamentsViewModel.class);
-        MEDICAMENTS medicaments = new MEDICAMENTS(classTH, NomCommercial, laboratoire, denomination, forme, dureee,  remboursable, lots ,dateFab, datePer, description, price, quantite,codeBarre);
-         medicamentSviewModel.insertChoose(medicaments);
+        MEDICAMENTS medicaments = new MEDICAMENTS(classTH, NomCommercial, laboratoire, denomination, forme, dureee, remboursable, lots, dateFab, datePer, description, price, quantite, codeBarre);
+        medicamentSviewModel.insertChoose(medicaments);
         savedM();
-
-
-
-
 
 
     }
@@ -252,6 +233,7 @@ public class DashboardFragment extends Fragment implements View.OnClickListener,
     public void onNothingSelected(AdapterView<?> parent) {
 
     }
+
     public void showSnackbar() {
 
         Snackbar.make(getView(), "Entrez tous les champs", Snackbar.LENGTH_LONG)
@@ -271,27 +253,29 @@ public class DashboardFragment extends Fragment implements View.OnClickListener,
         integrator.setPrompt("Le code en cours de scanne");
         integrator.initiateScan();
     }
+
     @Override
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-         IntentResult result = IntentIntegrator.parseActivityResult(requestCode, resultCode, data);
-            if (result != null) {
+        IntentResult result = IntentIntegrator.parseActivityResult(requestCode, resultCode, data);
+        if (result != null) {
 
 
-                if (result.getContents() != null) {
-                    Toast.makeText(getContext(),  result.getContents(), Toast.LENGTH_LONG).show();
+            if (result.getContents() != null) {
+                Toast.makeText(getContext(), result.getContents(), Toast.LENGTH_LONG).show();
 
-                    codeB.setText(result.getContents());
+                codeB.setText(result.getContents());
 
-
-                } else {
-                    snackIntrouvable();
-                }
 
             } else {
-                //super.onActivityResult(requestCode, resultCode, data);
+                snackIntrouvable();
             }
 
+        } else {
+            //super.onActivityResult(requestCode, resultCode, data);
         }
+
+    }
+
     public void snackIntrouvable() {
 
         Snackbar.make(getView(), "Médicament introuvable", Snackbar.LENGTH_LONG)
@@ -302,6 +286,7 @@ public class DashboardFragment extends Fragment implements View.OnClickListener,
                     }
                 }).show();
     }
+
     public void savedM() {
 
         Snackbar.make(getView(), "Médicament enregistré", Snackbar.LENGTH_LONG)
@@ -312,7 +297,6 @@ public class DashboardFragment extends Fragment implements View.OnClickListener,
                     }
                 }).show();
     }
-
 
 
 }

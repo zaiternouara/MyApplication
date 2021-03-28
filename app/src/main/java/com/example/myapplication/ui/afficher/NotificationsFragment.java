@@ -6,7 +6,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -22,7 +21,7 @@ import com.example.myapplication.ui.afficherTous.afficherTousMedoc;
 import com.google.android.material.snackbar.Snackbar;
 
 public class NotificationsFragment extends Fragment implements View.OnClickListener {
-    DataPassListener mCallback;
+
     private Button affiT;
     private Button affiL;
     private Button affiR;
@@ -121,10 +120,6 @@ public class NotificationsFragment extends Fragment implements View.OnClickListe
         transaction.commit();
     }
 
-
-    public interface DataPassListener {
-        void passData(String data);
-    }
     public void showSnackbar() {
 
         Snackbar.make(getView(), "Entrez votre recherche", Snackbar.LENGTH_LONG)
@@ -135,4 +130,6 @@ public class NotificationsFragment extends Fragment implements View.OnClickListe
                     }
                 }).show();
     }
+
+
 }

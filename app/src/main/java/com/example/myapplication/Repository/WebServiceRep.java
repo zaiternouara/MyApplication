@@ -1,7 +1,6 @@
 package com.example.myapplication.Repository;
 
 import android.app.Application;
-import android.util.Log;
 import android.widget.Toast;
 
 import androidx.lifecycle.LiveData;
@@ -95,7 +94,6 @@ public class WebServiceRep implements GlobaleRepository {
     }
 
 
-
     @Override
     public MutableLiveData<List<MEDICAMENTS>> getSearchMedicamemts(Application application, String search) {
         return getListOfSearchFromServer(application, search);
@@ -150,7 +148,7 @@ public class WebServiceRep implements GlobaleRepository {
                         }
                     }
                 } catch (JSONException e) {
-                   // e.printStackTrace();
+                    // e.printStackTrace();
                 }
 
                 myList.setValue(medicamentslist);
@@ -211,7 +209,7 @@ public class WebServiceRep implements GlobaleRepository {
                                 //Log.d("Success", response.toString());
 
                             } catch (JSONException e) {
-                               // e.printStackTrace();
+                                // e.printStackTrace();
                             }
                         }
                     }
@@ -275,7 +273,7 @@ public class WebServiceRep implements GlobaleRepository {
                         }
                     }
                 } catch (JSONException e) {
-                   // e.printStackTrace();
+                    // e.printStackTrace();
                 }
 
                 myListExpire.setValue(medicamentslist);
@@ -442,7 +440,7 @@ public class WebServiceRep implements GlobaleRepository {
 
         MyfileRequeteSingleton.getInstance(application).addToRequestQueue(jsonObjectRequest);
 
-        return  myListSearchByCodeBare;
+        return myListSearchByCodeBare;
     }
 
     public void AddMedicament(MEDICAMENTS medicaments) {
