@@ -1,30 +1,25 @@
 package com.example.myapplication;
 
-import android.content.ClipData;
 import android.content.IntentFilter;
 import android.net.ConnectivityManager;
 import android.os.Bundle;
 import android.view.MenuItem;
-import android.view.View;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Lifecycle;
 import androidx.lifecycle.LifecycleRegistry;
-import androidx.lifecycle.ViewModelProvider;
 
 import com.example.myapplication.Connection.BroadcastReceiverNetwork;
-import com.example.myapplication.Connection.NetworkConnection;
 import com.example.myapplication.ui.afficher.NotificationsFragment;
 import com.example.myapplication.ui.ajouter.DashboardFragment;
 import com.example.myapplication.ui.home.HomeFragment;
-import com.example.myapplication.viewModel.MedicamentsViewModel;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class MainActivity extends AppCompatActivity {
 
-    private static LifecycleRegistry lifecycleRegistry;
+
     private final BottomNavigationView.OnNavigationItemSelectedListener bottomNavMethod = new
             BottomNavigationView.OnNavigationItemSelectedListener() {
                 @Override
@@ -51,7 +46,6 @@ public class MainActivity extends AppCompatActivity {
                 }
             };
     private BroadcastReceiverNetwork networkReceiver;
-    private NetworkConnection connection;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -117,14 +111,6 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    public void pull() {
-        connection = new NetworkConnection(this);
-        if (connection.isConnected() == true) {
-            lifecycleRegistry = new LifecycleRegistry(this);
-            lifecycleRegistry.markState(Lifecycle.State.CREATED);
-            MedicamentsViewModel medicamentSviewModel = new ViewModelProvider(this).get(MedicamentsViewModel.class);
-            medicamentSviewModel.pull(this);
-        }
-    }
+
 }
 

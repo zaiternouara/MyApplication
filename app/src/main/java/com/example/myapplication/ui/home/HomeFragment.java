@@ -8,22 +8,24 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.FrameLayout;
 import android.widget.ImageView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
+import androidx.lifecycle.Lifecycle;
+import androidx.lifecycle.LifecycleRegistry;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.example.myapplication.CodeBare.CaptureAct;
 import com.example.myapplication.CodeBare.IntentIntegratorClass;
+import com.example.myapplication.Connection.NetworkConnection;
 import com.example.myapplication.R;
 import com.example.myapplication.ui.afficherTous.SearchCodeBareResults;
 import com.example.myapplication.ui.afficherTous.searchByOcr;
+import com.example.myapplication.viewModel.MedicamentsViewModel;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
@@ -37,10 +39,14 @@ import com.google.zxing.integration.android.IntentResult;
 
 public class HomeFragment extends Fragment implements View.OnClickListener {
 
+    private static LifecycleRegistry lifecycleRegistry;
+    Fragment fragment = null;
     private HomeViewModel homeViewModel;
     private ImageView logo;
     private Button scanner;
-    private Button appareil;
+    private Button CodeBare;
+    private Button sync;
+    private NetworkConnection connection;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -49,13 +55,20 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         View root = inflater.inflate(R.layout.fragment_home, container, false);
         logo = root.findViewById(R.id.imageView);
         scanner = root.findViewById(R.id.button3);
-        appareil = root.findViewById(R.id.button4);
+        CodeBare = root.findViewById(R.id.button4);
+        sync = root.findViewById(R.id.sync);
+
+        sync.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                pull();
+            }
+        });
+
         scanner.setOnClickListener(this);
 
 
-        Fragment fragment = null;
-
-        appareil.setOnClickListener(new View.OnClickListener() {
+        CodeBare.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 scanCode();
@@ -74,7 +87,6 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         integrator.setPrompt("Le code en cours de scanne");
         integrator.initiateScan();
     }
-
 
 
     public void goCamera() {
@@ -134,13 +146,13 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
                     fragment.setArguments(i);
                     FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
 
-                    fragmentManager.beginTransaction().replace(R.id.nav_host_fragment,fragment)
+                    fragmentManager.beginTransaction().replace(R.id.nav_host_fragment, fragment)
                             .commit();
 
 
-
                 } else {
-                    nofound();                }
+                    nofound();
+                }
 
             } else {
                 //super.onActivityResult(requestCode, resultCode, data);
@@ -157,9 +169,10 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         goCamera();
 
     }
+
     public void codeBarre(String S) {
 
-        Snackbar.make(getView(), "Le code est "+S, Snackbar.LENGTH_LONG)
+        Snackbar.make(getView(), "Le code est " + S, Snackbar.LENGTH_LONG)
                 .setAction("Génial !", new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -170,7 +183,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
 
     public void nofound() {
 
-        Snackbar.make(getView(),"Médicament introuvable" , Snackbar.LENGTH_LONG)
+        Snackbar.make(getView(), "Médicament introuvable", Snackbar.LENGTH_LONG)
                 .setAction("Génial !", new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -179,9 +192,15 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
                 }).show();
     }
 
-
-
-
+    public void pull() {
+        connection = new NetworkConnection(getContext());
+        if (connection.isConnected() == true) {
+            lifecycleRegistry = new LifecycleRegistry(this);
+            lifecycleRegistry.markState(Lifecycle.State.CREATED);
+            MedicamentsViewModel medicamentSviewModel = new ViewModelProvider(this).get(MedicamentsViewModel.class);
+            medicamentSviewModel.pull(this);
+        }
+    }
 
 
 }
