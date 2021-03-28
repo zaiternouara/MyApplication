@@ -29,11 +29,7 @@
             app:popUpToInclusive="true"
             app:destination="@id/affichertous" />
     </fragment>
-    <fragment
-        android:id="@+id/navigation_modifier"
-        android:name="com.example.myapplication.ui.modifier.ModifierFragment"
-        android:label="@string/title_modifier"
-        tools:layout="@layout/modifier_fragment" />
+
 
     <fragment
         android:id="@+id/affichertous"

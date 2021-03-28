@@ -39,7 +39,6 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
 
     private HomeViewModel homeViewModel;
     private ImageView logo;
-    private FrameLayout backgr;
     private Button scanner;
     private Button appareil;
 
@@ -49,7 +48,6 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
                 new ViewModelProvider(this).get(HomeViewModel.class);
         View root = inflater.inflate(R.layout.fragment_home, container, false);
         logo = root.findViewById(R.id.imageView);
-        backgr = root.findViewById(R.id.imageView2);
         scanner = root.findViewById(R.id.button3);
         appareil = root.findViewById(R.id.button4);
         scanner.setOnClickListener(this);

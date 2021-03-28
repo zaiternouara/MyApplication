@@ -19,7 +19,6 @@ import com.example.myapplication.Connection.NetworkConnection;
 import com.example.myapplication.ui.afficher.NotificationsFragment;
 import com.example.myapplication.ui.ajouter.DashboardFragment;
 import com.example.myapplication.ui.home.HomeFragment;
-import com.example.myapplication.ui.modifier.ModifierFragment;
 import com.example.myapplication.viewModel.MedicamentsViewModel;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
@@ -43,9 +42,7 @@ public class MainActivity extends AppCompatActivity {
                         case R.id.navigation_notifications:
                             fragment = new NotificationsFragment();
                             break;
-                        case R.id.navigation_modifier:
-                           fragment = new ModifierFragment();
-                           break;
+
                     }
                     getSupportFragmentManager().beginTransaction()
                             .replace(R.id.nav_host_fragment, fragment).commit();
