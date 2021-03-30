@@ -203,9 +203,8 @@ public class DashboardFragment extends Fragment implements View.OnClickListener,
             classeTh.setText(null);
             descr.setText(null);
             lot.setText(null);
-            // labo.setText(null);
+             labo.setText(null);
             denom.setText(null);
-            //form.setText(null);
             duree.setText(null);
             dateF.setText(null);
             dateP.setText(null);
@@ -225,7 +224,6 @@ public class DashboardFragment extends Fragment implements View.OnClickListener,
 
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-        //String formePh = form.getItemAtPosition(position).toString();
 
     }
 

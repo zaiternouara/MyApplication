@@ -86,6 +86,7 @@
                 android:layout_marginRight="10dp"
                 android:gravity="center"
                 android:hint="Laboratoire"
+                android:inputType="textPersonName"
                 />
 
 

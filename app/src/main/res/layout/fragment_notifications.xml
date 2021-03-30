@@ -85,44 +85,72 @@
 
         <Button
             android:id="@+id/button5"
-            android:layout_width="206dp"
-            android:layout_height="81dp"
+            android:layout_width="193dp"
+            android:layout_height="84dp"
             android:layout_marginStart="93dp"
             android:layout_marginLeft="93dp"
             android:layout_marginTop="8dp"
-            android:layout_marginEnd="92dp"
-            android:layout_marginRight="92dp"
+            android:background="@drawable/affichert"
+            android:gravity="center_horizontal"
             android:text="Afficher tout les médicaments"
+            android:textColor="@color/orange"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintHorizontal_bias="0.695"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/button" />
 
         <Button
             android:id="@+id/pLabo"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="148dp"
+            android:layout_height="75dp"
             android:layout_marginEnd="145dp"
             android:layout_marginRight="145dp"
             android:layout_marginBottom="49dp"
+            android:background="@drawable/affichert"
+
+            android:gravity="center_horizontal"
             android:text="Par laboratoire"
+            android:textColor="@color/orange"
+
             app:layout_constraintBottom_toTopOf="@+id/expire"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintHorizontal_bias="0.346"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/button5"
             app:layout_constraintVertical_bias="1.0" />
 
         <Button
             android:id="@+id/expire"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="64dp"
-            android:layout_marginRight="64dp"
+            android:layout_width="123dp"
+            android:layout_height="74dp"
+            android:layout_marginEnd="48dp"
+            android:layout_marginRight="48dp"
             android:layout_marginBottom="52dp"
             android:text="A recycler"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent" />
+
+        <ImageView
+            android:id="@+id/imageView2"
+            android:layout_width="62dp"
+            android:layout_height="40dp"
+            android:layout_marginTop="40dp"
+            android:layout_marginEnd="65dp"
+            android:layout_marginRight="65dp"
+            android:src="@drawable/pillule"
+            app:layout_constraintEnd_toEndOf="@+id/button5"
+            app:layout_constraintTop_toTopOf="@+id/button5" />
+
+        <ImageView
+            android:id="@+id/imageView4"
+            android:layout_width="67dp"
+            android:layout_height="49dp"
+            android:layout_marginTop="26dp"
+            android:layout_marginEnd="40dp"
+            android:layout_marginRight="40dp"
+            android:src="@drawable/lad"
+            app:layout_constraintEnd_toEndOf="@+id/pLabo"
+            app:layout_constraintTop_toTopOf="@+id/pLabo" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
