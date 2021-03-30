@@ -152,9 +152,9 @@ public class MedicamentsViewModel extends AndroidViewModel {
         }
     }
 
-    public void pull(LifecycleOwner k) {
+    public void pull(LifecycleOwner O) {
 
-        allMedicaments.observe(k,
+        allMedicaments.observe(O,
                 new Observer<List<MEDICAMENTS>>() {
                     @Override
                     public void onChanged(@Nullable List<MEDICAMENTS> all) {
