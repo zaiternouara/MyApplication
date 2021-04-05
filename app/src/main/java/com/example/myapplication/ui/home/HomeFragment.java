@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -195,10 +196,14 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
     public void pull() {
         connection = new NetworkConnection(getContext());
         if (connection.isConnected() == true) {
+            Toast.makeText(getContext(), "Internet is available ", Toast.LENGTH_SHORT).show();
             lifecycleRegistry = new LifecycleRegistry(this);
             lifecycleRegistry.markState(Lifecycle.State.CREATED);
             MedicamentsViewModel medicamentSviewModel = new ViewModelProvider(this).get(MedicamentsViewModel.class);
             medicamentSviewModel.pull(this);
+            Toast.makeText(getContext(), "Les données ont été mis au serveur ", Toast.LENGTH_SHORT).show();
+        }else{
+            Toast.makeText(getContext(), "Internet is not available", Toast.LENGTH_SHORT).show();
         }
     }
 
