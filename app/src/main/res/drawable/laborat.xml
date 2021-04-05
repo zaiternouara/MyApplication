@@ -2,9 +2,9 @@
 <layer-list xmlns:android="http://schemas.android.com/apk/res/android" >
 
     <item
-        android:drawable="@drawable/pillule"
-        android:width="@dimen/icon"
-        android:height="@dimen/icon"
+        android:drawable="@drawable/lad"
+        android:width="@dimen/icon_lab"
+        android:height="@dimen/icon_lab"
         />
 
 </layer-list >

@@ -2,6 +2,7 @@ package com.example.myapplication.ui.ajouter;
 
 import android.app.DatePickerDialog;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -33,7 +34,10 @@ import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
+import java.util.List;
 import java.util.Locale;
 
 public class DashboardFragment extends Fragment implements View.OnClickListener, DatePickerDialog.OnDateSetListener, AdapterView.OnItemSelectedListener {
@@ -94,12 +98,53 @@ public class DashboardFragment extends Fragment implements View.OnClickListener,
             }
 
         });
-        // String forme = form.getSelectedItem().toString();
-        ArrayAdapter<CharSequence> adap = ArrayAdapter.createFromResource(getContext(),
-                R.array.numbers, android.R.layout.simple_spinner_item);
-        adap.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        form.setAdapter(adap);
+        String[] medoc = new String[]{
+                "Forme Phamaceutique",
+                "",
+                "Comprimé",
+                "",
+                "Géllule",
+                "",
+                "Sachet",
+                "",
+                "Crème",
+                "",
+                "Gouttes"
+        };
+        final List<String> medicamentList = new ArrayList<>(Arrays.asList(medoc));
+        final ArrayAdapter<String> spinnerArrayAdapter = new ArrayAdapter<String>(
+                getContext(),android.R.layout.simple_spinner_item,medicamentList){
+            @Override
+            public boolean isEnabled(int position) {
+                if(position == 0)
+                {
+                    // Disable the first item from Spinner
+                    // First item will be use for hint
+                    return false;
+                }
+                else
+                {
+                    return true;
+                }            }
+
+            @Override
+            public View getDropDownView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
+                View view = super.getDropDownView(position, convertView, parent);
+                TextView tv = (TextView) view;
+                if(position == 0){
+                    // Set the hint text color gray
+                    tv.setTextColor(Color.GRAY);
+                }
+                else {
+                    tv.setTextColor(Color.BLACK);
+                }
+                return view;            }
+
+    };
+        spinnerArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_item);
+        form.setAdapter(spinnerArrayAdapter);
         form.setOnItemSelectedListener(this);
+
         DatePickerDialog.OnDateSetListener datefab = new DatePickerDialog.OnDateSetListener() {
             @Override
             public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {

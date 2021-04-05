@@ -110,12 +110,17 @@
             <Spinner
                 android:id="@+id/inputForm"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="40dp"
                 android:ems="20"
                 android:textAlignment="center"
                 android:gravity="center_horizontal"
                 android:hint="Forme Pharmaceutique"
                 android:text="Forme Pharmaceutique "
+                android:layout_marginRight="10dp"
+                android:spinnerMode="dropdown"
+                android:layout_marginTop="5sp"
+
+                android:background="@drawable/edit"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
@@ -175,7 +180,7 @@
                 android:layout_marginRight="10dp"
                 android:gravity="center"
                 android:hint="Lot"
-                android:inputType="number" />
+                android:inputType="textPersonName" />
 
             <EditText
                 android:id="@+id/inputDateF"
@@ -269,14 +274,13 @@
                 android:layout_width="170dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10sp"
-                android:background="@drawable/button"
-                android:shadowColor="@android:color/holo_orange_dark"
-                android:shadowDx="0"
-                android:shadowDy="0"
-                android:shadowRadius="5"
-                android:layout_marginLeft="80dp"
+                android:background="@drawable/ajouter"
+                android:layout_gravity="center_horizontal"
                 android:text="Ajouter"
-                android:textColor="#FFFFFF" />
+                android:textColor="@color/black"
+                android:textAppearance="@style/TextAppearance.AppCompat.Title"
+                android:shadowColor="#FF0000"
+                />
 
 
         </LinearLayout>

@@ -1,9 +1,12 @@
 package com.example.myapplication.ui.afficherTous;
 
+import android.content.res.Resources;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.RelativeLayout;
 
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
@@ -43,6 +46,8 @@ public class afficherTousMedoc extends Fragment {
 
         View root = inflater.inflate(R.layout.fragment_afficher_tous_medoc, container, false);
         RecyclerView recyclerView = root.findViewById(R.id.recycle_view);
+
+
 
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));//comment les infos sont afficher
         recyclerView.setHasFixedSize(true);
