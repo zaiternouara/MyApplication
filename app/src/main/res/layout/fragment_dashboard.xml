@@ -16,15 +16,16 @@
         android:layout_marginTop="8dp"
         android:layout_weight="1"
         android:fontFamily="sans-serif"
-        android:text="Ajouter un médicament"
-        android:textColor="#FFC800"
-        android:textSize="30sp"
-        android:textStyle="bold"
+        android:gravity="center"
         android:shadowColor="#FF0000"
         android:shadowDx="2.8"
         android:shadowDy="2.8"
         android:shadowRadius="2"
+        android:text="Ajouter un médicament"
         android:textAllCaps="true"
+        android:textColor="#FFC800"
+        android:textSize="30sp"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView" />
@@ -134,26 +135,23 @@
                 android:background="@drawable/edit"
                 android:layout_marginRight="10dp"
                 android:gravity="center"
-                android:hint="Durée de conservation"
+                android:hint="Durée de conservation (en mois)"
                 android:inputType="number" />
+            <TextView
+                android:id="@+id/question"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAlignment="center"
+                android:gravity="center_horizontal"
+                android:text="Est-il remboursable ?" />
 
             <RadioGroup
                 android:id="@+id/inputRembou"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
 
-                <TextView
-                    android:id="@+id/question"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:textAlignment="center"
-                    android:gravity="center_horizontal"
-                    android:text="Est-il remboursable ?" />
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:orientation="horizontal">
                     <RadioButton
                         android:id="@+id/inputOui"
                         android:layout_width="wrap_content"
@@ -167,7 +165,6 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:text="non" />
-                </LinearLayout>
             </RadioGroup>
 
 
@@ -237,7 +234,7 @@
                 android:background="@drawable/edit"
                 android:layout_marginRight="10dp"
                 android:gravity="center"
-                android:hint="Prix du Médicament"
+                android:hint="Prix du Médicament (En Dinars)"
                 android:inputType="number" />
 
             <EditText

@@ -10,5 +10,22 @@
         android:layout_height="match_parent"
         android:background="@mipmap/bg"
         tools:listitem="@layout/medicament_item" />
+    <RelativeLayout
+
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/swip"
+        android:layout_marginTop="528dp"
+        >
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="Swipez à gauche pour supprimer un médicament"
+            android:textAppearance="@style/TextAppearance.AppCompat.Title"></TextView>
+
+    </RelativeLayout>
+
 
 </FrameLayout>

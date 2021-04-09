@@ -6,102 +6,285 @@
     tools:context=".ui.afficherTous.afficher_details"
     android:id="@+id/afficherDetails"
     android:background="@mipmap/bg">
-    <RelativeLayout
-        android:layout_width="wrap_content"
+
+    <TextView
+        android:id="@+id/Tv"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="8dp">
+        android:layout_marginTop="20dp"
+        android:fontFamily="sans-serif"
+        android:gravity="center"
+        android:shadowColor="@color/teal_200"
+        android:shadowDx="2.8"
+        android:shadowDy="2.8"
+        android:shadowRadius="2"
+        android:text="Détails du médicament"
+        android:textAllCaps="true"
+        android:textColor="#FFC800"
+        android:textSize="30sp"
+        android:textStyle="bold" />
+
+    <RelativeLayout
+
+        android:layout_width="match_parent"
+        android:layout_height="88dp"
+        android:background="@drawable/det"
+        android:layout_marginTop="100dp"
+        >
+
+        <TextView
+            android:id="@+id/text_view_NomC"
+
+            android:layout_width="208dp"
+            android:layout_height="64dp"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginStart="-11dp"
+            android:layout_marginLeft="-11dp"
+            android:layout_marginTop="11dp"
+            android:layout_marginEnd="214dp"
+            android:layout_marginRight="214dp"
+            android:layout_marginBottom="13dp"
+            android:gravity="center"
+            android:text="Médicament"
+            android:textAppearance="@style/TextAppearance.AppCompat.Title"
+            android:textSize="30dp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/tvp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Prix"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:paddingRight="60dp"
+            android:paddingTop="18sp"/>
+
+
         <TextView
             android:id="@+id/text_view_Prix"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_below="@+id/tvp"
+            android:layout_marginEnd="26dp"
+            android:layout_marginRight="26dp"
+            android:paddingRight="10sp"
             android:text="1"
-            android:textAppearance="@style/TextAppearance.AppCompat.Title"
-            android:layout_alignParentRight="true" />
+            android:textAppearance="@style/TextAppearance.AppCompat.Title" />
+
         <TextView
-            android:id="@+id/text_view_NomC"
+            android:id="@+id/text_view_rembou"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Médicament"
-            android:textAppearance="@style/TextAppearance.AppCompat.Title"
-            android:layout_toStartOf="@id/text_view_Prix"
-            android:layout_alignParentStart="true"
-            android:ellipsize="end"
-            android:layout_alignParentLeft="true"
-            android:layout_toLeftOf="@id/text_view_Prix" />
+            android:layout_gravity="center"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_below="@id/text_view_Prix"
+            android:text="r"
+            android:paddingRight="20sp"/>
+    </RelativeLayout>
+
+    <LinearLayout
+        android:id="@+id/rs"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="210dp"
+        android:background="@drawable/det"
+        android:orientation="vertical"
+        android:padding="8dp">
+
+
+        <TextView
+            android:id="@+id/text_Class"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="Classe Thérapeutique :"
+            android:textAppearance="@style/TextAppearance.AppCompat.Title" />
 
         <TextView
             android:id="@+id/text_view_Class"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/text_view_NomC"
+            android:layout_below="@id/text_Class"
+            android:layout_gravity="center"
             android:text="classe" />
+
+        <TextView
+            android:id="@+id/text_Labo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/text_view_Class"
+            android:layout_gravity="center"
+            android:text="Laboratoire :"
+            android:textAppearance="@style/TextAppearance.AppCompat.Title" />
 
         <TextView
             android:id="@+id/text_view_Labo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/text_view_Class"
-            android:text="lab"/>
+            android:layout_gravity="center"
+            android:text="lab" />
+
+        <TextView
+            android:id="@+id/text_Lot"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="Lot :"
+            android:textAppearance="@style/TextAppearance.AppCompat.Title" />
+
         <TextView
             android:id="@+id/text_view_Lot"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/text_view_Labo"
-            android:text="Lot"/>
+            android:layout_gravity="center"
+            android:text="Lot" />
+
+        <TextView
+            android:id="@+id/text_form"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="Forme Pharmaceutique :"
+            android:textAppearance="@style/TextAppearance.AppCompat.Title" />
 
         <TextView
             android:id="@+id/text_view_form"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/text_view_Lot"
-            android:text="form"/>
+            android:layout_gravity="center"
+            android:text="form" />
+
+        <TextView
+            android:id="@+id/text_duree"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="Durée de conservation :"
+            android:textAppearance="@style/TextAppearance.AppCompat.Title" />
+
         <TextView
             android:id="@+id/textViewDure"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/text_view_form"
-            android:text="duree"/>
+            android:layout_gravity="center"
+            android:text="duree" />
+
+        <TextView
+            android:id="@+id/text_dateF"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="Date de Fabrication :"
+            android:textAppearance="@style/TextAppearance.AppCompat.Title" />
+
         <TextView
             android:id="@+id/text_view_dateF"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/textViewDure"
-            android:text="dateF"/>
+            android:layout_gravity="center"
+            android:text="dateF" />
+
+        <TextView
+            android:id="@+id/text_datP"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="Date de Péremption :"
+            android:textAppearance="@style/TextAppearance.AppCompat.Title" />
+
         <TextView
             android:id="@+id/text_view_dateP"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/text_view_dateF"
-            android:text="dateP"/>
+            android:layout_gravity="center"
+            android:text="dateP" />
+
+        <TextView
+            android:id="@+id/text_desc"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="Description :"
+            android:textAppearance="@style/TextAppearance.AppCompat.Title" />
+
         <TextView
             android:id="@+id/text_view_desc"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/text_view_dateP"
-            android:text="description"/>
+            android:layout_gravity="center"
+            android:text="description" />
+
+        <TextView
+            android:id="@+id/text_quant"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="Quantité :"
+            android:textAppearance="@style/TextAppearance.AppCompat.Title" />
+
         <TextView
             android:id="@+id/text_view_quant"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/text_view_desc"
-            android:text="quantite"/>
+            android:layout_gravity="center"
+            android:text="quantite" />
+
+
+
+    </LinearLayout>
+
+    <RelativeLayout
+
+        android:layout_width="289dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="650dp"
+        android:background="@drawable/det">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginStart="105dp"
+            android:layout_marginLeft="105dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginEnd="114dp"
+            android:layout_marginRight="114dp"
+            android:gravity="center"
+            android:text="Code à Barre"></TextView>
 
         <TextView
             android:id="@+id/text_view_code"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="230dp"
+            android:layout_height="38dp"
+            android:layout_alignParentTop="true"
             android:layout_alignParentEnd="true"
             android:layout_alignParentRight="true"
-            android:layout_below="@id/text_view_Prix"
-            android:text="code" />
-        <TextView
-            android:id="@+id/text_view_rembou"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/text_view_quant"
-            />
-
+            android:layout_alignParentBottom="true"
+            android:layout_marginTop="15dp"
+            android:layout_marginEnd="33dp"
+            android:layout_marginRight="33dp"
+            android:layout_marginBottom="20dp"
+            android:gravity="center_horizontal"
+            android:text="code"
+            android:textAppearance="@style/TextAppearance.AppCompat.Title"
+            android:textSize="30dp" />
+        />
     </RelativeLayout>
+
+
+
 
 </FrameLayout>

@@ -16,8 +16,8 @@
         <item>Creme</item>
     </string-array>
 
-    <string name="remboursable">remboursable</string>
-    <string name="nonremboursable">non remboursable</string>
+    <string name="remboursable">Ce médicament est remboursable</string>
+    <string name="nonremboursable">Ce médicament est non remboursable</string>
     <string name="title_activity_ocr">Ocr</string>
     <!-- Strings used for fragments for navigation -->
     <string name="first_fragment_label">First Fragment</string>

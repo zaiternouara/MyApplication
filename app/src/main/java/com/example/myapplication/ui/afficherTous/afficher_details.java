@@ -1,5 +1,7 @@
 package com.example.myapplication.ui.afficherTous;
 
+import android.graphics.Color;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -58,22 +60,27 @@ public class afficher_details extends Fragment {
         switch (remb) {
             case "1":
                 rembou.setText(getResources().getString(R.string.remboursable));
+                rembou.setTextColor(Color.parseColor("#4CAF50"));
+                rembou.setTypeface(Typeface.DEFAULT_BOLD);
                 break;
             case "0":
                 rembou.setText(getResources().getString(R.string.nonremboursable));
+                rembou.setTextColor(Color.parseColor("#D32F2F"));
+                rembou.setTypeface(Typeface.DEFAULT_BOLD);
+
                 break;
             default:
 
         }
 
         String price = getArguments().getString("prix");
-        prix.setText(price);
+        prix.setText(price+" DZD");
 
         String nlot = getArguments().getString("lot");
         lot.setText(nlot);
 
         String dure = getArguments().getString("duree de conservation");
-        duree.setText(dure);
+        duree.setText(dure+" mois");
 
         String forme = getArguments().getString("forme pharmaceutique");
         form.setText(forme);
